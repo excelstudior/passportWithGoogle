@@ -23,7 +23,11 @@ app.use(dbConnect.initDatabaseServer);
 
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
-
+app.use(function(req,res,next){
+    
+    console.log('req session is ',req.session);
+    next()
+})
 app.get('/',(req,res)=>{
     res.render('home',{user:req.user})
 })

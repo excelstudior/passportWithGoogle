@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const keys = require('./keys');
 const User = require('../models/user');
+const localStorage=require('localStorage');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -21,6 +22,7 @@ passport.use(new GoogleStrategy({
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
 }, (accessToken, refreshToken, profile, done) => {
+    localStorage.setItem('googleAccessToken',accessToken);
     // console.log(profile,'accessToken is ',accessToken,'refreshToken is ',refreshToken,'done is ',done)
     User.findOne({ googleId: profile.id }).then((existingUser) => {
         if (existingUser) {
