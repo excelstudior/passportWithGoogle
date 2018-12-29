@@ -14,7 +14,7 @@
         }
         nav{
             background: #ff5353;
-            padding: 20px 10px;
+            padding: 0px 10px;
         }
         nav ul{
             max-width: 960px;
@@ -34,6 +34,18 @@
             padding: 10px;
             display: block;
         }
+        nav span{
+            color: #fff;
+            font-size: 18px;
+            /* background: rgba(255,255,255,0.2);
+            text-decoration: none; */
+            padding: 10px;
+            display: block;
+        }
+        nav img{
+            border-radius: 50%;
+            vertical-align: middle;
+        }
         main, header{
             max-width: 960px;
             margin: 30px auto;
@@ -47,8 +59,8 @@
         <ul>
             <li><a href="/">Home Page</a></li>
             <li><a href="/auth/logout">Log Out</a></li>
-            <li><a href="/auth/login">Log In</a></li>
-            <li>Welcome,<%=user.username%></li>
+            <li><span>Welcome, <%=user.username%></span></li>
+            <li><img src="<%=user.thumbnail%>"/></li>
         </ul>
     </nav>
     <header>

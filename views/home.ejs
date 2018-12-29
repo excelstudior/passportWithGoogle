@@ -14,7 +14,7 @@
         }
         nav{
             background: #ff5353;
-            padding: 20px 10px;
+            padding: 0px 10px;
         }
         nav ul{
             max-width: 960px;
@@ -46,8 +46,13 @@
     <nav>
         <ul>
             <li><a href="/">Home Page</a></li>
+            <%if(user){%>
             <li><a href="/auth/logout">Log Out</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <%}else{%>
             <li><a href="/auth/login">Log In</a></li>
+            <%}%>
+            
         </ul>
     </nav>
     <header>
