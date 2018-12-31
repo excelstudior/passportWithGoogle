@@ -40,15 +40,15 @@ router.post('/register',(req,res)=>{
         thumbnail:'',
     })
 
-    bcrypt.genSalt(10,(err,salt)=>{
-        bcrypt.hash(newUser.password,salt,(err,hashedPassword)=>{
+   
+        bcrypt.hash(newUser.password,5,(err,hash)=>{
             if(err){console.log(err)};
-            newUser.password=hashedPassword;
+            newUser.password=hash;
             newUser.save()
                     .then(()=>res.redirect('/auth/login'))
                     .catch(err=>console.log(err))
         })
-    })
+    
 })
 
 
