@@ -39,8 +39,6 @@ router.post('/register',(req,res)=>{
         googleId:'',
         thumbnail:'',
     })
-
-   
         bcrypt.hash(newUser.password,5,(err,hash)=>{
             if(err){console.log(err)};
             newUser.password=hash;
@@ -53,12 +51,7 @@ router.post('/register',(req,res)=>{
 
 
 router.post('/login',
-passport.authenticate('local',{successRedirect:'/',failureRedirect:'/auth/failLogin',failureFlash: true}),
-(req,res)=>{
-    console.log(req.body)
-    res.redirect('/profile/')
-}
-)
+passport.authenticate('local',{successRedirect:'/profile',failureRedirect:'/auth/failLogin',failureFlash: true}))
 
 
 
@@ -69,7 +62,7 @@ router.get('/google',passport.authenticate('google',{
 
 router.get('/google/redirect',passport.authenticate('google'),(req,res)=>{
     console.log(req.user)
-    res.redirect('/profile/')
+    res.redirect('/profile')
 })
 
 module.exports=router;
