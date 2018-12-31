@@ -2,11 +2,18 @@ const router=require('express').Router();
 const passport=require('passport');
 const {OAuth2Client}=require('google-auth-library')
 const localStorage=require('localStorage');
+const bcrypt=require('bcryptjs');
+
+//import model 
+const User=require('../models/user');
+
 //auth login
 router.get('/login',(req,res)=>{
     res.render('login')
 })
-
+router.get('/failLogin',(req,res)=>{
+    res.render('failLogin')
+})
 router.get('/logout',(req,res)=>{
     // req.logout();
     req.session=null;
@@ -16,6 +23,45 @@ router.get('/logout',(req,res)=>{
     
     //res.send('logging out')
 })
+//Register User
+router.get('/register',(req,res)=>{
+   res.render('register')
+
+})
+
+router.post('/register',(req,res)=>{
+    //To do: Input validations, validate user existence
+
+    console.log(req.body.username,req.body.password)
+    let newUser=new User({
+        username:req.body.username,
+        password:'',
+        googleId:'',
+        thumbnail:'',
+    })
+
+    bcrypt.genSalt(10,(err,salt)=>{
+        bcrypt.hash(newUser.password,salt,(err,hashedPassword)=>{
+            if(err){console.log(err)};
+            newUser.password=hashedPassword;
+            newUser.save()
+                    .then(()=>res.redirect('/auth/login'))
+                    .catch(err=>console.log(err))
+        })
+    })
+})
+
+
+router.post('/login',
+passport.authenticate('local',{successRedirect:'/',failureRedirect:'/auth/failLogin',failureFlash: true}),
+(req,res)=>{
+    console.log(req.body)
+    res.redirect('/profile/')
+}
+)
+
+
+
 
 router.get('/google',passport.authenticate('google',{
     scope:['profile']

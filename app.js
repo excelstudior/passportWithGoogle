@@ -1,5 +1,8 @@
 const express=require ('express');
 const cookieSession=require('cookie-session');
+const flash=require('connect-flash');
+const bodyParser=require('body-parser');
+const cookieParser=require('cookie-parser');
 const app =express();
 //const mongoose=require('mongoose');
 const keys=require('./config/keys');
@@ -14,7 +17,9 @@ app.use(cookieSession({
     maxAge:24*60*60*1000,
     keys:[keys.session.cookieKey]
 }))
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
 

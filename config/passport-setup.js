@@ -1,5 +1,7 @@
 const passport = require('passport');
+const bcrypt=require('bcryptjs');
 const GoogleStrategy = require('passport-google-oauth20');
+const LocalStrategy = require('passport-local').Strategy;
 const keys = require('./keys');
 const User = require('../models/user');
 const localStorage=require('localStorage');
@@ -40,3 +42,37 @@ passport.use(new GoogleStrategy({
         }
     })
 }))
+
+passport.use(new LocalStrategy(
+    {
+        usernameField: 'username',
+        passwordField: 'password',
+        passReqToCallback : true,
+      },
+    function(req,username, password, done) {
+        console.log(req.body,username,password)
+        User.findOne({ username: username }, function(err, user) {
+          if (err) { return done(err); }
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username.' });
+          }
+
+          bcrypt.compare(password,user.password).then((result)=>console.log(result))
+
+          bcrypt.compare(password, user.password)
+                .then(isMatch=>{
+                    if (isMatch){
+                         return done(null, user);
+                    } else {
+                        console.log('password',password, 'userpassword',user.password)
+                        return done(null, false, { message: 'Incorrect password.' });
+                    }
+                })
+        //   if (!user.password!=password) {
+        //       console.log(password)
+        //     return done(null, false, { message: 'Incorrect password.' });
+        //   }
+         
+        });
+      }
+))

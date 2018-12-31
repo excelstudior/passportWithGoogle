@@ -29,10 +29,12 @@
         nav a{
             color: #fff;
             font-size: 18px;
-            background: rgba(255,255,255,0.2);
             text-decoration: none;
             padding: 10px;
             display: block;
+        }
+        nav a:hover{
+            background: rgba(255,255,255,0.2);
         }
         main, header{
             max-width: 960px;
@@ -51,6 +53,7 @@
             <li><a href="/profile">Profile</a></li>
             <%}else{%>
             <li><a href="/auth/login">Log In</a></li>
+            <li><a href="/auth/register">Register</a></li>
             <%}%>
             
         </ul>
