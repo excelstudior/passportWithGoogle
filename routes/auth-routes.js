@@ -14,15 +14,15 @@ router.get('/login',(req,res)=>{
 router.get('/failLogin',(req,res)=>{
     res.render('failLogin')
 })
+
+//auth logout
 router.get('/logout',(req,res)=>{
-    // req.logout();
     req.session=null;
     let oAuth2Client=new OAuth2Client;
     oAuth2Client.revokeToken(localStorage.getItem('googleAccessToken'))
     res.redirect('/auth/login/')
-    
-    //res.send('logging out')
 })
+
 //Register User
 router.get('/register',(req,res)=>{
    res.render('register')
@@ -32,7 +32,6 @@ router.get('/register',(req,res)=>{
 router.post('/register',(req,res)=>{
     //To do: Input validations, validate user existence
 
-    console.log(req.body.username,req.body.password)
     let newUser=new User({
         username:req.body.username,
         password:'',
@@ -49,13 +48,12 @@ router.post('/register',(req,res)=>{
     
 })
 
-
+//user login use local strategy
 router.post('/login',
 passport.authenticate('local',{successRedirect:'/profile',failureRedirect:'/auth/failLogin',failureFlash: true}))
 
 
-
-
+//user login use google strategy
 router.get('/google',passport.authenticate('google',{
     scope:['profile']
 }))
