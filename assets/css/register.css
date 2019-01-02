@@ -171,4 +171,9 @@ input:focus{
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  } 
+}
+/*Add validations*/ 
+input[type="email"]:invalid,
+input[type="tel"]:invalid {
+    background-color: bisque;
+}

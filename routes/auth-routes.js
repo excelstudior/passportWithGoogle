@@ -40,9 +40,10 @@ router.post('/register', (req, res) => {
 
     let newUser = new User({
         username: req.body.username,
-        password: '',
+        password: req.body.password,
         googleId: '',
         thumbnail: '',
+        createdBy: req.user!==undefined? user.id:req.body.username
     })
     bcrypt.hash(newUser.password, 5, (err, hash) => {
         if (err) { console.log(err) };
