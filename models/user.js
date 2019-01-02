@@ -1,17 +1,19 @@
 const mongoose=require('mongoose');
 const bcrypt=require('bcryptjs');
+const userType=require('../Utilities/constants')
 const Schema=mongoose.Schema;
 const options={
     timestamps:true,
 }
 const userSchema=new Schema({
     username:{type:String,unique:true,required:true},
-    password:String,
-    firstName:{type:String,required:true},
-    lastName:{type:String,required:true},
-    email:{type:String,required:true,trim:true},
-    userType:{type:String,enum:[ADMIN,END_USER],default:END_USER},
-    accountExpireDate:{type:Date},
+    password:{type:String,required:true},
+    firstName:{type:String,default:''},
+    lastName:{type:String,default:''},
+    email:{type:String,trim:true,default:''},
+    phone:[{numbers:String,numberType:String}],
+    userType:{type:String,enum:[userType.ADMIN,userType.END_USER],default:userType.END_USER},
+    accountExpireDate:{type:Date,default:null},
     activeStatus:{type:Boolean,default:true},
     googleId:String,
     thumbnail:String,

@@ -6,44 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Register your account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <!-- <script src="main.js"></script> -->
-    <style>
-        body{
-            font-family: arial;
-            margin: 0;
-        }
-        nav{
-            background: #ff5353;
-            padding: 0px 10px;
-        }
-        nav ul{
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0;
-        }
-        nav li{
-            list-style-type: none;
-            display: inline-block;
-            margin: 0 10px 0 0;
-        }
-        nav a{
-            color: #fff;
-            font-size: 18px;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-        }
-        nav a:hover{
-            background: rgba(255,255,255,0.2);
-        }
-        main, header{
-            max-width: 960px;
-            margin: 30px auto;
-            padding: 0 10px;
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/assets/css/register.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -52,16 +17,68 @@
             <li><a href="/">Home Page</a></li>
         </ul>
     </nav>
-    <h1>Register Your Account</h1>
 
     <form action="/auth/register" method="post">
-        <input type='text' name="username" placeholder="User name" />
-        <br>
-        <input type='password' name="password" placeholder="password" />
-        <br>
-        <input type="submit" value="Log In"/>
+
+        <fieldset>
+            <legend>Log in details</legend>
+            <div class="inputWithIcon">
+                <input type='text' name="username" placeholder="User name" />
+                <i class="fas fa-user"></i>
+            </div>
+            <br>
+            <div class="inputWithIcon">
+                <input type='password' name="password" placeholder="password" />
+                <i class="fas fa-key"></i>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Tell us more about you...</legend>
+            <div class="inputWithIcon">
+                <input type='text' name="firstName" placeholder="Your first name" />
+                <i class="fas fa-tag"></i>
+            </div><br>
+            <div class="inputWithIcon">
+                <input type='text' name="lastName" placeholder="Your last name" />
+                <i class="fas fa-tag"></i>
+            </div><br>
+            <div class="inputWithIcon">
+                <input type='email' name="email" placeholder="Your email" />
+                <i class="fas fa-envelope"></i>
+            </div><br>
+            <div class="inputWithIcon">
+                <input type='tel' name="phoneNumber" placeholder="Best contact phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+                <i class="fas fa-phone"></i>
+                <span class="hint">Format:123-456-7890</span>
+            </div>
+        </fieldset>
+        <fieldset>
+                <legend>User Type</legend>
+                <div class="inputCheckGroup">
+                    
+                    <label class="checkBoxContainer" for="Admin">Admin
+                        <input type="checkbox" id='Admin' name='userType' value='Admin'>
+                        <span class="checkmark"></span>
+                    </label>
+                    
+                    <label class="checkBoxContainer" for="End_user">End User
+                        <input type="checkbox" id='End_user' name='userType' value='End_user' checked>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+    
+            </fieldset>
+
+        <div>
+            <input type="submit" value="Register" />
+        </div>
+        <!-- <%if(user!==undefined && user.userType==='Admin'){%> -->
+
+        <!-- <%}%> -->
+
+
     </form>
-    <a class='google-btn' href="/auth/google">Google+</a>
+
 
 </body>
 

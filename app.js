@@ -22,6 +22,7 @@ app.use(cookieParser());
 app.use(flash())
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/assets',express.static(__dirname+'/assets'))
 
 //connect to Mongodb
 app.use(dbConnect.initDatabaseServer);

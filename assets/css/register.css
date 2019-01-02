@@ -1,0 +1,174 @@
+body{
+    font-family: arial;
+    margin: 0;
+}
+nav{
+    background: #ff5353;
+    padding: 0px 10px;
+}
+nav ul{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0;
+}
+nav li{
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+nav a{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+nav a:hover{
+    background: rgba(255,255,255,0.2);
+}
+/* main, header{
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 0 10px;
+    color: #333; 
+}
+*/
+form{
+    color:#eee;
+    padding: 20px;
+    background: #f37474;
+    margin:auto 20%;
+}
+form p{
+    font-size: 18px;
+    letter-spacing: .01em;
+}
+input[type="radio"]{
+    opacity:0;
+    width:0;
+    margin:0;
+}
+label[for="rbx_Admin"],label[for="rbx_Admin"]{
+    margin-bottom: 10px;
+    display: inline-block;
+    padding-left: 26px;
+    background: url(/assets/img/checks.png) no-repeat;
+    background-position: 0 -32px;
+    line-height: 24px;
+    cursor: pointer;
+}
+input:checked+label[for="rbx_Admin"],
+input:checked+label[for="rbx_Admin"]{
+    background-position: 0 -64px;
+    color:#ce1010;
+}
+
+fieldset{
+    padding:20px;
+    margin:20px 0px;
+    border:1px solid rgb(82, 81, 81);
+}
+legend{
+    padding:10px;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+}
+
+input{
+    display: block;
+    margin-bottom: 20px;
+    padding:10px 10px 10px 50px;
+    border:0;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    box-sizing:border-box;
+     -moz-box-sizing:border-box;
+     -webkit-box-sizing:border-box;
+}
+input[type="submit"]{
+    padding:10px;
+}
+input:focus{
+    transition: 0.5s;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+.inputWithIcon input{
+    padding-left: 40px;
+    padding-right:20px;
+
+}
+.inputWithIcon i{
+    position: absolute;
+    left:0;
+    top:0px;
+    padding:10px;
+    color:gray;
+}
+.inputRadioGroup input{
+    display: inline-block;
+}
+
+/* checkbox group*/
+.inputCheckGroup label{
+    display: inline-block;
+}
+.checkBoxContainer{
+    display: block;
+    position: relative;
+    padding: 0px 40px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkBoxContainer input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: #eee;
+    border-radius: 4px;
+}
+.checkBoxContainer:hover input ~ .checkmark{
+    background-color: #ccc;
+}
+.checkBoxContainer input:checked ~ .checkmark{
+    background-color: #2196F3;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+.checkBoxContainer input:checked ~ .checkmark:after {
+    display: block;
+}
+.checkBoxContainer .checkmark:after {
+    left: 6px;
+    top: 2.5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    /* background-color: black; */
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  } 
