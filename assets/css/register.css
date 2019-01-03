@@ -1,72 +1,22 @@
-body{
-    font-family: arial;
-    margin: 0;
-}
-nav{
-    background: #ff5353;
-    padding: 0px 10px;
-}
-nav ul{
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0;
-}
-nav li{
-    list-style-type: none;
-    display: inline-block;
-    margin: 0 10px 0 0;
-}
-nav a{
-    color: #fff;
-    font-size: 20px;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-}
-nav a:hover{
-    background: rgba(255,255,255,0.2);
-}
-/* main, header{
-    max-width: 960px;
-    margin: 30px auto;
-    padding: 0 10px;
-    color: #333; 
-}
-*/
-form{
+
+.main form{
     color:#eee;
     padding: 20px;
     background: #f37474;
-    margin:auto 20%;
+    margin:auto;
+    width: 60%;
+    display: block;
 }
 form p{
     font-size: 18px;
     letter-spacing: .01em;
-}
-input[type="radio"]{
-    opacity:0;
-    width:0;
-    margin:0;
-}
-label[for="rbx_Admin"],label[for="rbx_Admin"]{
-    margin-bottom: 10px;
-    display: inline-block;
-    padding-left: 26px;
-    background: url(/assets/img/checks.png) no-repeat;
-    background-position: 0 -32px;
-    line-height: 24px;
-    cursor: pointer;
-}
-input:checked+label[for="rbx_Admin"],
-input:checked+label[for="rbx_Admin"]{
-    background-position: 0 -64px;
-    color:#ce1010;
 }
 
 fieldset{
     padding:20px;
     margin:20px 0px;
     border:1px solid rgb(82, 81, 81);
+    border-radius: 4px;
 }
 legend{
     padding:10px;
@@ -74,10 +24,10 @@ legend{
     letter-spacing: 0.1em;
 }
 
-input{
+/* input{
     display: block;
-    margin-bottom: 20px;
-    padding:10px 10px 10px 50px;
+    /* margin-bottom: 20px; */
+    /* padding:10px 10px 10px 50px;
     border:0;
     border-radius: 4px;
     font-size: 14px;
@@ -85,33 +35,73 @@ input{
     width: 100%;
     box-sizing:border-box;
      -moz-box-sizing:border-box;
-     -webkit-box-sizing:border-box;
+     -webkit-box-sizing:border-box; 
+} */
+/*submit button*/
+form div div{
+    display:flex;
+  
+    justify-content: flex-end;
+    
 }
-input[type="submit"]{
+button[type="submit"], form div a{flex-grow: 1;
+    color:black;
+    margin:0 10px;
     padding:10px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 500;
+    width: 15%;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
 }
+
+input[type="submit"]:hover{
+    background-color: beige;
+}
+
 input:focus{
     transition: 0.5s;
 }
 
-.inputWithIcon{
-    position: relative;
+/* input with icon flex
+*/
+.inputWithIconFlex{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    /* border:0.1 solid gray;
+    border-radius: 4px; */
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    background-color: white;
+    border-radius: 4px;
+    box-sizing:border-box;
+     -moz-box-sizing:border-box;
+     -webkit-box-sizing:border-box;
 }
-.inputWithIcon input{
-    padding-left: 40px;
-    padding-right:20px;
 
+.inputWithIconFlex input{
+    padding:10px 10px 10px 10px;
+    flex-grow:9.5;
+    margin:0;
+    border:none;
 }
-.inputWithIcon i{
-    position: absolute;
-    left:0;
-    top:0px;
-    padding:10px;
-    color:gray;
+.inputWithIconFlex i{
+    flex-grow:0.5;
+    margin:0;
+    padding:0 0 0 10px;
+    border:none;
 }
-.inputRadioGroup input{
-    display: inline-block;
+.inputWithIconFlex i:first-child{
+    color:black;
 }
+
+/*-----END-----*/
 
 /* checkbox group*/
 .inputCheckGroup label{

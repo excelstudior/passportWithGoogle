@@ -5,65 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Oauth with Google</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <!-- <script src="main.js"></script> -->
-    <style>
-        body{
-            font-family: arial;
-            margin: 0;
-        }
-        nav{
-            background: #ff5353;
-            padding: 0px 10px;
-        }
-        nav ul{
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0;
-        }
-        nav li{
-            list-style-type: none;
-            display: inline-block;
-            margin: 0 10px 0 0;
-        }
-        nav a{
-            color: #fff;
-            font-size: 18px;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-        }
-        nav a:hover{
-            background: rgba(255,255,255,0.2);
-        }
-        main, header{
-            max-width: 960px;
-            margin: 30px auto;
-            padding: 0 10px;
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home Page</a></li>
-            <%if(user){%>
-            <li><a href="/auth/logout">Log Out</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <%}else{%>
-            <li><a href="/auth/login">Log In</a></li>
-            <li><a href="/auth/register">Register</a></li>
-            <%}%>
-            
-        </ul>
-    </nav>
-    <header>
-        <h1>Net Ninja Oauth Tut's</h1>
-        <h2>Home Page</h2>
-    </header>
-    <Main>
-        <p>Main Paragraph</p>
-    </Main>
+    <%-include('common/nav')-%>
+    <div class="main">
+
+    </div>
 </body>
 </html>

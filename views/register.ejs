@@ -7,80 +7,122 @@
     <title>Register your account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/assets/css/register.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
+    <!-- <script type="text/javascript" src='/assets/js/val_register,js'></script> -->
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home Page</a></li>
-        </ul>
-    </nav>
+    <%-include('common/nav')-%>
+    <div class="main">
+        <form action="/auth/register" method="post">
 
-    <form action="/auth/register" method="post">
-
-        <fieldset>
-            <legend>Log in details</legend>
-            <div class="inputWithIcon">
-                <input type='text' name="username" placeholder="User name" />
-                <i class="fas fa-user"></i>
-            </div>
-            <br>
-            <div class="inputWithIcon">
-                <input type='password' name="password" placeholder="password" />
-                <i class="fas fa-key"></i>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Tell us more about you...</legend>
-            <div class="inputWithIcon">
-                <input type='text' name="firstName" placeholder="Your first name" />
-                <i class="fas fa-tag"></i>
-            </div><br>
-            <div class="inputWithIcon">
-                <input type='text' name="lastName" placeholder="Your last name" />
-                <i class="fas fa-tag"></i>
-            </div><br>
-            <span class="inputHints">Please put in a valid email address</span><br>
-            <div class="inputWithIcon">
-                <input type='email' name="email" placeholder="Your email" />
-                <i class="fas fa-envelope"></i>
-            </div><br>
-            <div class="inputWithIcon">
-                <input type='tel' name="phoneNumber" placeholder="Best contact phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
-                <i class="fas fa-phone"></i>
-                <span class="inputHints">Format:123-456-7890</span>
-            </div>
-        </fieldset>
-        <fieldset>
+            <fieldset>
+                <legend>Log in details</legend>
+                <div class="inputWithIconFlex">
+                    <i class="fas fa-user"></i>
+                    <input type='text' name="username"
+                        placeholder="User name" 
+                        onchange="validateInput(this.name,this.type)" />
+                    <i id='username_check' class="fas fa-check"></i>
+                </div>
+                <br>
+                <div class="inputWithIconFlex">
+                    <i class="fas fa-key"></i>
+                    <input type='password' name="password" 
+                        placeholder="password" 
+                        onchange="validateInput(this.name,this.type)"/>
+                    <i id='password_check' class="fas fa-check"></i>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Tell us more about you...</legend>
+                <div class="inputWithIconFlex">
+                    <i class="fas fa-tag"></i>
+                    <input type='text' name="firstName" placeholder="Your first name" />
+                    <i class="fas fa-check"></i>
+                </div><br>
+                <div class="inputWithIconFlex">
+                    <i class="fas fa-tag"></i>
+                    <input type='text' name="lastName" placeholder="Your last name" />
+                    <i class="fas fa-check"></i>
+                </div><br>
+                <div class="inputWithIconFlex">
+                    <i class="fas fa-envelope"></i>
+                    <input type='email' name="email" placeholder="Please put in a valid email address" />
+                    <i class="fas fa-check"></i>
+                </div><br>
+                <div class="inputWithIconFlex">
+                    <i class="fas fa-phone"></i>
+                    <input type='tel' name="phoneNumber" placeholder="Best contact phone number. E.g.1234-567-890"
+                        pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" />
+                    <i class="fas fa-check"></i>
+                </div>
+            </fieldset>
+            <fieldset>
                 <legend>User Type</legend>
                 <div class="inputCheckGroup">
-                    
+
                     <label class="checkBoxContainer" for="Admin">Admin
                         <input type="checkbox" id='Admin' name='userType' value='Admin'>
                         <span class="checkmark"></span>
                     </label>
-                    
+
                     <label class="checkBoxContainer" for="End_user">End User
                         <input type="checkbox" id='End_user' name='userType' value='End_user' checked>
                         <span class="checkmark"></span>
                     </label>
                 </div>
-    
+
             </fieldset>
 
-        <div>
-            <input type="submit" value="Register" />
-        </div>
-        <!-- <%if(user!==undefined && user.userType==='Admin'){%> -->
+            <div>
+                <div><button type="submit" value="Submit">Submit</button>
+                    <a href="/">Cancel</a></div>
 
-        <!-- <%}%> -->
+            </div>
 
+        </form>
+    </div>
 
-    </form>
 
 
 </body>
-
+<script>
+    var validateInput=function(elementName,typeName){
+        var message=''
+        var elements=document.getElementsByName(elementName)
+        for(i=0;i<elements.length;i++){
+            if(elements[i].type===typeName){
+                switch (elementName){
+                    case 'username':
+                        if (elements[i].value.length<=3){
+                            message='User name need to be longer than 3 characters'
+                            elements[i].style.backgroundColor='beige';
+                            alert(message)
+                        } else {
+                            elements[i].style.backgroundColor='white';
+                            var checkId=elementName+'_check'
+                            document.getElementById(checkId).style.color='green';
+                        }
+                        return message;
+                    case 'password':
+                        if (elements[i].value.length<=5){
+                            message='Password needs to have at least 5 characters'
+                            elements[i].style.backgroundColor='beige';
+                            alert(message)
+                        } else {
+                            var checkId=elementName+'_check'
+                            elements[i].style.backgroundColor='white';
+                            document.getElementById(checkId).style.color='green';
+                        }
+                    return message;
+                        
+                    default:return message
+                }
+            }
+        }
+    };
+</script>
 </html>
