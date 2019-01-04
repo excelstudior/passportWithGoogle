@@ -7,19 +7,49 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/register.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <script type="text/javascript" src='/assets/js/val_register.js'></script>
 </head>
 
 <body>
     <%-include('common/nav')-%>
-    <form action="/auth/login" method="post">
-        <input type='text' name="username" placeholder="User name" />
-        <br>
-        <input type='password' name="password" placeholder="password" />
-        <br>
-        <input type="submit" value="Log In"/>
-    </form>
-    <a class='google-btn' href="/auth/google">Google+</a>
-
+    <div id='login'>
+        <div id='local-login'>
+             <form action="/auth/login" method="post">
+                    <fieldset>
+                        <div class="inputWithIconFlex">
+                            <span id='username_msg'></span>
+                            <div>
+                                <i class="fas fa-user"></i>
+                                <input type='text' name="username" placeholder="User name" onchange="validateInput(this.name,this.type)" />
+                                <i id='username_check' class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="inputWithIconFlex">
+                            <span id='password_msg'></span>
+                            <div>
+                                <i class="fas fa-key"></i>
+                                <input type='password' name="password" placeholder="password" onchange="validateInput(this.name,this.type)" />
+                                <i id='password_check' class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <input type="submit" value="Log In" />
+            </form>
+        </div> 
+        <div id='third-party-login'>
+            <div><img src='/assets/img/img_google_signin.png'><label>Sign in with Google</label></div>
+            <a class='google-btn' href="/auth/google">Log in with Google+</a>
+            <a class='google-btn' href="/auth/google">Log in with Google+</a>
+            <a class='google-btn' href="/auth/google">Log in with Google+</a>
+        </div>
+        
+        
+    </div>
 </body>
 
 </html>

@@ -24,19 +24,7 @@ legend{
     letter-spacing: 0.1em;
 }
 
-/* input{
-    display: block;
-    /* margin-bottom: 20px; */
-    /* padding:10px 10px 10px 50px;
-    border:0;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    width: 100%;
-    box-sizing:border-box;
-     -moz-box-sizing:border-box;
-     -webkit-box-sizing:border-box; 
-} */
+
 /*submit button*/
 form div div{
     display:flex;
@@ -69,6 +57,15 @@ input:focus{
 /* input with icon flex
 */
 .inputWithIconFlex{
+    display: flex;
+    flex-direction: column;
+}
+.inputWithIconFlex span{
+    font-size: 10px;
+    color:black;
+    padding: 5px 0px;
+}
+.inputWithIconFlex div{
     display:flex;
     justify-content: space-evenly;
     align-items: center;
@@ -85,19 +82,19 @@ input:focus{
      -webkit-box-sizing:border-box;
 }
 
-.inputWithIconFlex input{
+.inputWithIconFlex div input{
     padding:10px 10px 10px 10px;
     flex-grow:9.5;
     margin:0;
     border:none;
 }
-.inputWithIconFlex i{
+.inputWithIconFlex div i{
     flex-grow:0.5;
     margin:0;
     padding:0 0 0 10px;
     border:none;
 }
-.inputWithIconFlex i:first-child{
+.inputWithIconFlex div i:first-child{
     color:black;
 }
 
