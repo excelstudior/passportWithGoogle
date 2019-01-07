@@ -23,7 +23,7 @@ const userSchema=new Schema({
     createdBy:String,
 },options)
 
-userSchema.methods.validPassword = function(password) {
+userSchema.methods.validatePassword = function(password) {
     return bcrypt.compare(password, this.password);
   };
 userSchema.methods.updatePassword=function(password){

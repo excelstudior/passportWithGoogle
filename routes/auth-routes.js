@@ -18,13 +18,14 @@ router.get('/failLogin', (req, res) => {
 //auth logout
 router.get('/logout', (req, res) => {
 
-    req.logOut();
+    //
     let oAuth2Client = new OAuth2Client;
     let googleAccessToken = localStorage.getItem('googleAccessToken')
     if (googleAccessToken !== null) {
         oAuth2Client.revokeToken(googleAccessToken)
                     .then(()=>console.log('revoke google token'))
     }
+    req.logOut();
     req.session=null;
     res.redirect('/auth/login/')
 })
