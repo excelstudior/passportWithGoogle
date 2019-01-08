@@ -1,0 +1,23 @@
+<%if(error){%>
+    <div id='errorModal'>
+        <div id='errorModalContent'>
+        <div id='errorModalHead'>
+            <h2>
+                Please verify the following errors:
+             </h2>     
+        </div>    
+        <div id='errorModalBody'>
+            <ul>
+                <%for (var i=0;i<error.messages.length;i++){%>
+                <li><%= error.messages[i] %></li>
+                <%}%>
+            </ul>
+        </div>
+        <div id='errorModalFoot'>
+            <button onclick="toggle_visibility('errorModal')">close</button>
+        </div>
+        
+        </div>
+        
+    </div>  
+<%}%>

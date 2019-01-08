@@ -11,10 +11,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
     <script type="text/javascript" src='/assets/js/val_register.js'></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+			  crossorigin="anonymous"></script>
 </head>
 
 <body>
     <%-include('common/nav')-%>
+    <%-include('common/validationError')-%>
     <div class="main">
         <form action="/auth/register" method="post">
 
@@ -104,41 +109,6 @@
 
 
 </body>
-<!-- <script>
-    var validateInput=function(elementName,typeName){
-        var message=''
-        var elements=document.getElementsByName(elementName)
-        for(i=0;i<elements.length;i++){
-            if(elements[i].type===typeName){
-                switch (elementName){
-                    case 'username':
-                        if (elements[i].value.length<=3){
-                            message='User name need to be longer than 3 characters'
-                            elements[i].style.backgroundColor='beige';
-                            alert(message)
-                        } else {
-                            elements[i].style.backgroundColor='white';
-                            var checkId=elementName+'_check'
-                            document.getElementById(checkId).style.color='green';
-                        }
-                        return message;
-                    case 'password':
-                        if (elements[i].value.length<=5){
-                            message='Password needs to have at least 5 characters'
-                            elements[i].style.backgroundColor='beige';
-                            alert(message)
-                        } else {
-                            var checkId=elementName+'_check'
-                            elements[i].style.backgroundColor='white';
-                            document.getElementById(checkId).style.color='green';
-                        }
-                    return message;
-                        
-                    default:return message
-                }
-            }
-        }
-    };
-</script> -->
+<script type="text/javascript" src='/assets/js/common.js'></script>
 
 </html>

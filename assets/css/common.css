@@ -35,7 +35,7 @@ nav li{
 }
 nav a,nav ul li span{
     color: #fff;
-    font-size: 10px;
+    font-size: 14px;
     text-decoration: none;
     padding:8px 15px ;
     display: block;
@@ -56,4 +56,55 @@ nav a:hover{
     padding: 0 ;
     display: inline;
    
+}
+#errorModal{
+    display:block;
+    position: fixed;
+    opacity: 0.9;
+    background-color:rgb(160, 158, 158);
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    overflow: auto;
+}
+#errorModalContent{
+    margin: auto;
+    width: 70%;
+    border-radius: 5px;
+    background-color:beige;
+    padding:0;
+}
+#errorModalHead{
+    padding:20px;
+    color: beige;
+    background-color: #ff5353;
+}
+
+#errorModalHead h2{
+    margin:auto;
+}
+
+#errorModalContent ul{
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+}
+#errorModalContent ul li{
+    list-style-type: none;
+    padding: 5px 0px;
+}
+#errorModalFoot {
+    padding:10px 20px;
+    color: beige;
+    background-color: #ff5353;
+    display: flex;
+    justify-content: flex-end;
+}
+#errorModalFoot button {
+    padding:10px;
+    background-color: beige;
+    border-radius: 5px;
+    border:none;
 }

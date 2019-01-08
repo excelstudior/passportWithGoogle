@@ -32,12 +32,18 @@ router.get('/logout', (req, res) => {
 
 //Register User
 router.get('/register', (req, res) => {
-    res.render('register',{user:req.user})
+    res.render('register',{user:req.user,error:{messages:['Yo','Yo','Yo3']}})
 
 })
 
 router.post('/register', (req, res) => {
     //To do: Input validations, validate user existence
+    let error={messages:[]};
+    User.findOne({username:req.body.username}).then((user)=>{
+        if(user){
+            error.messages=['User name has been registered, Please user anther name.']
+            res.json({error})}
+    })
 
     let newUser = new User({
         username: req.body.username,
