@@ -6,6 +6,7 @@
     margin:auto;
     width: 60%;
     display: block;
+    box-sizing: border-box;
 }
 form p{
     font-size: 18px;

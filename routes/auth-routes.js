@@ -32,33 +32,35 @@ router.get('/logout', (req, res) => {
 
 //Register User
 router.get('/register', (req, res) => {
-    res.render('register',{user:req.user,error:{messages:['Yo','Yo','Yo3']}})
+    res.render('register',{user:req.user})
 
 })
 
 router.post('/register', (req, res) => {
-    //To do: Input validations, validate user existence
     let error={messages:[]};
     User.findOne({username:req.body.username}).then((user)=>{
         if(user){
             error.messages=['User name has been registered, Please user anther name.']
-            res.json({error})}
-    })
+            res.send(error);
+        } else {
+            let newUser = new User({
+                username: req.body.username,
+                password: req.body.password,
+                googleId: '',
+                thumbnail: '',
+                createdBy: req.user!==undefined? user.id:req.body.username
+            })
+            bcrypt.hash(newUser.password, 5, (err, hash) => {
+                if (err) { console.log(err) };
+                newUser.password = hash;
+                newUser.save()
+                    .then(() => res.redirect('/auth/login'))
+                    .catch(err => console.log(err))
+            })
+        }
+    }) 
 
-    let newUser = new User({
-        username: req.body.username,
-        password: req.body.password,
-        googleId: '',
-        thumbnail: '',
-        createdBy: req.user!==undefined? user.id:req.body.username
-    })
-    bcrypt.hash(newUser.password, 5, (err, hash) => {
-        if (err) { console.log(err) };
-        newUser.password = hash;
-        newUser.save()
-            .then(() => res.redirect('/auth/login'))
-            .catch(err => console.log(err))
-    })
+    
 
 })
 

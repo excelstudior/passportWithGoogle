@@ -7,7 +7,7 @@
             <%if(user){%>
             <li><a href="/auth/logout">Log Out</a></li>
             <li><a href="/profile">Profile</a></li>
-            <li ><span>Welcome, <%=user.username%></span></li>
+            <li ><span>Hi, <%=user.username%></span></li>
             <li ><img src="<%=user.thumbnail%>"/></li>
             <%}else{%>
             <li><a href="/auth/login">Log In</a></li>

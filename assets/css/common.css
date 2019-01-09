@@ -58,7 +58,7 @@ nav a:hover{
    
 }
 #errorModal{
-    display:block;
+    display:none;
     position: fixed;
     opacity: 0.9;
     background-color:rgb(160, 158, 158);

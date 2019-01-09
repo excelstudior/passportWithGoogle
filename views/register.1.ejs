@@ -10,13 +10,18 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
+    <script type="text/javascript" src='/assets/js/val_register.js'></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+			  crossorigin="anonymous"></script>
 </head>
 
 <body>
     <%-include('common/nav')-%>
     <%-include('common/validationError')-%>
     <div class="main">
-        <form id='registerUserForm' onsubmit="submitForm(event)" method="POST">
+        <form id='registerUserForm' action="/auth/register" method="post">
 
             <fieldset>
                 <legend>Log in details</legend>
@@ -105,7 +110,5 @@
 
 </body>
 <script type="text/javascript" src='/assets/js/common.js'></script>
-<script type="text/javascript" src='/assets/js/register.js'></script>
-<script type="text/javascript" src='/assets/js/val_register.js'></script>
 
 </html>

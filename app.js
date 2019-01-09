@@ -18,6 +18,7 @@ app.use(cookieSession({
     keys:[keys.session.cookieKey]
 }))
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(flash())
 app.use(passport.initialize());
