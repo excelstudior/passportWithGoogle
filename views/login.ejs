@@ -16,37 +16,36 @@
 
 <body>
     <%-include('common/nav')-%>
-    <div id='login'>
+    <div id='login'>   
+            <%if(message){%>
+                <p ><%= message[0] %></p>
+                <%}%>
         <div id='local-login'>
-             <form action="/auth/login" method="post">
-                    <fieldset>
-                        <div class="inputWithIconFlex">
-                            <span id='username_msg'></span>
-                            <div>
-                                <i class="fas fa-user"></i>
-                                <input type='text' name="username" placeholder="User name" onchange="validateInput(this.name,this.type)" />
-                                <i id='username_check' class="fas fa-check"></i>
-                            </div>
+                
+            <form action="/auth/login" method="POST">
+                <div class='login-inputWithIcon'>
+                    <div>
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" placeholder="Your user name">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div class='login-inputWithIcon'>
+                        <div>
+                            <i class="fas fa-key"></i>
+                            <input type="password" name="password" placeholder="Your passwords">
+                            <i class="fas fa-check"></i>
                         </div>
-                        <br>
-                        <div class="inputWithIconFlex">
-                            <span id='password_msg'></span>
-                            <div>
-                                <i class="fas fa-key"></i>
-                                <input type='password' name="password" placeholder="password" onchange="validateInput(this.name,this.type)" />
-                                <i id='password_check' class="fas fa-check"></i>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <input type="submit" value="Log In" />
+                </div>
+                <button id='btn-login' type="submit">Log In</button>
             </form>
-        </div> 
+        </div>
         <div id='third-party-login'>
             <div><a href="/auth/google"><img src='/assets/img/img_google_signin.png'></a></div>
+            <span>Or</span>
+            <div><a href="/auth/google"><img src='/assets/img/img_google_signin.png'></a></div>
         </div>
-        
-        
-    </div>
+  </div>
 </body>
-
+<script type="text/javascript" src='/assets/js/common.js'></script>
 </html>

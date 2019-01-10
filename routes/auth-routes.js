@@ -9,10 +9,12 @@ const User = require('../models/user');
 
 //auth login
 router.get('/login', (req, res) => {
-    res.render('login',{user:req.user})
+    //console.log(req.flash('error'))
+    res.render('login',{user:req.user,message:req.flash('error')})
 })
 router.get('/failLogin', (req, res) => {
-    res.render('failLogin')
+    //console.log(req.flash('error'))
+    res.render('failLogin',{ message: req.flash('error')})
 })
 
 //auth logout
@@ -66,7 +68,7 @@ router.post('/register', (req, res) => {
 
 //user login use local strategy
 router.post('/login',
-    passport.authenticate('local', { successRedirect: '/profile', failureRedirect: '/auth/failLogin', failureFlash: true }))
+    passport.authenticate('local', { successRedirect: '/profile',failureRedirect:'/auth/login', failureFlash: true }))
 
 
 //user login use google strategy
