@@ -5,20 +5,30 @@
         </ul>
         <ul>
             <%if(user){%>
-            <li><a href="/auth/logout">Log Out</a></li>
-            <li><a href="/profile">Profile</a></li>
             <li>
                 <div class='dropdown'>
-                    <button onclick="return showDropdown('queueDropdown')" class='dropbtn'>Queue</button>
+                    <!-- <button onclick="return showDropdown('queueDropdown')" class='dropbtn'></button> -->
+                    <span onclick="return showDropdown('queueDropdown')" class='dropbtn'>Queue</span>
                     <div id='queueDropdown' class='dropdown-content'>
-                        <a href="">Queue Item 1</a>
-                        <a href="">Queue Item 2</a>
-                        <a href="">Queue Item 3</a>
+                        <a href=""><i class="fas fa-plus-square"></i>New Queue</a>
+                        <a href=""><i class="fas fa-layer-group"></i>My Queue</a>
+                        <a href=""><i class="fas fa-users"></i>Team</a>
                     </div>
                 </div>
             </li>
-            <li ><span>Hi, <%=user.username%></span></li>
-            <li ><img src="<%=user.thumbnail%>"/></li>
+            <li><div class='dropdown'>
+                <button onclick="return showDropdown('userDropdown')" class='dropbtn'>Hi, <%=user.username%></button>
+                <div id='userDropdown' class='dropdown-content'>
+                        <a href="/profile">
+                            <%if(user.thumbnail!==''){%>
+                            <img src="<%=user.thumbnail%>"/>
+                            <%}else{%>
+                                <i class="fas fa-user"></i>
+                            <%}%>
+                            <span>Profile</span></a>
+                        <a href="/auth/logout"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a>
+                </div>
+            </div></li>
             <%}else{%>
             <li><a href="/auth/login">Log In</a></li>
             <li><a href="/auth/register">Register</a></li>
