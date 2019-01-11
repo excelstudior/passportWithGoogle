@@ -50,7 +50,27 @@ var showErrorModal = function (errorMessages) {
 var createFormDataObject = function (form) {
     var formDataObject = {};
     for (var pair of new FormData(form)) {
-        formDataObject[pair[0]] = pair[1]
-    }
+        formDataObject[pair[0]] = pair[1];
+    };
     return formDataObject;
 }
+
+//Dropdown 
+////for dropdown menu/list 
+var showDropdown=function(elememntId) {
+    document.getElementById(elememntId).classList.toggle("dropdown-show");
+}
+////Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('dropdown-show')) {
+          openDropdown.classList.remove('dropdown-show');
+        }
+      }
+    }
+}
+//End

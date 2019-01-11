@@ -3,7 +3,7 @@ body{
     margin: 0;
 }
 nav{
-    background: #8DAABA;
+    background: #2980B9;
     padding: 0;
     display: flex;
     /* max-width: 960px;  */
@@ -33,13 +33,13 @@ nav li{
     margin: 0 10px 0 0;
     /* justify-content: flex-start */
 }
-nav a,nav ul li span{
-    color: #ffffff;
+nav a,nav ul li span,.dropbtn{
+    color: antiquewhite;
     font-size: 16px;
     text-decoration: none;
     padding:18px 15px ;
     display: block;
-    font-weight: 400;
+    font-weight: 500;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 nav ul li img{
@@ -48,8 +48,43 @@ nav ul li img{
     width: 50%;
 }
 nav a:hover{
-    background: rgba(255,255,255,0.2);
+    background-color: #2980B9;
 }
+/* click dropdown manual. First need to inherit li a style above and set own rules below*/
+.dropbtn{
+    border:none;
+    background-color: #2980B9;
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color: antiquewhite;
+    color: #2980B9;
+    cursor: pointer;
+  }
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+.dropdown-content a {
+    padding: 10px 12px; 
+    text-decoration: none;
+    color:#2980B9;
+    font-weight: 500;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: antiquewhite;
+}
+.dropdown-show {display:block;}
+/*End dropDown*/
 .main {
     max-width: 961px;
     margin:0  auto;
