@@ -11,8 +11,11 @@ const ticketSchema = new Schema({
     createdBy: {
         user: {
             id: { type: Schema.Types.ObjectId },
-            name: String
-        }
+            name: String,
+            ref: 'user',
+        },
+        required:true,
+        index:true,
     },
     contact: {
         clientId: { type: Schema.Types.ObjectId },
@@ -23,16 +26,19 @@ const ticketSchema = new Schema({
     assignee: {
         user: {
             id: { type: Schema.Types.ObjectId },
-            name: String
-        }
+            name: String,
+            ref: 'user',
+        },
+        index:true,
     },
     status: { type: String, default: status.OPEN },
-    referenceNumber: { type:Number, unique: true },
+    referenceNumber: { type: Number, unique: true, index: true },
+    tags: [{ type: String }]
 
 }, options)
 
 // ticketSchema.static.findLastReferenceNumber=function(){
-
+//https://stackoverflow.com/questions/19751420/mongoosejs-how-to-find-the-element-with-the-maximum-value
 // }
 const Ticket = mongoose.model('ticket', ticketSchema)
 module.exports = Ticket;

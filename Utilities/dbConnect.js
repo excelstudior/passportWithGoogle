@@ -4,11 +4,11 @@ const keys=require('../config/keys')
 var mongoose=require('mongoose')
 var db;
 var connectionState;
-
+var dbConnectOptions={ autoIndex: false }
 function connectDbServer() {
     if (db===undefined) {
         console.warn("Trying to init DB again!");
-        return mongoose.connect(keys.mongodb.url+keys.mongodb.database,handleDbConnect);
+        return mongoose.connect(keys.mongodb.url+keys.mongodb.database,dbConnectOptions,handleDbConnect);
 
     } else{
         console.log('readyState ',db.readyState)

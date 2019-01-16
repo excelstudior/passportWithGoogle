@@ -1,7 +1,7 @@
 #login{
     display: block;
     margin:20px auto;
-    width: 50%;
+    width: 400px;
     border:solid 1px #8daaba;
     padding: 20px;
     box-sizing: border-box;
@@ -34,7 +34,7 @@
     display: flex;
     border: 0.5px solid #bae1f2;
     border-radius: 5px;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center
 }
 .login-inputWithIcon div i{
@@ -48,7 +48,7 @@
 }
 #btn-login{
     margin: 10px 0px;
-    padding: 10px 10px;
+    padding: 10px 20px;
     border:#8daaba solid 0.5px;
 }
 #login p{
