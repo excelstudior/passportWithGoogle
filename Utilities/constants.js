@@ -1,10 +1,16 @@
 module.exports = {
     userType: {
         ADMIN: 'Admin',
-        END_USER: 'End_user',
+        END_USER: 'End User',
         GUEST:'Guest',
         CLIENT:'Client',
-        SUPERADMIN:'Super_Admin',
+        SUPERADMIN:'Super Admin',
+    },
+    ticketStatus:{
+        OPEN:'Open',
+        AWAITCLIENTRESPONSE:'Await Client Response',
+        RESOLVED:'Resolve',
+        PROGRESSING:'Progressing',
     },
     randomeString: function (length) {
         // function will return and string of random uppercase letters, length of the string is a parameter
