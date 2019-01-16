@@ -57,20 +57,23 @@ var createFormDataObject = function (form) {
 
 //Dropdown 
 ////for dropdown menu/list 
-var showDropdown=function(elememntId) {
+var showDropdown = function (elememntId) {
     document.getElementById(elememntId).classList.toggle("dropdown-show");
 }
 ////Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('dropdown-show')) {
-          openDropdown.classList.remove('dropdown-show');
+var toggleDropdownContent = function (dropDownId) {
+    var dropdown = document.getElementById(dropDownId);
+    if (dropdown.classList.contains('dropdown-show')) {
+        dropdown.classList.remove('dropdown-show');
+    }
+}
+window.onclick = function (event) {
+    var dropDownBtns = [{ btnId: '#userDropdownBtn', dropDownId: 'userDropdown' },
+    { btnId: '#queueDropdownBtn', dropDownId: 'queueDropdown' }]
+    for (var i = 0; i < dropDownBtns.length; i++) {
+        if (!event.target.matches(dropDownBtns[i].btnId)) {
+            toggleDropdownContent(dropDownBtns[i].dropDownId);
         }
-      }
     }
 }
 //End
