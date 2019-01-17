@@ -10,6 +10,7 @@ const passport=require('passport');
 const passportSetup=require('./config/passport-setup');
 const authRoutes=require('./routes/auth-routes');
 const profileRoutes=require('./routes/profile')
+const ticketRoutes=require('./routes/ticket')
 const dbConnect=require('./Utilities/dbConnect');
 
 app.set('view engine','ejs')
@@ -30,6 +31,7 @@ app.use(dbConnect.initDatabaseServer);
 
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
+app.use('/ticket',ticketRoutes);
 app.use(function(req,res,next){
     
     console.log('req session is ',req.session);

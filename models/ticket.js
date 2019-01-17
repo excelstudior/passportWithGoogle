@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const utilities = require('../Utilities/constants');
+//const User=require('./user')
 const Schema = mongoose.Schema;
 const options = {
     timestamps: true,
@@ -9,13 +10,8 @@ const ticketSchema = new Schema({
     subject: { type: String, required: true },
     description: { type: String, require: true },
     createdBy: {
-        user: {
-            id: { type: Schema.Types.ObjectId },
-            name: String,
-            ref: 'user',
-        },
-        required:true,
-        index:true,
+        id: { type: Schema.Types.ObjectId, ref: 'User', index: true },
+        userName: String,
     },
     contact: {
         clientId: { type: Schema.Types.ObjectId },
@@ -24,21 +20,33 @@ const ticketSchema = new Schema({
         email: { type: String, require: true }
     },
     assignee: {
-        user: {
-            id: { type: Schema.Types.ObjectId },
-            name: String,
-            ref: 'user',
-        },
-        index:true,
+        id: { type: Schema.Types.ObjectId, ref: 'User', index: true },
+        userName: String,
     },
     status: { type: String, default: status.OPEN },
     referenceNumber: { type: Number, unique: true, index: true },
-    tags: [{ type: String }]
+    tags: [{ type: String }],
+    updates: {
+        user: {
+            id: { type: Schema.Types.ObjectId, ref: 'User' },
+            userName:String,
+        },
+        content:{type:String},
+        date:{
+            type:Date,
+            default:Date.now
+        }
+    }
 
 }, options)
 
-// ticketSchema.static.findLastReferenceNumber=function(){
 //https://stackoverflow.com/questions/19751420/mongoosejs-how-to-find-the-element-with-the-maximum-value
-// }
+ticketSchema.statics.findLastReferenceNumber = function (callback) {
+    return this.findOne({}).sort('-referenceNumber').exec(callback)
+}
+
+// ticketSchema.statics.findAll=function(){
+//     return this.find().sort('-referenceNumber')
+//  }
 const Ticket = mongoose.model('ticket', ticketSchema)
 module.exports = Ticket;
