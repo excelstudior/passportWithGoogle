@@ -27,11 +27,14 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
     contact.email = 'aba@gmail.com';
     console.log(req.user)
     // get assignee information
+    console.log(req.body.assignee);
+    let assignee={}
     let newTicket = new Ticket({
         subject: 'Test Ticket subject',
         description: 'Test description',
         createdBy: createdBy,
         contact: contact,
+        assignee:assignee,
         tags: null
     })
 
