@@ -19,10 +19,20 @@
     border: 0.5px solid #8daaba;
 }
 
+#superAdmin-UserRegisterForm fieldset legend{
+    padding: 10px 10px;
+    font-weight: 600;
+}
+
 #superAdmin-UserRegisterForm fieldset div{
     margin-top:12px;
     margin-bottom: 12px;
     padding: 0px 5px;
+}
+#superAdmin-UserRegisterForm fieldset div span{
+    font-size: 14px;
+    color:red;
+    font-weight: 400;
 }
 #input-w-icon{
     display: flex;
@@ -38,8 +48,17 @@
     margin-right: 10px;
     padding:5px 5px;
     border:none;
+    background-color: antiquewhite;
 }
 #input-w-icon i:nth-child(3){
+    /* color:green;
+    display: none; */
     color:white;
+}
+#sel-user-type{
+    padding: 5px 10px;
+    font-weight: 500;
+    border:none;
+    background-color: antiquewhite
 }
 

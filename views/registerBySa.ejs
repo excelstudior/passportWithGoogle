@@ -16,7 +16,7 @@
     <%-include('common/nav')-%>
     <%-include('common/validationError')-%>
     <div id='sa-register'>
-        <form id='superAdmin-UserRegisterForm' method="POST">
+        <form id='superAdmin-UserRegisterForm' onsubmit="submitForm(event)" method="POST">
             <h2>New User Registeration</h2>
             <fieldset>
                 <legend>Log in details</legend>
@@ -31,7 +31,7 @@
                 <br>
                 <div>
                     <span id='password_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-key"></i>
                         <input type='password' name="password" placeholder="password" onchange="validateInput(this.name,this.type)" />
                         <i id='password_check' class="fas fa-check"></i>
@@ -42,7 +42,7 @@
                 <legend>User Info</legend>
                 <div>
                     <span id='firstName_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-tag"></i>
                         <input type='text' name="firstName" placeholder="Your first name" />
                         <i id='firstName_check' class="fas fa-check"></i>
@@ -50,7 +50,7 @@
                 </div><br>
                 <div>
                     <span></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-tag"></i>
                         <input type='text' name="lastName" placeholder="Your last name" />
                         <i class="fas fa-check"></i>
@@ -59,7 +59,7 @@
                 </div><br>
                 <div>
                     <span id='email_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-envelope"></i>
                         <input type='email' name="email" placeholder="Please put in a valid email address" />
                         <i id='email_check' class="fas fa-check"></i>
@@ -67,22 +67,24 @@
                 </div><br>
                 <div>
                     <span id='tel_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-phone"></i>
                         <input type='tel' name="phoneNumber" placeholder="Best contact phone number. E.g.1234-567-890"
-                            pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" />
+                            />
                         <i id='tel_check' class="fas fa-check"></i>
                     </div>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>User Type</legend>
-                <select>
-                    <option value="ADMIN">Admin</option>
-                    <option value="GUEST">Guest</option>
-                    <option value="CLIENT">Client</option>
-                    <option value="SUPERADMIN">Super Admin</option>
-                </select>
+                <div>
+                    <select id="sel-user-type">
+                        <option name='ADMIN' value="ADMIN">Admin</option>
+                        <option name='GUEST' value="GUEST">Guest</option>
+                        <option name='CLIENT' value="CLIENT">Client</option>
+                        <option name="SUPERADMIN" value="SUPERADMIN">Super Admin</option>
+                    </select>
+                </div>
 
             </fieldset>
 

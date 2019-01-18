@@ -63,9 +63,12 @@ var showDropdown = function (elememntId) {
 ////Close the dropdown menu if the user clicks outside of it
 var toggleDropdownContent = function (dropDownId) {
     var dropdown = document.getElementById(dropDownId);
-    if (dropdown.classList.contains('dropdown-show')) {
-        dropdown.classList.remove('dropdown-show');
+    if(dropdown!==null){
+        if (dropdown.classList.contains('dropdown-show')) {
+            dropdown.classList.remove('dropdown-show');
+        }
     }
+    
 }
 window.onclick = function (event) {
     var dropDownBtns = [{ btnId: '#userDropdownBtn', dropDownId: 'userDropdown' },

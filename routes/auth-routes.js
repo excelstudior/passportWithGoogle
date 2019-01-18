@@ -45,9 +45,16 @@ router.post('/register', (req, res) => {
             error.messages=['User name has been registered, Please user anther name.']
             res.send(error);
         } else {
+            let phone={}
+            phone.Type='Preferred';
+            phone.numbers=req.body.phoneNumber;
             let newUser = new User({
                 username: req.body.username,
                 password: req.body.password,
+                firstName:req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                phone:[phone],
                 googleId: '',
                 thumbnail: '',
                 createdBy: req.user!==undefined? user.id:req.body.username

@@ -11,7 +11,7 @@ const userSchema = new Schema({
     firstName: { type: String, default: '' },
     lastName: { type: String, default: '' },
     email: { type: String, trim: true, default: '' },
-    phone: [{ numbers: String, numberType: String }],
+    phone: [{ numbers: String, Type: String }],
     userType: {
         type: String,
         enum: [utilities.userType.ADMIN,

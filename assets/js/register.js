@@ -1,9 +1,10 @@
 var userRegisterURL = '/auth/register';
-var registerUserForm = document.getElementById('registerUserForm');
+var registerUserForm = document.getElementById('superAdmin-UserRegisterForm');
 
 var submitForm = function (e) {
     e.preventDefault();
     var data = createFormDataObject(registerUserForm)
+    console.log(data);
     fetch(userRegisterURL, {
         method: 'POST',
         headers: {
