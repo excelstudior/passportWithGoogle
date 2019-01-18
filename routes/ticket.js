@@ -29,6 +29,10 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
     // get assignee information
     console.log(req.body.assignee);
     let assignee={}
+
+    // get priority
+    let priority=req.body.priority;
+
     let newTicket = new Ticket({
         subject: 'Test Ticket subject',
         description: 'Test description',

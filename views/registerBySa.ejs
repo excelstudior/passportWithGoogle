@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register your account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/assets/css/sa-register.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <%-include('common/nav')-%>
+    <%-include('common/validationError')-%>
+    <div id='sa-register'>
+        <form id='superAdmin-UserRegisterForm' method="POST">
+            <h2>New User Registeration</h2>
+            <fieldset>
+                <legend>Log in details</legend>
+                <div>
+                    <span id='username_msg'></span>
+                    <div id='input-w-icon'>
+                        <i class="fas fa-user"></i>
+                        <input type='text' name="username" placeholder="User name" onchange="validateInput(this.name,this.type)" />
+                        <i id='username_check' class="fas fa-check"></i>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <span id='password_msg'></span>
+                    <div>
+                        <i class="fas fa-key"></i>
+                        <input type='password' name="password" placeholder="password" onchange="validateInput(this.name,this.type)" />
+                        <i id='password_check' class="fas fa-check"></i>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>User Info</legend>
+                <div>
+                    <span id='firstName_msg'></span>
+                    <div>
+                        <i class="fas fa-tag"></i>
+                        <input type='text' name="firstName" placeholder="Your first name" />
+                        <i id='firstName_check' class="fas fa-check"></i>
+                    </div>
+                </div><br>
+                <div>
+                    <span></span>
+                    <div>
+                        <i class="fas fa-tag"></i>
+                        <input type='text' name="lastName" placeholder="Your last name" />
+                        <i class="fas fa-check"></i>
+                    </div>
+
+                </div><br>
+                <div>
+                    <span id='email_msg'></span>
+                    <div>
+                        <i class="fas fa-envelope"></i>
+                        <input type='email' name="email" placeholder="Please put in a valid email address" />
+                        <i id='email_check' class="fas fa-check"></i>
+                    </div>
+                </div><br>
+                <div>
+                    <span id='tel_msg'></span>
+                    <div>
+                        <i class="fas fa-phone"></i>
+                        <input type='tel' name="phoneNumber" placeholder="Best contact phone number. E.g.1234-567-890"
+                            pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" />
+                        <i id='tel_check' class="fas fa-check"></i>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>User Type</legend>
+                <select>
+                    <option value="ADMIN">Admin</option>
+                    <option value="GUEST">Guest</option>
+                    <option value="CLIENT">Client</option>
+                    <option value="SUPERADMIN">Super Admin</option>
+                </select>
+
+            </fieldset>
+
+            <div>
+                <div><button type="submit" value="Submit">Submit</button>
+                    <a href="/">Cancel</a></div>
+
+            </div>
+
+        </form>
+    </div>
+
+
+
+</body>
+<script type="text/javascript" src='/assets/js/common.js'></script>
+<script type="text/javascript" src='/assets/js/register.js'></script>
+<script type="text/javascript" src='/assets/js/val_register.js'></script>
+
+</html>

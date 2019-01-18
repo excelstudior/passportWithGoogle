@@ -32,7 +32,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/auth/login/')
 })
 
-//Register User
+//Register User, guest register
 router.get('/register', (req, res) => {
     res.render('register',{user:req.user})
 
@@ -64,6 +64,12 @@ router.post('/register', (req, res) => {
 
     
 
+})
+
+//Register User by super admin
+
+router.get('/registerBySa',(req,res)=>{
+    res.render('registerBySa',{user:req.user})
 })
 
 //user login use local strategy

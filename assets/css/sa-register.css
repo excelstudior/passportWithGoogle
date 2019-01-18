@@ -1,0 +1,45 @@
+#sa-register{
+    background: white;
+}
+#superAdmin-UserRegisterForm{
+    width: 400px;
+    margin: 20px auto; 
+}
+
+#superAdmin-UserRegisterForm h2{
+    padding: 12px 10px;
+    text-align: center;
+    background-color: #2980B9;
+    color:antiquewhite
+}
+
+#superAdmin-UserRegisterForm fieldset{
+    margin-top:12px;
+    margin-bottom: 12px;
+    border: 0.5px solid #8daaba;
+}
+
+#superAdmin-UserRegisterForm fieldset div{
+    margin-top:12px;
+    margin-bottom: 12px;
+    padding: 0px 5px;
+}
+#input-w-icon{
+    display: flex;
+    align-items: center;
+}
+#input-w-icon i{
+    flex-grow: 1;
+    margin:0px 10px 0px 5px;
+    width: 20px;
+}
+#input-w-icon input{
+    flex-grow: 15;
+    margin-right: 10px;
+    padding:5px 5px;
+    border:none;
+}
+#input-w-icon i:nth-child(3){
+    color:white;
+}
+
