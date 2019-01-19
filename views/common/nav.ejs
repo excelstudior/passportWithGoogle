@@ -1,38 +1,51 @@
 <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a>About</a></li>
-            <li><a href="/auth/registerBySa">Add User</a></li>          
-        </ul>
-        <ul>
-            <%if(user){%>
-            <li>
-                <div class='dropdown'>
-                    <!-- <button onclick="return showDropdown('queueDropdown')" class='dropbtn'></button> -->
-                    <span onclick="return showDropdown('queueDropdown')" class='dropbtn' id='queueDropdownBtn'>Queue</span>
-                    <div id='queueDropdown' class='dropdown-content'>
-                        <a href=""><i class="fas fa-plus-square"></i>New Queue</a>
-                        <a href=""><i class="fas fa-layer-group"></i>My Queue</a>
-                        <a href=""><i class="fas fa-users"></i>Team</a>
-                    </div>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a>About</a></li>
+        <!-- <li><a href="/auth/registerBySa">Add User</a></li>           -->
+    </ul>
+    <ul>
+        <%if(user){%>
+        <li>
+            <div class='dropdown'>
+                <!-- <button onclick="return showDropdown('queueDropdown')" class='dropbtn'></button> -->
+                <span onclick="return showDropdown('ticketDropdown')" class='dropbtn' id='ticketDropdownBtn'>Ticket</span>
+                <div id='ticketDropdown' class='dropdown-content'>
+                    <a href="/ticket"><i class="fas fa-plus-square"></i>New Ticket</a>
+                    <a href=""><i class="fas fa-layer-group"></i>My Tickets</a>
                 </div>
-            </li>
-            <li><div class='dropdown'>
-                <button onclick="return showDropdown('userDropdown')" class='dropbtn' id='userDropdownBtn'>Hi, <%=user.username%></button>
+            </div>
+        </li>
+        <li>
+            <div class='dropdown'>
+                <!-- <button onclick="return showDropdown('queueDropdown')" class='dropbtn'></button> -->
+                <span onclick="return showDropdown('queueDropdown')" class='dropbtn' id='queueDropdownBtn'>Queue</span>
+                <div id='queueDropdown' class='dropdown-content'>
+                    <a href=""><i class="fas fa-plus-square"></i>New Queue</a>
+                    <a href=""><i class="fas fa-layer-group"></i>My Queue</a>
+                    <a href=""><i class="fas fa-users"></i>Team</a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class='dropdown'>
+                <button onclick="return showDropdown('userDropdown')" class='dropbtn' id='userDropdownBtn'>Hi,
+                    <%=user.username%></button>
                 <div id='userDropdown' class='dropdown-content'>
-                        <a href="/profile">
-                            <%if(user.thumbnail!==''){%>
-                            <img src="<%=user.thumbnail%>"/>
-                            <%}else{%>
-                                <i class="fas fa-user"></i>
-                            <%}%>
-                            <span>Profile</span></a>
-                        <a href="/auth/logout"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a>
+                    <a href="/profile">
+                        <%if(user.thumbnail!==''){%>
+                        <img src="<%=user.thumbnail%>" />
+                        <%}else{%>
+                        <i class="fas fa-user"></i>
+                        <%}%>
+                        <span>Profile</span></a>
+                    <a href="/auth/logout"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a>
                 </div>
-            </div></li>
-            <%}else{%>
-            <li><a href="/auth/login">Log In</a></li>
-            <li><a href="/auth/register">Register</a></li>
-            <%}%>
-        </ul>
-    </nav>
+            </div>
+        </li>
+        <%}else{%>
+        <li><a href="/auth/login">Log In</a></li>
+        <li><a href="/auth/register">Register</a></li>
+        <%}%>
+    </ul>
+</nav>

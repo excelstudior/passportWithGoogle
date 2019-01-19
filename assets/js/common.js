@@ -72,7 +72,9 @@ var toggleDropdownContent = function (dropDownId) {
 }
 window.onclick = function (event) {
     var dropDownBtns = [{ btnId: '#userDropdownBtn', dropDownId: 'userDropdown' },
-    { btnId: '#queueDropdownBtn', dropDownId: 'queueDropdown' }]
+    { btnId: '#queueDropdownBtn', dropDownId: 'queueDropdown' },
+    { btnId: '#ticketDropdownBtn', dropDownId: 'ticketDropdown' }
+]
     for (var i = 0; i < dropDownBtns.length; i++) {
         if (!event.target.matches(dropDownBtns[i].btnId)) {
             toggleDropdownContent(dropDownBtns[i].dropDownId);

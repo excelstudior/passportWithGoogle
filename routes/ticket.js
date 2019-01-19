@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const Ticket = require('../models/ticket')
 router.get('/', userUtil.isAuthenticated, (req, res) => {
-
-    res.send("<p>Ticket</p><br/> <form action='/Ticket' method='post'> <button type=''submit''>send</button></form>")
+    res.render('ticket',{user:req.user})
+    // res.send("<p>Ticket</p><br/> <form action='/Ticket' method='post'> <button type=''submit''>send</button></form>")
 
 });
 

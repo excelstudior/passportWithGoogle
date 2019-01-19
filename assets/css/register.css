@@ -1,166 +1,84 @@
-
-.main form{
-    color:#eee;
-    padding: 20px;
-    background: #f37474;
-    margin:auto;
-    width: 60%;
-    display: block;
-    box-sizing: border-box;
+#sa-register{
+    background: white;
 }
-form p{
-    font-size: 18px;
-    letter-spacing: .01em;
+#superAdmin-UserRegisterForm{
+    width: 400px;
+    margin: 20px auto; 
 }
 
-fieldset{
-    padding:20px;
-    margin:20px 0px;
-    border:1px solid rgb(82, 81, 81);
-    border-radius: 4px;
-}
-legend{
-    padding:10px;
-    font-size: 18px;
-    letter-spacing: 0.1em;
-}
-
-
-/*submit button*/
-form div div{
-    display:flex;
-  
-    justify-content: flex-end;
-    
-}
-button[type="submit"], form div a{flex-grow: 1;
-    color:black;
-    margin:0 10px;
-    padding:10px;
-    background-color: white;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
-    border: none;
+#superAdmin-UserRegisterForm h2{
+    padding: 12px 10px;
     text-align: center;
-    text-decoration: none;
+    background-color: #2980B9;
+    color:antiquewhite
 }
 
-input[type="submit"]:hover{
-    background-color: beige;
-}
-
-input:focus{
-    transition: 0.5s;
-}
-
-/* input with icon flex
-*/
-.inputWithIconFlex{
-    display: flex;
-    flex-direction: column;
-}
-.inputWithIconFlex span{
-    font-size: 10px;
-    color:black;
-    padding: 5px 0px;
-}
-.inputWithIconFlex div{
-    display:flex;
-    justify-content: space-evenly;
-    align-items: center;
-    
-    /* border:0.1 solid gray;
-    border-radius: 4px; */
-    font-size: 14px;
-    font-weight: 500;
-    width: 100%;
-    background-color: white;
-    border-radius: 4px;
-    box-sizing:border-box;
-     -moz-box-sizing:border-box;
-     -webkit-box-sizing:border-box;
-}
-
-.inputWithIconFlex div input{
-    padding:10px 10px 10px 10px;
-    flex-grow:9.5;
-    margin:0;
-    border:none;
-}
-.inputWithIconFlex div i{
-    flex-grow:0.5;
-    margin:0;
-    padding:0 0 0 10px;
-    border:none;
-}
-.inputWithIconFlex div i:first-child{
-    color:black;
-}
-
-/*-----END-----*/
-
-/* checkbox group*/
-.inputCheckGroup label{
-    display: inline-block;
-}
-.checkBoxContainer{
-    display: block;
-    position: relative;
-    padding: 0px 40px;
+#superAdmin-UserRegisterForm fieldset{
+    margin-top:12px;
     margin-bottom: 12px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    border: 0.5px solid #8daaba;
 }
-.checkBoxContainer input{
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+
+#superAdmin-UserRegisterForm fieldset legend{
+    padding: 10px 10px;
+    font-weight: 600;
 }
-.checkmark{
-    position: absolute;
-    top:0;
-    left: 0;
-    height: 20px;
+
+#superAdmin-UserRegisterForm fieldset div{
+    margin-top:12px;
+    margin-bottom: 12px;
+    padding: 0px 5px;
+}
+#superAdmin-UserRegisterForm fieldset div span{
+    font-size: 14px;
+    color:red;
+    font-weight: 400;
+}
+#input-w-icon{
+    display: flex;
+    align-items: center;
+}
+#input-w-icon i{
+    flex-grow: 1;
+    margin:0px 10px 0px 5px;
     width: 20px;
-    background: #eee;
-    border-radius: 4px;
 }
-.checkBoxContainer:hover input ~ .checkmark{
-    background-color: #ccc;
+#input-w-icon input{
+    flex-grow: 15;
+    margin-right: 10px;
+    padding:5px 5px;
+    border:none;
+    background-color: antiquewhite;
 }
-.checkBoxContainer input:checked ~ .checkmark{
-    background-color: #2196F3;
+#input-w-icon i:nth-child(3){
+    /* color:green;
+    display: none; */
+    color:white;
 }
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+#sel-user-type{
+    padding: 5px 10px;
+    font-weight: 500;
+    border:none;
+    background-color: antiquewhite
 }
-/* Show the checkmark when checked */
-.checkBoxContainer input:checked ~ .checkmark:after {
-    display: block;
+/*buttons*/
+#superAdmin-UserRegisterForm button{
+    padding:6px 12px;
+    border-radius: 0;
+    border:none;
+    box-shadow: none;
+    background-color:#2980B9;
+    color:antiquewhite;
+    font-weight: 400;
 }
-.checkBoxContainer .checkmark:after {
-    left: 6px;
-    top: 2.5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    /* background-color: black; */
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-/*Add validations*/ 
-input[type="email"]:invalid,
-input[type="tel"]:invalid {
-    background-color: bisque;
+#superAdmin-UserRegisterForm a{
+    padding:6px 12px;
+    text-decoration: none;
+    background-color:#2980B9;
+    font-size: 14px;
+    line-height: 17px;
+    color:antiquewhite;
+    font-weight: 400;
+    box-sizing: border-box;
+    display: inline-block;
 }

@@ -1,0 +1,18 @@
+.ticket-main{
+    background-color: antiquewhite;
+}
+#ticket{
+   width: 800px;
+   margin: 20px auto;
+   
+}
+#ticket div{
+    display: inline-block;
+}
+#ticket-info{
+    width:498px;
+    border-right:2px black solid
+}
+#ticket-options{
+    width:300px;
+}

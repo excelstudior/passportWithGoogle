@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Register your account</title>
+    <title>Register User account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/assets/css/register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
@@ -15,23 +15,23 @@
 <body>
     <%-include('common/nav')-%>
     <%-include('common/validationError')-%>
-    <div class="main">
-        <form id='registerUserForm' onsubmit="submitForm(event)" method="POST">
-
+    <div id='sa-register'>
+        <form id='superAdmin-UserRegisterForm' onsubmit="submitForm(event)" method="POST">
+            <h2>New User Registeration</h2>
             <fieldset>
                 <legend>Log in details</legend>
-                <div class="inputWithIconFlex">
+                <div>
                     <span id='username_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-user"></i>
                         <input type='text' name="username" placeholder="User name" onchange="validateInput(this.name,this.type)" />
                         <i id='username_check' class="fas fa-check"></i>
                     </div>
                 </div>
                 <br>
-                <div class="inputWithIconFlex">
+                <div>
                     <span id='password_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-key"></i>
                         <input type='password' name="password" placeholder="password" onchange="validateInput(this.name,this.type)" />
                         <i id='password_check' class="fas fa-check"></i>
@@ -39,55 +39,51 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Tell us more about you...</legend>
-                <div class="inputWithIconFlex">
+                <legend>User Info</legend>
+                <div>
                     <span id='firstName_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-tag"></i>
-                        <input type='text' name="firstName" placeholder="Your first name" />
+                        <input type='text' name="firstName" placeholder="User first name" />
                         <i id='firstName_check' class="fas fa-check"></i>
                     </div>
                 </div><br>
-                <div class="inputWithIconFlex">
+                <div>
                     <span></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-tag"></i>
-                        <input type='text' name="lastName" placeholder="Your last name" />
+                        <input type='text' name="lastName" placeholder="User last name" />
                         <i class="fas fa-check"></i>
                     </div>
 
                 </div><br>
-                <div class="inputWithIconFlex">
+                <div>
                     <span id='email_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-envelope"></i>
                         <input type='email' name="email" placeholder="Please put in a valid email address" />
                         <i id='email_check' class="fas fa-check"></i>
                     </div>
                 </div><br>
-                <div class="inputWithIconFlex">
+                <div>
                     <span id='tel_msg'></span>
-                    <div>
+                    <div id='input-w-icon'>
                         <i class="fas fa-phone"></i>
                         <input type='tel' name="phoneNumber" placeholder="Best contact phone number. E.g.1234-567-890"
-                            pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" />
+                            />
                         <i id='tel_check' class="fas fa-check"></i>
                     </div>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>User Type</legend>
-                <div class="inputCheckGroup">
-
-                    <label class="checkBoxContainer" for="Admin">Admin
-                        <input type="checkbox" id='Admin' name='userType' value='Admin'>
-                        <span class="checkmark"></span>
-                    </label>
-
-                    <label class="checkBoxContainer" for="Guest">Guest
-                        <input type="checkbox" id='Guest' name='userType' value='Guest' checked>
-                        <span class="checkmark"></span>
-                    </label>
+                <div>
+                    <select id="sel-user-type">
+                        <option name='ADMIN' value="ADMIN">Admin</option>
+                        <option name='GUEST' value="GUEST">Guest</option>
+                        <option name='CLIENT' value="CLIENT">Client</option>
+                        <option name="SUPERADMIN" value="SUPERADMIN">Super Admin</option>
+                    </select>
                 </div>
 
             </fieldset>
