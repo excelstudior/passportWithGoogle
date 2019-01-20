@@ -18,36 +18,28 @@
         <form id='ticket'>
             <div id="ticket-info">
                 <label for="subject">Subject</label>
-                <br>
-                <input type="text" name="subject">
-                <br>
+                <input type="text" name="subject" id='ticket-subject'>
                 <label for="description">Description</label>
-                <br>
-                <textarea name="description" id="" cols="30" rows="10"></textarea>
-                <br>
+                <textarea name="description" id="ticket-description" ></textarea>
             </div>
             <div id="ticket-options">
                 <label for="priority">Priority</label>
-                <br>
-                <select name="priority" id="priority">
+                <select name="priority" id="ticket-priority">
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </select>
-                <br>
                 <label for="assignee">Assignee</label>
-                <br>
-                <select name="assignee" id="assignee">
+                <select name="assignee" id="ticket-assignee">
                     <option value="ray">Ray</option>
                     <option value="jack">Jack</option>
                 </select>
-                <br>
                 <fieldset>
                     <legend>Contact Details</legend>
                     <!-- create a validate function (add the case statement) to validate 3 fields, can't empty, is validate phone number, email address -->
                     <div>
                         <span id='contactName_msg'></span>
-                        <div id='input-w-icon'>
+                        <div class='inputWithIcon'>
                             <i class="fas fa-user"></i>
                             <input type='text' name="contactName" placeholder="Your name" onchange="validateInput(this.name,this.type)" />
                             <i id='contactName_check' class="fas fa-check"></i>
@@ -55,16 +47,16 @@
                     </div>
                     <div>
                         <span id='contactPhone_msg'></span>
-                        <div id='input-w-icon'>
-                            <i class="fas fa-user"></i>
+                        <div class='inputWithIcon'>
+                            <i class="fas fa-envelope"></i>
                             <input type='text' name="contactPhone" placeholder="Your phone" onchange="validateInput(this.name,this.type)" />
                             <i id='contactPhone_check' class="fas fa-check"></i>
                         </div>
                     </div>
                     <div>
                         <span id='contactEmail_msg'></span>
-                        <div id='input-w-icon'>
-                            <i class="fas fa-user"></i>
+                        <div class='inputWithIcon'>
+                            <i class="fas fa-phone"></i>
                             <input type='text' name="contactEmail" placeholder="Your Email" onchange="validateInput(this.name,this.type)" />
                             <i id='contactEmail_check' class="fas fa-check"></i>
                         </div>

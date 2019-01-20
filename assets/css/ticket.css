@@ -1,18 +1,44 @@
-.ticket-main{
-    background-color: antiquewhite;
-}
+
 #ticket{
-   width: 800px;
-   margin: 20px auto;
+   width: 820px;
+   margin: 10px auto;
    
 }
 #ticket div{
     display: inline-block;
+    vertical-align: top;
 }
 #ticket-info{
     width:498px;
-    border-right:2px black solid
+    padding:5px
 }
+#ticket label,fieldset{
+    margin: 5px 0px;
+    display: block;
+}
+#ticket input,textarea,select{
+   padding: 5px 5px;
+   border:1px solid grey;
+   border-radius: 0;
+   font-size: 14px;
+}
+
 #ticket-options{
     width:300px;
+}
+#ticket-options fieldset div{
+    margin: 0px 3px;
+}
+#ticket-description{
+    width: 480px;
+    height: 300px;
+}
+.inputWithIcon{
+    display: flex !important;
+    align-items: center;
+    padding:5px 0px;
+}
+.inputWithIcon input{
+    margin:5px 5px;
+    border:none !important;
 }
