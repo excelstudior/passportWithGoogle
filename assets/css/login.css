@@ -5,7 +5,6 @@
     border:solid 1px #8daaba;
     padding: 20px;
     box-sizing: border-box;
-    border-radius: 5px;
 }
 #third-party-login{
     display: flex;
@@ -33,13 +32,13 @@
     padding: 5px 5px;
     display: flex;
     border: 0.5px solid #bae1f2;
-    border-radius: 5px;
     justify-content: flex-start;
     align-items: center
 }
 .login-inputWithIcon div i{
     flex-grow: 0.5; 
     padding:0px 10px;
+    width: auto;
 }
 .login-inputWithIcon div input{
     flex-grow: 8; 

@@ -9,12 +9,13 @@
     vertical-align: top;
 }
 #ticket-info{
-    width:498px;
+    width:488px;
     padding:5px
 }
 #ticket label,fieldset{
-    margin: 5px 0px;
+    margin: 10px 0px 5px 0px;
     display: block;
+    font-weight: 600;
 }
 #ticket input,textarea,select{
    padding: 5px 5px;
@@ -25,20 +26,26 @@
 
 #ticket-options{
     width:300px;
+    padding:5px;
 }
 #ticket-options fieldset div{
     margin: 0px 3px;
+    display: block;
 }
 #ticket-description{
-    width: 480px;
+    width: 460px;
     height: 300px;
 }
 .inputWithIcon{
     display: flex !important;
     align-items: center;
     padding:5px 0px;
+    justify-content: space-between;
 }
 .inputWithIcon input{
     margin:5px 5px;
     border:none !important;
+}
+.inputWithIcon i{
+    width: auto;
 }
