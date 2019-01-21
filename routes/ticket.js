@@ -11,54 +11,56 @@ router.get('/', userUtil.isAuthenticated, (req, res) => {
 });
 
 router.post('/', userUtil.isAuthenticated, (req, res) => {
-    // get ticket creator's id and username
-    let userId = req.user.id;
-    let userName = req.user.username;
-    let createdBy = {};
-    createdBy.id = userId;
-    createdBy.userName = userName;
-    // get contact information
-    let contact = {};
-    console.log(req.body.contact)
-    // mock ObjectId for test
-    contact.clientId = mongoose.Types.ObjectId();
-    contact.name = 'test contact name';
-    contact.phone = '04330888888';
-    contact.email = 'aba@gmail.com';
-    console.log(req.user)
-    // get assignee information
-    console.log(req.body.assignee);
-    let assignee={}
+    let contact=req.body.contact
+    let body=req.body
+    console.log(contact);
+    console.log(body);
+    res.send('sent')
+    // // get ticket creator's id and username
+    // let userId = req.user.id;
+    // let userName = req.user.username;
+    // let createdBy = {};
+    // createdBy.id = userId;
+    // createdBy.userName = userName;
+    // // get contact information
+    // let contact = {};
+    // console.log(req.body.contact)
+    // // mock ObjectId for test
+    // contact.clientId = mongoose.Types.ObjectId();
+    // contact.name = 'test contact name';
+    // contact.phone = '04330888888';
+    // contact.email = 'aba@gmail.com';
+    // console.log(req.user)
+    // // get assignee information
+    // console.log(req.body.assignee);
+    // let assignee={}
 
-    // get priority
-    let priority=req.body.priority;
+    // // get priority
+    // let priority=req.body.priority;
 
-    let newTicket = new Ticket({
-        subject: 'Test Ticket subject',
-        description: 'Test description',
-        createdBy: createdBy,
-        contact: contact,
-        assignee:assignee,
-        tags: null
-    })
+    // let newTicket = new Ticket({
+    //     subject: 'Test Ticket subject',
+    //     description: 'Test description',
+    //     createdBy: createdBy,
+    //     contact: contact,
+    //     assignee:assignee,
+    //     tags: null
+    // })
 
-    newTicket.referenceNumber = 0
-    Ticket.findLastReferenceNumber().then(function (ticket,err) {
-        console.log('find ticket ',ticket)
-        if (ticket === undefined) {
-            newTicket.referenceNumber = 1;
-        } else {
-            newTicket.referenceNumber = ticket.referenceNumber + 1;
-        }
-        console.log(newTicket)
-        newTicket
-        .save()
-        .then(console.log('Save!'))
-        .catch(console.log(err))
-    })
-    //console.log(ref)
-    res.send(userName)
-    //res.send("<p>Ticket</p><br/> <form> <button type=''submit''>send</button></form>")
-    //    res.render('profile',{user:req.user})
+    // newTicket.referenceNumber = 0
+    // Ticket.findLastReferenceNumber().then(function (ticket,err) {
+    //     console.log('find ticket ',ticket)
+    //     if (ticket === undefined) {
+    //         newTicket.referenceNumber = 1;
+    //     } else {
+    //         newTicket.referenceNumber = ticket.referenceNumber + 1;
+    //     }
+    //     console.log(newTicket)
+    //     newTicket
+    //     .save()
+    //     .then(console.log('Save!'))
+    //     .catch(console.log(err))
+    // })
+    // res.send(userName)
 });
 module.exports = router;

@@ -54,7 +54,12 @@ var createFormDataObject = function (form) {
     };
     return formDataObject;
 }
-
+var testFormObject=function(formId){
+    var form=document.getElementById(formId);
+    var data=createFormDataObject(form);
+    data=JSON.stringify(data);
+    console.log(data);
+}
 //Dropdown 
 ////for dropdown menu/list 
 var showDropdown = function (elememntId) {
