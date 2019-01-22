@@ -24,16 +24,25 @@
    font-size: 14px;
 }
 
+#ticket select{
+    width: 100%;
+ }
+
 #ticket-options{
     width:300px;
     padding:5px;
 }
 #ticket-options fieldset div{
-    margin: 0px 3px;
+    margin: 0px 5px;
     display: block;
 }
-#ticket-description{
+#ticket-options fieldset legend{
+    margin:5px 0px;
+}
+#ticket-description,#ticket-subject{
     width: 460px;
+}
+#ticket-description{
     height: 300px;
 }
 .inputWithIcon{
@@ -49,6 +58,12 @@
 .inputWithIcon i{
     width: auto;
 }
+/*select */
+#ticket-options select{
+    background-color: #8daaba;
+    color:white;
+}
+
 /*buttons*/
 #ticket-options button{
     margin-top:10px;
@@ -58,7 +73,9 @@
     box-shadow: none;
     background-color:#2980B9;
     color:antiquewhite;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: 14px;
 }
 #ticket-options a{
     margin-top:10px;
@@ -66,9 +83,13 @@
     text-decoration: none;
     background-color:#2980B9;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 1.2;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
     color:antiquewhite;
-    font-weight: 800;
+    font-weight: 600;
     box-sizing: border-box;
     display: inline-block;
+    border:none;
 }
