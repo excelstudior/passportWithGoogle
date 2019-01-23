@@ -13,8 +13,10 @@ router.get('/', userUtil.isAuthenticated, (req, res) => {
 router.post('/', userUtil.isAuthenticated, (req, res) => {
     let contact=req.body.contact
     let body=req.body
+    let assignee=JSON.parse(req.body.assignee)
     console.log(contact);
     console.log(body);
+    console.log(assignee.id, assignee.name);
     res.send('sent')
     // // get ticket creator's id and username
     // let userId = req.user.id;
