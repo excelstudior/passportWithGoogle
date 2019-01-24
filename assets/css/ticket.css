@@ -19,7 +19,9 @@
 }
 #ticket input,textarea,select{
    padding: 5px 5px;
-   border:1px solid grey;
+   border:none;
+   margin-bottom: 10px;
+   /* border:1px solid grey; */
    border-radius: 0px;
    font-size: 14px;
    -webkit-appearance: none;
@@ -28,11 +30,16 @@
 
 #ticket select{
     width: 100%;
+    font-weight: 500;
  }
 
 #ticket-options{
     width:300px;
     padding:5px;
+}
+#ticket-options fieldset{
+    border:none;
+    background:#efecec; 
 }
 #ticket-options fieldset div{
     margin: 0px 5px;
@@ -43,6 +50,8 @@
 }
 #ticket-description,#ticket-subject{
     width: 460px;
+    border-bottom: 1px solid #2980B9 !important;
+    
 }
 #ticket-description{
     height: 300px;
@@ -62,7 +71,7 @@
 }
 /*select */
 #ticket-options select{
-    background-color: #8daaba;
+    background-color: #2980B9;
     color:white;
 }
 
@@ -75,7 +84,7 @@
     box-shadow: none;
     background-color:#2980B9;
     color:antiquewhite;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
     font-size: 14px;
 }
@@ -90,8 +99,9 @@
     -moz-appearance: button;
     appearance: button; */
     color:antiquewhite;
-    font-weight: 600;
+    font-weight: 500;
     box-sizing: border-box;
     display: inline-block;
     border:none;
 }
+

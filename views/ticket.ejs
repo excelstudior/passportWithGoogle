@@ -14,13 +14,14 @@
 
 <body>
     <%-include('common/nav')-%>
+    <%-include('common/validationError')-%>
     <div class="ticket-main">
-        <form id='ticket' action="/ticket" method="POST">
+        <form id='ticket' onsubmit="submitTicket(event)" >
             <div id="ticket-info">
                 <label for="subject">Subject</label>
                 <input type="text" name="subject" id='ticket-subject' onchange="return testFormObject('ticket')">
                 <label for="description">Description</label>
-                <textarea name="description" id="ticket-description" ></textarea>
+                <textarea name="description" id="ticket-description" placeholder="Write something..." ></textarea>
             </div>
             <div id="ticket-options">
                 <label for="priority">Priority</label>
@@ -31,8 +32,9 @@
                 </select>
                 <label for="assignee">Assignee</label>
                 <select name="assignee" id="ticket-assignee">
-                    <option value='{"id":"1234","name":"Ray"}'>Ray</option>
-                    <option value="jack">Jack</option>
+                    <% for (var i=0;i < usersMap.length;i++) { %>
+                            <option value=<%= usersMap[i].value %> > <%= usersMap[i].name %> </option>
+                    <% } %>         
                 </select>
                 <fieldset>
                     <legend>Contact Details</legend>
@@ -41,23 +43,24 @@
                         <span id='contactName_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-user"></i>
-                            <input type='text' name="contact[name]" placeholder="Your name" onchange="validateInput(this.name,this.type)" />
+                            <input type='text' name=contactName placeholder="Your name" onchange="validateInput(this.name,this.type)" />
                             <i id='contactName_check' class="fas fa-check"></i>
                         </div>
                     </div>
                     <div>
                         <span id='contactPhone_msg'></span>
                         <div class='inputWithIcon'>
-                            <i class="fas fa-envelope"></i>
-                            <input type='text' name="contact[phone]" placeholder="Your phone" onchange="validateInput(this.name,this.type)" />
+                            
+                            <i class="fas fa-phone"></i>
+                            <input type='text' name=contactPhone placeholder="Your phone" onchange="validateInput(this.name,this.type)" />
                             <i id='contactPhone_check' class="fas fa-check"></i>
                         </div>
                     </div>
                     <div>
                         <span id='contactEmail_msg'></span>
                         <div class='inputWithIcon'>
-                            <i class="fas fa-phone"></i>
-                            <input type='text' name="contact[email]" placeholder="Your Email" onchange="validateInput(this.name,this.type)" />
+                            <i class="fas fa-envelope"></i>
+                            <input type='text' name=contactEmail placeholder="Your Email" onchange="validateInput(this.name,this.type)" />
                             <i id='contactEmail_check' class="fas fa-check"></i>
                         </div>
                     </div>
@@ -71,5 +74,6 @@
     </div>
 </body>
 <script type="text/javascript" src='/assets/js/common.js'></script>
+<script type="text/javascript" src='/assets/js/ticket.js'></script>
 
 </html>

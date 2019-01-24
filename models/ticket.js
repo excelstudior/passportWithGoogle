@@ -26,17 +26,14 @@ const ticketSchema = new Schema({
     status: { type: String, default: status.OPEN },
     referenceNumber: { type: Number, unique: true, index: true },
     tags: [{ type: String }],
-    updates: {
+    updates: [{
         user: {
             id: { type: Schema.Types.ObjectId, ref: 'User' },
             userName:String,
         },
         content:{type:String},
-        date:{
-            type:Date,
-            default:Date.now
-        }
-    },
+        date:{type:Date }
+    }],
     priority:{type:String}
 
 }, options)

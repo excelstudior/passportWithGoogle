@@ -5,64 +5,80 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const Ticket = require('../models/ticket')
 router.get('/', userUtil.isAuthenticated, (req, res) => {
-    res.render('ticket',{user:req.user})
+    User.find().then((users) => {
+        console.log(users)
+        if (users) {
+            console.log(users)
+            let usersMap = users.map((user) => {
+                let userObj = { id: user._id, userName: user.username }
+                return { value: JSON.stringify(userObj), name: user.username }
+            })
+            console.log(usersMap)
+            res.render('ticket', { user: req.user, usersMap: usersMap })
+        } else {
+            res.render('ticket', { user: req.user, usersMap: usersMap })
+        }
+    })
+    //res.render('ticket',{user:req.user})
     // res.send("<p>Ticket</p><br/> <form action='/Ticket' method='post'> <button type=''submit''>send</button></form>")
 
 });
 
 router.post('/', userUtil.isAuthenticated, (req, res) => {
-    let contact=req.body.contact
-    let body=req.body
-    let assignee=JSON.parse(req.body.assignee)
-    console.log(contact);
-    console.log(body);
-    console.log(assignee.id, assignee.name);
-    res.send('sent')
-    // // get ticket creator's id and username
-    // let userId = req.user.id;
-    // let userName = req.user.username;
-    // let createdBy = {};
-    // createdBy.id = userId;
-    // createdBy.userName = userName;
-    // // get contact information
-    // let contact = {};
-    // console.log(req.body.contact)
-    // // mock ObjectId for test
-    // contact.clientId = mongoose.Types.ObjectId();
-    // contact.name = 'test contact name';
-    // contact.phone = '04330888888';
-    // contact.email = 'aba@gmail.com';
-    // console.log(req.user)
-    // // get assignee information
-    // console.log(req.body.assignee);
-    // let assignee={}
+    let userId = req.user.id;
+    let userName = req.user.username;
+    let createdBy = {};
+    createdBy.id = userId;
+    createdBy.userName = userName;
 
-    // // get priority
-    // let priority=req.body.priority;
+    // get assignee information
+    let assignee = JSON.parse(req.body.assignee)
+    // create contact object
+    let contact={} 
+    contact.name= req.body.contactName;
+    contact.email= req.body.contactEmail;
+    contact.phone= req.body.contactPhone;
+    if (req.body.contactId!==undefined){
+        contact.clientId=req.body.contactId;
+    } else {
+        contact.clientId=null;
+    }
+    // get priority
+    let priority = req.body.priority;
+    // create update log
+    let update={}
+    update.user=createdBy;
+    update.content='Tickte Created';
+    update.date=Date.now();
+    let updates=[]
+    updates.push(update);
 
-    // let newTicket = new Ticket({
-    //     subject: 'Test Ticket subject',
-    //     description: 'Test description',
-    //     createdBy: createdBy,
-    //     contact: contact,
-    //     assignee:assignee,
-    //     tags: null
-    // })
+    let newTicket = new Ticket({
+        subject: req.body.subject,
+        description: req.body.description,
+        createdBy: createdBy,
+        contact: contact,
+        assignee:assignee,
+        tags: null,
+        priority: priority,
+        updates:updates,
+    })
 
-    // newTicket.referenceNumber = 0
-    // Ticket.findLastReferenceNumber().then(function (ticket,err) {
-    //     console.log('find ticket ',ticket)
-    //     if (ticket === undefined) {
-    //         newTicket.referenceNumber = 1;
-    //     } else {
-    //         newTicket.referenceNumber = ticket.referenceNumber + 1;
-    //     }
-    //     console.log(newTicket)
-    //     newTicket
-    //     .save()
-    //     .then(console.log('Save!'))
-    //     .catch(console.log(err))
-    // })
+    newTicket.referenceNumber = 0
+    Ticket.findLastReferenceNumber().then(function (err, ticket) {
+        console.log('find ticket ', err,ticket)
+        if (ticket === undefined) {
+            newTicket.referenceNumber = 1;
+        } else {
+            newTicket.referenceNumber = ticket.referenceNumber + 1;
+        }
+        console.log(newTicket)
+       // res.send(newTicket)
+        newTicket
+        .save()
+        .then(function(ticket){res.send(ticket)})
+        .catch(console.log(err))
+    })
     // res.send(userName)
 });
 module.exports = router;
