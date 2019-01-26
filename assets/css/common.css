@@ -116,8 +116,8 @@ nav a,nav ul li span,.dropbtn{
 #errorModal{
     display:none;
     position: fixed;
-    opacity: 0.9;
-    background-color:rgb(160, 158, 158);
+    opacity: 0.95;
+    background-color:white;
     z-index: 1;
     width: 100%;
     height: 100%;
@@ -127,15 +127,15 @@ nav a,nav ul li span,.dropbtn{
 }
 #errorModalContent{
     margin: auto;
-    width: 70%;
+    width: 50%;
     border-radius: 5px;
-    background-color:beige;
+    background-color:antiquewhite;
     padding:0;
 }
 #errorModalHead{
     padding:20px;
-    color: beige;
-    background-color: #ff5353;
+    color: antiquewhite;
+    background-color: #2980B9;
 }
 
 #errorModalHead h2{
@@ -146,21 +146,23 @@ nav a,nav ul li span,.dropbtn{
     display: block;
     font-size: 16px;
     font-weight: 400;
+    padding:10px 15px;
 }
 #errorModalContent ul li{
     list-style-type: none;
-    padding: 5px 0px;
+    padding: 15px 0px;
+    line-height:20px
 }
 #errorModalFoot {
     padding:10px 20px;
-    color: beige;
-    background-color: #ff5353;
+    color: antiquewhite;
+    background-color: #2980B9;
     display: flex;
     justify-content: flex-end;
 }
 #errorModalFoot button {
     padding:10px;
-    background-color: beige;
+    background-color: antiquewhite;
     border-radius: 5px;
     border:none;
 }

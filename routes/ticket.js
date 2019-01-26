@@ -65,20 +65,20 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
     })
 
     newTicket.referenceNumber = 0
-    Ticket.findLastReferenceNumber().then(function (err, ticket) {
+    Ticket.findLastReferenceNumber().then(function (ticket, err) {
         console.log('find ticket ', err,ticket)
-        if (ticket === undefined) {
+        if (ticket === null) {
             newTicket.referenceNumber = 1;
         } else {
             newTicket.referenceNumber = ticket.referenceNumber + 1;
         }
         console.log(newTicket)
-       // res.send(newTicket)
         newTicket
         .save()
-        .then(function(ticket){res.send(ticket)})
-        .catch(console.log(err))
+        .then(function(ticket){
+            res.redirect('/ticket')
+        }
+        ).catch(console.log(err))
     })
-    // res.send(userName)
 });
 module.exports = router;

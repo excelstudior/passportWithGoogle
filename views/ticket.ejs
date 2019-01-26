@@ -43,30 +43,25 @@
                         <span id='contactName_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-user"></i>
-                            <input type='text' name=contactName placeholder="Your name" onchange="validateInput(this.name,this.type)" />
-                            <i id='contactName_check' class="fas fa-check"></i>
+                            <input type='text' id="contact-name" name=contactName placeholder="Your name" onkeyup="validateTicketInfoInput()"/>
                         </div>
                     </div>
                     <div>
                         <span id='contactPhone_msg'></span>
-                        <div class='inputWithIcon'>
-                            
+                        <div class='inputWithIcon'>                            
                             <i class="fas fa-phone"></i>
-                            <input type='text' name=contactPhone placeholder="Your phone" onchange="validateInput(this.name,this.type)" />
-                            <i id='contactPhone_check' class="fas fa-check"></i>
+                            <input type='text' id="contact-phone" name=contactPhone placeholder="Your phone" onkeyup="validateTicketInfoInput()"/>
                         </div>
                     </div>
                     <div>
                         <span id='contactEmail_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-envelope"></i>
-                            <input type='text' name=contactEmail placeholder="Your Email" onchange="validateInput(this.name,this.type)" />
-                            <i id='contactEmail_check' class="fas fa-check"></i>
+                            <input type='text' id="contact-email" name=contactEmail placeholder="Your Email" onkeyup="validateTicketInfoInput()"/>
                         </div>
                     </div>
                 </fieldset>
                 <button type="submit" value="Submit">Submit</button>
-                <!-- <button onclick="e.preventDefault(); location.href='/'">Cancel</button> -->
                     <a href="/">Cancel</a>
             </div>
         </form>
@@ -75,5 +70,6 @@
 </body>
 <script type="text/javascript" src='/assets/js/common.js'></script>
 <script type="text/javascript" src='/assets/js/ticket.js'></script>
+<script type="text/javascript" src='/assets/js/validate.js'></script>
 
 </html>

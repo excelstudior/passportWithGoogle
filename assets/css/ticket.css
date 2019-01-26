@@ -18,7 +18,7 @@
     font-weight: 600;
 }
 #ticket input,textarea,select{
-   padding: 5px 5px;
+   padding: 10px 10px;
    border:none;
    margin-bottom: 10px;
    /* border:1px solid grey; */
@@ -39,14 +39,16 @@
 }
 #ticket-options fieldset{
     border:none;
-    background:#efecec; 
+    background:#efecec;
+    padding-left: 5px;
+    padding-right: 5px; 
 }
 #ticket-options fieldset div{
     margin: 0px 5px;
     display: block;
 }
 #ticket-options fieldset legend{
-    margin:5px 0px;
+    margin:5px auto;
 }
 #ticket-description,#ticket-subject{
     width: 460px;
@@ -55,19 +57,25 @@
 }
 #ticket-description{
     height: 300px;
+    
 }
 .inputWithIcon{
     display: flex !important;
     align-items: center;
-    padding:5px 0px;
+    padding:0px 5px;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
     justify-content: space-between;
+    background-color: white;
 }
 .inputWithIcon input{
-    margin:5px 0px;
+    margin:5px 0px !important;
     border:none !important;
+    flex-grow: 8;
 }
 .inputWithIcon i{
     width: auto;
+    flex-grow: 1;
 }
 /*select */
 #ticket-options select{
