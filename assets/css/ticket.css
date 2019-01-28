@@ -4,6 +4,12 @@
    margin: 10px auto;
    
 }
+#ticket h2{
+    border-bottom: #2980B9 solid 2px;
+    margin-bottom: 15px;
+    padding: 10px 0px;
+    text-align: center;
+}
 #ticket div{
     display: inline-block;
     vertical-align: top;
@@ -47,12 +53,13 @@
     margin: 0px 5px;
     display: block;
 }
-#ticket-options fieldset legend{
+#ticket-options fieldset p{
     margin:5px auto;
+    text-align: center;
 }
 #ticket-description,#ticket-subject{
     width: 460px;
-    border-bottom: 1px solid #2980B9 !important;
+    border-bottom: 0.5px solid #2980B9 !important;
     
 }
 #ticket-description{
@@ -69,7 +76,7 @@
     background-color: white;
 }
 .inputWithIcon input{
-    margin:5px 0px !important;
+    margin:0 !important;
     border:none !important;
     flex-grow: 8;
 }

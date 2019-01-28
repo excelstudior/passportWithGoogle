@@ -6,11 +6,15 @@ var ticketForm = document.getElementById('ticket');
 function validateTicketInfoInput(){
     //create output messages array object
     var messages=[];
-    //fields to be validated
-    // var contactName=document.getElementById('contact-name');
-    // var contactPhone=document.getElementById('contact-phone');
-    // var contactEmail=document.getElementById('contact-email');
 
+    var msgTicketSubject=validateLength('ticket-subject',2);
+    if (msgTicketSubject!==undefined){
+        messages.push(msgTicketSubject)
+    }
+    var msgTicketDescription=validateLength('ticket-description',2);
+    if (msgTicketDescription!==undefined){
+        messages.push(msgTicketDescription)
+    }
     var msgContactName=validateLength('contact-name',2);
     if (msgContactName!==undefined){
         messages.push(msgContactName)
@@ -53,8 +57,7 @@ var submitTicket = function (e) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data),
-    }
-    ).then(function (res) {
+    }).then(function (res) {
         if (res !== undefined) {
             if (res.redirected) {
                 window.location.replace(res.url)
@@ -67,3 +70,30 @@ var submitTicket = function (e) {
     })
     
 }
+
+// var getUserTickets = function (id) {
+   
+//     var userId=id;
+
+//     console.log('ticket userid ',userId);
+//     var userTicketsURL=ticketURL+'/user/'+userId
+//     console.log(userTicketsURL)
+//     fetch(userTicketsURL, {
+//         method: 'GET',
+//         headers: {
+//             'Accept': 'application/json',
+//             "Content-Type": "application/json"
+//         },
+//     })
+//     // .then(function (res) {
+//     //     if (res !==undefined){
+//     //     res.json().then(function(data){
+//     //         console.log('there are ',data.tickets.length + 'tickets')
+//     //     })} else {
+//     //         console.log(res)
+//     //     }
+//     // }).catch(function(err){
+//     //     console.log(err)
+//     // })
+    
+// }

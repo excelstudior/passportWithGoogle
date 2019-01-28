@@ -75,13 +75,13 @@ router.post('/register', (req, res) => {
 
 //Register User by super admin
 
-router.get('/registerBySa',(req,res)=>{
-    res.render('registerBySa',{user:req.user})
-})
+// router.get('/registerBySa',(req,res)=>{
+//     res.render('registerBySa',{user:req.user})
+// })
 
 //user login use local strategy
 router.post('/login',
-    passport.authenticate('local', { successRedirect: '/profile',failureRedirect:'/auth/login', failureFlash: true }))
+    passport.authenticate('local', { successRedirect: '/ticket/LoggedInUser/',failureRedirect:'/auth/login', failureFlash: true }))
 
 
 //user login use google strategy

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 //import models
 const User = require('../models/user');
 const Ticket = require('../models/ticket')
+//get new ticket page
 router.get('/', userUtil.isAuthenticated, (req, res) => {
     User.find().then((users) => {
         console.log(users)
@@ -24,6 +25,21 @@ router.get('/', userUtil.isAuthenticated, (req, res) => {
 
 });
 
+//get tickets of logged in user
+router.get('/LoggedInUser/',userUtil.isAuthenticated,(req,res)=>{
+    let userId=req.user.id
+    console.log('request user id :',userId)
+    Ticket.find({'assignee.id':userId}).then((tickets)=>{
+        console.log(tickets);
+        res.render('tickets',{user:req.user})
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+})
+
+//post new ticket
 router.post('/', userUtil.isAuthenticated, (req, res) => {
     let userId = req.user.id;
     let userName = req.user.username;
@@ -73,10 +89,12 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
             newTicket.referenceNumber = ticket.referenceNumber + 1;
         }
         console.log(newTicket)
+        var redirectUrl='/ticket/user/';
+        console.log(redirectUrl)
         newTicket
         .save()
         .then(function(ticket){
-            res.redirect('/ticket')
+            res.redirect(redirectUrl)
         }
         ).catch(console.log(err))
     })

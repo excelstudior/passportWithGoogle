@@ -15,7 +15,7 @@ var validateLength=function(Id,requiredLen){
     if (domObject.element.value===undefined){
         return "Length is not a property of element " + Id;
     } else if (domObject.element.value.length<requiredLen) {
-        return "Length of "+domObject.elementName+" is less than require value of "+ requiredLen;
+        return "Length of "+domObject.elementName+" is less than minimun of "+ requiredLen+" characters";
     } 
 }
 var validateWithRegex=function(Id,regexStr,message){
