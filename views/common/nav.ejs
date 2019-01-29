@@ -9,7 +9,7 @@
         <li>
             <div class='dropdown'>
                 <!-- <button onclick="return showDropdown('queueDropdown')" class='dropbtn'></button> -->
-                <span onclick="return showDropdown('ticketDropdown')" class='dropbtn' id='ticketDropdownBtn'>Ticket</span>
+                <span onclick="showDropdown('ticketDropdown')" class='dropbtn' id='ticketDropdownBtn'>Ticket</span>
                 <div id='ticketDropdown' class='dropdown-content'>
                     <a href="/ticket"><i class="fas fa-plus-square"></i>New Ticket</a>
                     <a href='/ticket/LoggedInUser' id=<%=user.id%>><i class="fas fa-layer-group"></i>My Tickets</a>
@@ -19,7 +19,7 @@
         <li>
             <div class='dropdown'>
                 <!-- <button onclick="return showDropdown('queueDropdown')" class='dropbtn'></button> -->
-                <span onclick="return showDropdown('queueDropdown')" class='dropbtn' id='queueDropdownBtn'>Queue</span>
+                <span onclick="showDropdown('queueDropdown')" class='dropbtn' id='queueDropdownBtn'>Queue</span>
                 <div id='queueDropdown' class='dropdown-content'>
                     <a href=""><i class="fas fa-plus-square"></i>New Queue</a>
                     <a href=""><i class="fas fa-layer-group"></i>My Queue</a>
@@ -29,7 +29,7 @@
         </li>
         <li>
             <div class='dropdown'>
-                <button onclick="return showDropdown('userDropdown')" class='dropbtn' id='userDropdownBtn'>Hi,
+                <button onclick="showDropdown('userDropdown')" class='dropbtn' id='userDropdownBtn'>Hi,
                     <%=user.username%></button>
                 <div id='userDropdown' class='dropdown-content'>
                     <a href="/profile">

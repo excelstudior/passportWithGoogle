@@ -85,8 +85,31 @@
     flex-grow: 1;
 }
 /*select */
-#ticket-options select{
-    background-color: #2980B9;
+/* #ticket-options select{
+    background-color:white;
+    color: #2980B9;
+    border:1px solid #2980B9;
+    
+}
+
+#ticket-options select option{
+    font-weight: 600;
+    background-color: antiquewhite;
+} */
+
+.priorityHigh{
+    font-weight: 600;
+    background-color: red;
+    color:black;
+}
+.priorityMedium{
+    font-weight: 600;
+    background-color: yellow;
+    color:blue;
+}
+.priorityLow{
+    font-weight: 600;
+    background-color: green;
     color:white;
 }
 

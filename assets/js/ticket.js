@@ -71,29 +71,32 @@ var submitTicket = function (e) {
     
 }
 
-// var getUserTickets = function (id) {
-   
-//     var userId=id;
+function hasClass(el, className)
+{
+    if (el.classList)
+        return el.classList.contains(className);
+    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+}
+document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('select[name="priority"]').onchange=changeEventHandler;
+},false);
 
-//     console.log('ticket userid ',userId);
-//     var userTicketsURL=ticketURL+'/user/'+userId
-//     console.log(userTicketsURL)
-//     fetch(userTicketsURL, {
-//         method: 'GET',
-//         headers: {
-//             'Accept': 'application/json',
-//             "Content-Type": "application/json"
-//         },
-//     })
-//     // .then(function (res) {
-//     //     if (res !==undefined){
-//     //     res.json().then(function(data){
-//     //         console.log('there are ',data.tickets.length + 'tickets')
-//     //     })} else {
-//     //         console.log(res)
-//     //     }
-//     // }).catch(function(err){
-//     //     console.log(err)
-//     // })
-    
-// }
+function changeEventHandler(event) {
+    // You can use “this” to refer to the selected element.
+    if(!event.target.value) alert('Please priority level');
+    else {
+        var newClassName='priority'+event.target.value;
+        var classNameArray=event.target.className.split(' ');
+        console.log(classNameArray)
+        var checkStr=new RegExp('priority')
+        classNameArray.forEach(function(cl){
+            if (checkStr.test(cl)){
+                event.target.classList.remove(cl)
+            }
+            
+        })
+        event.target.classList.add(newClassName);
+        // var v=hasClass(event.target,newClassName)
+        // alert (v)
+    }; 
+}

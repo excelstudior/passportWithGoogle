@@ -21,16 +21,16 @@
             <h2>New Ticket</h3>
             <div id="ticket-info">
                 <label for="subject">Subject</label>
-                <input type="text" name="subject" id='ticket-subject' onchange="return testFormObject('ticket')">
+                <input type="text" name="subject" id='ticket-subject'>
                 <label for="description">Description</label>
                 <textarea name="description" id="ticket-description" placeholder="Write something..." ></textarea>
             </div>
             <div id="ticket-options">
                 <label for="priority">Priority</label>
-                <select name="priority" id="ticket-priority">
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
+                <select class="priorityLow" name="priority" id="ticket-priority">
+                    <option class="priorityHigh" value="High">High</option>
+                    <option class="priorityMedium" value="Medium">Medium</option>
+                    <option selected class="priorityLow" value="Low">Low</option>
                 </select>
                 <label for="assignee">Assignee</label>
                 <select name="assignee" id="ticket-assignee">
