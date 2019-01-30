@@ -17,27 +17,40 @@
     <%-include('common/validationError')-%>
     <div class="ticket-main">
         <h2>My tickets</h2>
-        <button>new ticket</button>
+        <div id="tickets-menu">  
+            <ul>
+                <li><a href="/ticket"><i class="fas fa-plus-square"></i>New Ticket</a></li>
+                <li><a href="/ticket"><i class="fas fa-plus-square"></i>New Ticket</a></li>
+            </ul>
+        </div>
+        
         <table>
             <thead>
                 <tr>
-                    <th>Ref No.</th>
+                    <th>No.</th>
                     <th>Subject</th>
-                    <th>Description</th>
                     <th>Priority</th>
                     <th>Assignee</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>      
             </thead>
             <tbody>
-                <tr>
-                    <td>Ref No.</td>
-                    <td>Subject</td>
-                    <td>Description</td>
-                    <td>Priority</td>
-                    <td>Assignee</td>
-                    <td>Action</td>
-                </tr>
+                <%if (tickets.length===0) {%>
+                    <tr>No tickets loaded</tr>
+                <%} else {%>
+                    <% for(var i=0; i < tickets.length; i++) { %>
+                        <tr>
+                          <td><%= tickets[i].referenceNumber %></td>
+                          <td><%= tickets[i].subject %></td>
+                          <td><%= tickets[i].priority %></td>
+                          <td><%= tickets[i].assignee.userName %></td>
+                          <td><%= tickets[i].status %></td>
+                          <td><%= tickets[i].action %></td>
+                        </tr>
+                     <% } %>
+                <%}%>
+
             </tbody>
         </table>
         

@@ -77,9 +77,12 @@ function hasClass(el, className)
         return el.classList.contains(className);
     return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
 }
-document.addEventListener('DOMContentLoaded',function() {
-    document.querySelector('select[name="priority"]').onchange=changeEventHandler;
-},false);
+
+// window.onload=function(){
+//     document.addEventListener('DOMContentLoaded',function() {
+//         document.querySelector('select[name="priority"]').onchange=changeEventHandler;
+//     },false);
+// }
 
 function changeEventHandler(event) {
     // You can use “this” to refer to the selected element.

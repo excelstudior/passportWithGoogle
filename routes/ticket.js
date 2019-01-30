@@ -31,7 +31,7 @@ router.get('/LoggedInUser/',userUtil.isAuthenticated,(req,res)=>{
     console.log('request user id :',userId)
     Ticket.find({'assignee.id':userId}).then((tickets)=>{
         console.log(tickets);
-        res.render('tickets',{user:req.user})
+        res.render('tickets',{user:req.user,tickets:tickets})
     }).catch((err)=>{
         console.log(err)
     })
