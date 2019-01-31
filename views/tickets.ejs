@@ -19,34 +19,37 @@
         <h2>My tickets</h2>
         <div id="tickets-menu">  
             <ul>
-                <li><a href="/ticket"><i class="fas fa-plus-square"></i>New Ticket</a></li>
-                <li><a href="/ticket"><i class="fas fa-plus-square"></i>New Ticket</a></li>
+                <li><a href="/ticket"><i class="fas fa-plus-square"> <span>New</span> </i></a></li>
+                <li><input type="text"><button>Search</button></li>
+                
             </ul>
         </div>
         
-        <table>
+        <table id="tickets-table">
             <thead>
                 <tr>
-                    <th>No.</th>
+                    <th>#</th>
                     <th>Subject</th>
                     <th>Priority</th>
+                    <th>Contact</th>
                     <th>Assignee</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>      
             </thead>
             <tbody>
                 <%if (tickets.length===0) {%>
-                    <tr>No tickets loaded</tr>
+                    <tr>There is no Tickets</tr>
                 <%} else {%>
                     <% for(var i=0; i < tickets.length; i++) { %>
                         <tr>
                           <td><%= tickets[i].referenceNumber %></td>
-                          <td><%= tickets[i].subject %></td>
+                          <td class="toolTip"><%= tickets[i].subject %><p class="toolTipText"><%= tickets[i].description %><p></td>
                           <td><%= tickets[i].priority %></td>
+                          <td><%= tickets[i].contact.name %></td>
                           <td><%= tickets[i].assignee.userName %></td>
                           <td><%= tickets[i].status %></td>
-                          <td><%= tickets[i].action %></td>
+                          <td><a>View</a><a>Edit</a></td>
                         </tr>
                      <% } %>
                 <%}%>

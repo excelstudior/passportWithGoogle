@@ -88,9 +88,9 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
         } else {
             newTicket.referenceNumber = ticket.referenceNumber + 1;
         }
-        console.log(newTicket)
+       // console.log(newTicket)
         var redirectUrl='/ticket/LoggedInUser/';
-        console.log(redirectUrl)
+       // console.log(redirectUrl)
         newTicket
         .save()
         .then(function(ticket){

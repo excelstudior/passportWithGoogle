@@ -4,9 +4,10 @@
    margin: 10px auto;
    
 }
-#ticket h2{
+#ticket h2,.ticket-main h2{
     border-bottom: #2980B9 solid 2px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     padding: 10px 0px;
     text-align: center;
 }
@@ -146,16 +147,94 @@
 /* tickets ejs menu*/
 #tickets-menu ul{
     display: inline-block;
+    padding:10px 0px;
+    background-color:#8daaba;
+    width: 100%;
+    margin:0; 
 }
+
 #tickets-menu ul li{
+    display: inline-block;
     list-style-type: none;
-    /* float: left; */
-    min-width: 160px;
-    text-align: left;
-    display: table-cell;
-    vertical-align: middle;
 }
-#tickets-menu ul li a{
-    text-decoration: none;
-    display: inline;
+
+#tickets-menu ul li a{ 
+   text-decoration: none;
+   padding:10px;
+  
 }
+#tickets-menu ul li i{
+   display: inline; 
+   color:white;
+   border-radius: 0;
+}
+#tickets-menu ul li span{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+#tickets-menu ul li input,#tickets-menu ul li button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    padding:5px;
+    margin-left:10px;
+    margin-right:10px;
+    background-color: white;
+    border: none;
+}
+#tickets-table{
+    margin-top:5px;
+    margin-bottom:5px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+#tickets-table thead tr th{
+    border-bottom: 1px solid #2980B9;
+    border-right:0;
+    border-left:0;
+    box-shadow: 0px 2px grey;
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+
+#tickets-table tbody tr td{
+    text-align: center;
+    padding:15px 0px;
+    
+}
+#tickets-table tbody tr:nth-child(even){
+    background-color:antiquewhite;
+}
+#tickets-table tbody tr a{
+    margin:10px 5px;
+    padding:5px 10px;
+}
+#tickets-table tbody tr a:first-child{
+    background-color:rgb(201, 227, 245);
+}
+#tickets-table tbody tr a:nth-child(2){
+    background-color:rgb(202, 245, 201);
+}
+.toolTipText{
+  visibility: hidden;
+  width: 480px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 10px 10px;
+  /* border-radius: 6px; */
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  /* bottom: 125%;
+  left: 50%; */
+  margin-left: 100px;
+   /* Fade in tooltip */
+   opacity: 0;
+   transition: opacity 0.3s;
+}
+.toolTip:hover .toolTipText{
+    visibility: visible;
+    opacity: 1;
+}
+/*rgb(212, 212, 253);*/
