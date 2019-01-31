@@ -44,7 +44,7 @@
                     <% for(var i=0; i < tickets.length; i++) { %>
                         <tr>
                           <td><%= tickets[i].referenceNumber %></td>
-                          <td class="toolTip"><%= tickets[i].subject %><p class="toolTipText"><%= tickets[i].description %><p></td>
+                          <td class="toolTip"><p><%= tickets[i].subject %></p><p class="toolTipText"><%= tickets[i].description %><p></td>
                           <td><%= tickets[i].priority %></td>
                           <td><%= tickets[i].contact.name %></td>
                           <td><%= tickets[i].assignee.userName %></td>
