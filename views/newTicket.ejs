@@ -38,7 +38,7 @@
                 <label for="assignee">Assignee</label>
                 <select name="assignee" id="ticket-assignee" >
                     <% for (var i=0;i < usersMap.length;i++) { %>
-                            <option value=<%= usersMap[i].value %> > <%= usersMap[i].name %> </option>
+                            <option value="<%= usersMap[i].value %>" > <%= usersMap[i].name %> </option>
                     <% } %>         
                 </select>
                 <fieldset>
