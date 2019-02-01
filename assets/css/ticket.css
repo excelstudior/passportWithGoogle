@@ -181,10 +181,20 @@
     background-color: white;
     border: none;
 }
+/*ticket controls*/
+#ticket-controls{
+    display: flex;
+    margin: 0px auto;
+    width: 100%;
+}
+#ticket-updates{
+    width: 28%;
+}
+/*ticket table*/
 #tickets-table{
     margin-top:5px;
     margin-bottom:5px;
-    width: 100%;
+    width: 70%;
     border-collapse: collapse;
     font-size: 12px;
 }
@@ -199,15 +209,17 @@
 
 #tickets-table tbody tr td{
     text-align: center;
-    padding:15px 0px;
+    padding:5px 0px;
+    text-overflow: ellipsis;
     
 }
 #tickets-table tbody tr:nth-child(even){
     background-color:antiquewhite;
 }
 #tickets-table tbody tr a{
-    margin:10px 5px;
-    padding:5px 10px;
+    margin:5px 5px;
+    padding:5px 5px;
+    text-decoration: none;
 }
 #tickets-table tbody tr a:first-child{
     background-color:rgb(201, 227, 245);
@@ -217,10 +229,11 @@
 }
 .toolTipText{
   visibility: hidden;
-  width: 480px;
+  width: 380px;
   background-color: #555;
   color: #fff;
-  text-align: center;
+  word-wrap: break-word;
+  text-align: left;
   padding: 10px 10px;
   /* border-radius: 6px; */
   /* Position the tooltip text */
@@ -228,7 +241,10 @@
   z-index: 1;
   /* bottom: 125%;
   left: 50%; */
-  margin-left: 100px;
+  margin-left: 60px;
+  margin-top:0px;
+  margin-bottom:0px;
+  overflow: hidden;
    /* Fade in tooltip */
    opacity: 0;
    transition: opacity 0.3s;

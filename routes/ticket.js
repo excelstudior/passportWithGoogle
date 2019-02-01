@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const Ticket = require('../models/ticket')
 //get new ticket page
-router.get('/', userUtil.isAuthenticated, (req, res) => {
+router.get('/newTicket', userUtil.isAuthenticated, (req, res) => {
     User.find().then((users) => {
         console.log(users)
         if (users) {
@@ -15,23 +15,72 @@ router.get('/', userUtil.isAuthenticated, (req, res) => {
                 return { value: JSON.stringify(userObj), name: user.username }
             })
             console.log(usersMap)
-            res.render('ticket', { user: req.user, usersMap: usersMap })
-        } else {
-            res.render('ticket', { user: req.user, usersMap: usersMap })
-        }
+            res.render('newTicket', { user: req.user, usersMap: usersMap })
+        } 
     })
-    //res.render('ticket',{user:req.user})
-    // res.send("<p>Ticket</p><br/> <form action='/Ticket' method='post'> <button type=''submit''>send</button></form>")
-
 });
 
 //get tickets of logged in user, point to tickets.ejs
 router.get('/LoggedInUser/',userUtil.isAuthenticated,(req,res)=>{
     let userId=req.user.id
     console.log('request user id :',userId)
-    Ticket.find({'assignee.id':userId}).then((tickets)=>{
+    Ticket.find({'assignee.id':userId})
+    .select('referenceNumber description subject priority contact status')
+    .then((tickets)=>{
         console.log(tickets);
         res.render('tickets',{user:req.user,tickets:tickets})
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+})
+//get a ticket with id,View
+router.get('/view/:ticketId', userUtil.isAuthenticated, (req, res) => {
+    var ticketId=req.params.ticketId;
+    Ticket.findById(ticketId)
+    .then((ticket) => {
+        console.log(ticket)
+        if (ticket) {
+            User.find().then((users) => {
+                if (users) {
+                    let usersMap = users.map((user) => {
+                        let userObj = { id: user._id, userName: user.username }
+                        return { value: JSON.stringify(userObj), name: user.username }
+                    })
+                    console.log(usersMap)
+                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket })
+                } 
+            })
+        } else {
+           res.json({message:'No ticket found'})
+        }
+    })
+});
+//get a ticket with id,Edit
+router.get('/edit/:ticketId', userUtil.isAuthenticated, (req, res) => {
+    var ticketId=req.params.ticketId;
+    Ticket.findById(ticketId)
+    .then((ticket) => {
+        console.log(ticket)
+        if (ticket) {
+            res.json({ticket:ticket})
+        } else {
+           res.json({message:'No ticket found'})
+        }
+    })
+});
+//test populate method
+router.get('/ticketTest/',userUtil.isAuthenticated,(req,res)=>{
+    let userId=req.user.id
+    console.log('request user id :',userId)
+    Ticket.find({'assignee.id':userId})
+    .select('referenceNumber subject priority contact status')
+    .then((tickets)=>{
+        for (var i=0;i<tickets.length;i++){
+            console.log(tickets[i]);
+        }
+        
     }).catch((err)=>{
         console.log(err)
     })

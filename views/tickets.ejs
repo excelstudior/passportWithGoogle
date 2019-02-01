@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Simple Ticket</title>
+    <title>My Tickets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/ticket.css" />
@@ -16,47 +16,68 @@
     <%-include('common/nav')-%>
     <%-include('common/validationError')-%>
     <div class="ticket-main">
-        <h2>My tickets</h2>
-        <div id="tickets-menu">  
+        <div id="tickets-menu">
             <ul>
-                <li><a href="/ticket"><i class="fas fa-plus-square"> <span>New</span> </i></a></li>
+                <li><a href="/ticket/newTicket"><i class="fas fa-plus-square"> <span>New</span> </i></a></li>
                 <li><input type="text"><button>Search</button></li>
-                
+
             </ul>
         </div>
-        
-        <table id="tickets-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Subject</th>
-                    <th>Priority</th>
-                    <th>Contact</th>
-                    <th>Assignee</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>      
-            </thead>
-            <tbody>
-                <%if (tickets.length===0) {%>
+        <div id='ticket-controls'>
+            <table id="tickets-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th>Priority</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%if (tickets.length===0) {%>
                     <tr>There is no Tickets</tr>
-                <%} else {%>
+                    <%} else {%>
                     <% for(var i=0; i < tickets.length; i++) { %>
-                        <tr>
-                          <td><%= tickets[i].referenceNumber %></td>
-                          <td class="toolTip"><p><%= tickets[i].subject %></p><p class="toolTipText"><%= tickets[i].description %><p></td>
-                          <td><%= tickets[i].priority %></td>
-                          <td><%= tickets[i].contact.name %></td>
-                          <td><%= tickets[i].assignee.userName %></td>
-                          <td><%= tickets[i].status %></td>
-                          <td><a>View</a><a>Edit</a></td>
-                        </tr>
-                     <% } %>
-                <%}%>
+                    <tr>
+                        <td>
+                            <%= tickets[i].referenceNumber %>
+                        </td>
+                        <td class="toolTip">
+                            <p>
+                                <%= tickets[i].subject %>
+                            </p>
+                            <div class="toolTipText">
+                                <P>
+                                    <%= tickets[i].description %>
+                                </P>
+                                <div>
+                        </td>
+                        <td>
+                            <%= tickets[i].priority %>
+                        </td>
+                        <td>
+                            <%= tickets[i].contact.name %>
+                        </td>
+                        <td>
+                            <%= tickets[i].status %>
+                        </td>
+                        <td><a href='/ticket/view/<%=tickets[i].id%>' id=<%=tickets[i].id%>>View</a>
+                            <a href='/ticket/edit/<%=tickets[i].id%>' id=<%=tickets[i].id%>>Edit</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <%}%>
 
-            </tbody>
-        </table>
-        
+                </tbody>
+            </table>
+            <div id='ticket-updates'>
+                content
+            </div>
+        </div>
+
+
     </div>
 </body>
 <script type="text/javascript" src='/assets/js/common.js'></script>
