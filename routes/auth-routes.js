@@ -81,7 +81,7 @@ router.post('/register', (req, res) => {
 
 //user login use local strategy
 router.post('/login',
-    passport.authenticate('local', { successRedirect: '/ticket/LoggedInUser/',failureRedirect:'/auth/login', failureFlash: true }))
+    passport.authenticate('local', { successRedirect: '/ticket/LoggedInUserTickets/',failureRedirect:'/auth/login', failureFlash: true }))
 
 
 //user login use google strategy
@@ -91,7 +91,7 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     console.log(req.user)
-    res.redirect('/profile')
+    res.redirect('/ticket/LoggedInUserTickets/')
 })
 
 module.exports = router;

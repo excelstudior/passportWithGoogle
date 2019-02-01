@@ -21,7 +21,7 @@ router.get('/newTicket', userUtil.isAuthenticated, (req, res) => {
 });
 
 //get tickets of logged in user, point to tickets.ejs
-router.get('/LoggedInUser/',userUtil.isAuthenticated,(req,res)=>{
+router.get('/LoggedInUserTickets/',userUtil.isAuthenticated,(req,res)=>{
     let userId=req.user.id
     console.log('request user id :',userId)
     Ticket.find({'assignee.id':userId})
@@ -138,7 +138,7 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
             newTicket.referenceNumber = ticket.referenceNumber + 1;
         }
        // console.log(newTicket)
-        var redirectUrl='/ticket/LoggedInUser/';
+        var redirectUrl='/ticket/LoggedInUserTickets/';
        // console.log(redirectUrl)
         newTicket
         .save()
