@@ -48,6 +48,7 @@ router.post('/register', (req, res) => {
             let phone={}
             phone.Type='Preferred';
             phone.numbers=req.body.phoneNumber;
+            let userType=req.body.userType;
             let newUser = new User({
                 username: req.body.username,
                 password: req.body.password,
@@ -57,7 +58,8 @@ router.post('/register', (req, res) => {
                 phone:[phone],
                 googleId: '',
                 thumbnail: '',
-                createdBy: req.user!==undefined? user.id:req.body.username
+                createdBy: req.user!==undefined? user.id:req.body.username,
+                userType:userType,
             })
             bcrypt.hash(newUser.password, 5, (err, hash) => {
                 if (err) { console.log(err) };

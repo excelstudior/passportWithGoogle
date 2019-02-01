@@ -19,7 +19,19 @@
     <%-include('common/nav')-%>
     <%-include('common/validationError')-%>
     <div class="ticket-main">
-        
+        <div id="tickets-menu">
+            <ul>
+                <li><a href="/ticket/LoggedInUserTickets"><i class="fas fa-arrow-left"> <span>Back</span></i></a></li>
+                <li><a href="/ticket/newTicket"><i class="fas fa-plus-square"> <span>New</span> </i></a></li>
+                <% if (mode==='view') {%>
+                    <li><a href='/ticket/edit/<%=ticket.id%>'><i class="fas fa-edit"> <span>Edit</span></i></a></li>
+                <% } else if (mode==='edit') {%>
+                    <li><a ><i class="fas fa-save"> <span>Save</span></i></a></li>
+                <% } %>
+            </ul>
+        </div>
+        <% var createdTime=ticket.createdAt.toString()%>
+        <h4>Created by <span style="color:#2980B9"><%=ticket.createdBy.userName%></span> at <%=createdTime%></h4>
         <form id='ticket'>
             <div id="ticket-info">
                 <label for="subject">Subject</label>
@@ -38,13 +50,14 @@
                                 <option class="<%= options[i].class %>" value="<%= options[i].value %>"><%= options[i].value %></option>
                             <% } %>   
                     <% } %>
-              
-                    <!-- <option class="priorityHigh" value="High">High</option>
-                    <option class="priorityMedium" value="Medium">Medium</option>
-                    <option selected class="priorityLow" value="Low">Low</option> -->
                 </select>
                 <label for="assignee">Assignee</label>
                 <select name="assignee" id="ticket-assignee" >
+                    <% for (var i=0;i < usersMap.length;i++) { %>
+                            <option value="<%= usersMap[i].value%>" > <%= usersMap[i].name %> </option>
+                    <% } %>         
+                </select>
+                <select name="status" id="ticket-status" >
                     <% for (var i=0;i < usersMap.length;i++) { %>
                             <option value="<%= usersMap[i].value%>" > <%= usersMap[i].name %> </option>
                     <% } %>         
@@ -74,9 +87,6 @@
                         </div>
                     </div>
                 </fieldset>
-                <!-- <button type="submit" value="Submit">Submit</button> -->
-                <a href="/">Submit</a>
-                    <a href="/">Cancel</a>
             </div>
         </form>
 

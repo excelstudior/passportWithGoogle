@@ -19,7 +19,11 @@
     <%-include('common/nav')-%>
     <%-include('common/validationError')-%>
     <div class="ticket-main">
-        
+        <div id="tickets-menu">
+            <ul>
+                <li><a href="/ticket/LoggedInUserTickets"><i class="fas fa-layer-group"> <span>My Tickets</span></i></a></li>
+            </ul>
+        </div>
         <form id='ticket' onsubmit="submitTicket(event)" >
             <h2>New Ticket</h3>
             <div id="ticket-info">

@@ -4,7 +4,7 @@
    margin: 10px auto;
    
 }
-#ticket h2,.ticket-main h2{
+#ticket h2,.ticket-main h2,h4{
     border-bottom: #2980B9 solid 2px;
     margin-bottom: 0px;
     margin-top: 0px;

@@ -49,7 +49,7 @@ router.get('/view/:ticketId', userUtil.isAuthenticated, (req, res) => {
                         return { value: JSON.stringify(userObj), name: user.username }
                     })
                     console.log(usersMap)
-                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket })
+                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'view' })
                 } 
             })
         } else {
@@ -64,7 +64,16 @@ router.get('/edit/:ticketId', userUtil.isAuthenticated, (req, res) => {
     .then((ticket) => {
         console.log(ticket)
         if (ticket) {
-            res.json({ticket:ticket})
+            User.find().then((users) => {
+                if (users) {
+                    let usersMap = users.map((user) => {
+                        let userObj = { id: user._id, userName: user.username }
+                        return { value: JSON.stringify(userObj), name: user.username }
+                    })
+                    console.log(usersMap)
+                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'edit' })
+                } 
+            })
         } else {
            res.json({message:'No ticket found'})
         }
