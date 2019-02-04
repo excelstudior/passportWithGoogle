@@ -31,7 +31,7 @@
             </ul>
         </div>
         <% var createdTime=ticket.createdAt.toString()%>
-        <h4>Created by <span style="color:#2980B9"><%=ticket.createdBy.userName%></span> at <%=createdTime%></h4>
+        <h6>Created by <span style="color:#2980B9"><%=ticket.createdBy.userName%></span> at <%=createdTime%></h6>
         <form id='ticket'>
             <div id="ticket-info">
                 <label for="subject">Subject</label>
@@ -57,11 +57,26 @@
                             <option value="<%= usersMap[i].value%>" > <%= usersMap[i].name %> </option>
                     <% } %>         
                 </select>
+                <label for="status">Status</label>
                 <select name="status" id="ticket-status" >
-                    <% for (var i=0;i < usersMap.length;i++) { %>
-                            <option value="<%= usersMap[i].value%>" > <%= usersMap[i].name %> </option>
+                    <% var status=Object.keys(ticketStatus)%>
+                    <% for (var i=0;i < status.length;i++) { %>
+                            <option value="<%=ticketStatus[status[i]] %>" > <%= ticketStatus[status[i]] %> </option>
                     <% } %>         
                 </select>
+                <label for="tags">tags</label>
+                <div id='ticket-tags'>
+                    <div id='ticket-tags-display'>
+                        <span>tag1</span>
+                        <span>tag2</span>
+                        <i class="fas fas fa-edit" onclick="toggle_display('ticket-tags-edit')"></i>
+                    </div>
+                    <div id='ticket-tags-edit'>
+                        <input type="text"><i class="fas fas fa-save"></i>
+                    </div>
+                    
+                    
+                </div>
                 <fieldset>
                     <p>Contact Details</p>
                     <!-- create a validate function (add the case statement) to validate 3 fields, can't empty, is validate phone number, email address -->

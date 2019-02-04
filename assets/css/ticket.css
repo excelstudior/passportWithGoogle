@@ -4,7 +4,7 @@
    margin: 10px auto;
    
 }
-#ticket h2,.ticket-main h2,h4{
+#ticket h2,.ticket-main h2,h6{
     border-bottom: #2980B9 solid 2px;
     margin-bottom: 0px;
     margin-top: 0px;
@@ -38,6 +38,7 @@
 #ticket select{
     width: 100%;
     font-weight: 500;
+    border-bottom: #2980B9 1px solid;
  }
 
 #ticket-options{
@@ -254,3 +255,11 @@
     opacity: 1;
 }
 /*rgb(212, 212, 253);*/
+
+/*ticket tag*/
+#ticket-tags #ticket-tags-edit{
+    display: none;
+    margin:5px 0px;
+   /* visibility: hidden; */
+    
+}

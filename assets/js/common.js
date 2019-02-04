@@ -1,9 +1,27 @@
+var toggle_display = function (element_id) {
+    var e = document.getElementById(element_id);
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+    } else {
+        e.style.display = 'none';
+    }
+}
+
+// var toggle_display = function (element_id) {
+//     var e = document.getElementById(element_id);
+//     if (e.style.display === 'block' || e.style.display === '') {
+//         e.style.display = 'none';
+//     } else {
+//         e.style.display = 'block';
+//     }
+// }
+
 var toggle_visibility = function (element_id) {
     var e = document.getElementById(element_id);
-    if (e.style.display === 'block' || e.style.display === '') {
-        e.style.display = 'none';
+    if (e.style.visibility === 'hidden'||e.style.visibility==='') {
+        e.style.visibility = 'visible';
     } else {
-        e.style.display = 'block';
+        e.style.visibility = 'hidden';
     }
 }
 

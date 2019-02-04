@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 //import models
 const User = require('../models/user');
 const Ticket = require('../models/ticket')
+const Util=require('../Utilities/constants')
+const TicketStatus=Util.ticketStatus;
 //get new ticket page
 router.get('/newTicket', userUtil.isAuthenticated, (req, res) => {
     User.find().then((users) => {
@@ -49,7 +51,7 @@ router.get('/view/:ticketId', userUtil.isAuthenticated, (req, res) => {
                         return { value: JSON.stringify(userObj), name: user.username }
                     })
                     console.log(usersMap)
-                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'view' })
+                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'view',ticketStatus:TicketStatus })
                 } 
             })
         } else {
@@ -71,7 +73,7 @@ router.get('/edit/:ticketId', userUtil.isAuthenticated, (req, res) => {
                         return { value: JSON.stringify(userObj), name: user.username }
                     })
                     console.log(usersMap)
-                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'edit' })
+                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'edit',ticketStatus:TicketStatus })
                 } 
             })
         } else {
