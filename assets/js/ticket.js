@@ -101,23 +101,49 @@ function changeEventHandler(event) {
         event.target.classList.add(newClassName);
     }; 
 }
-
+//need to add a check to remove duplicate tag value
+function getEditedTags(){
+    var tagsInput=document.getElementById("ticket-tags-newTags")
+    var newTags=tagsInput.value.split(',');
+    var tags=[]
+    //trim string, remove empty strings
+    newTags.forEach(function(tag){
+        var tryTrim=tag.trim()
+        if (tryTrim!==''){
+            tags.push(tryTrim);
+        }
+    })
+    return tags
+}
+function removeTag(){
+    alert('going to remove tag!')
+}
 function renderTags(tags,tagDiv){
     var tagsDiv=document.getElementById(tagDiv)
     clearChildNode(tagsDiv);
     for (var i=0;i<tags.length;i++){
         var li =createNode('li');
         var a =createNode('a')
+        var span=createNode('span')
+        span.innerHTML='x';
+        span.onclick=removeTag;
         a.classList.add('tag')
         a.innerHTML=tags[i]
+        a.insertBefore(span,a.childNodes[0])
+        //appendNode(a,span)
         appendNode(li,a)
-        appendNode(tags,li)
+        appendNode(tagsDiv,li)
     }
 }
 
+function saveEditedTags(){
+    var newTags=getEditedTags();
+    renderTags(newTags,'ticket-tags-list')
+    hideElement('ticket-tags-edit')
+}
+
 function closeAddTagsPopup(originalTags){
-    var Tags=document.getElementById("ticket-tags-newTags")
-    var newTags=Tags.value.split(',')
+    var newTags=getEditedTags()
     var ifTagsUpdated=isArrayEqual(originalTags,newTags)
 
     if (!ifTagsUpdated){

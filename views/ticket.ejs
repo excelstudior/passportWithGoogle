@@ -81,15 +81,20 @@
                 <div id='ticket-tags'>
                     <div id='ticket-tags-display'>
                         <ul id='ticket-tags-list'>
-                            <li><a class="tag">tag1</a></li>
-                            <li><a class="tag">tag2</a></li>
+                            <li><a class="tag"><span>x</span>tag1</a></li>
+                            <li><a class="tag"><span>x</span>tag2</a></li>
                         </ul>
                     </div>
                     <div id='ticket-tags-edit'>
                         <div id="ticket-tags-edit-btns">
                             <span>Edit Tags</span>
-                            <i class="fas fa-times" onclick="closeAddTagsPopup(['tag1','tag2'])"></i>  <i class="fas fa-save"></i>  
+                            <ul>
+                                <li onclick="closeAddTagsPopup(['tag1','tag2'])">SAVE</li>
+                                <li onclick="saveEditedTags()">X</li>
+                            </ul>
+                            <!-- <i class="fas fa-times" onclick="closeAddTagsPopup(['tag1','tag2'])"></i>  <i class="fas fa-save" onclick="saveEditedTags()"></i>   -->
                         </div>
+                        <p>Please use <i>comma</i> to seperate tags</p>
                         <input type="text" id='ticket-tags-newTags' placeholder="please use comma to seperate tags" value="tag1,tag2">
                     </div>
                 </div>
