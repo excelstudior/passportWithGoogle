@@ -7,7 +7,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ticket No.<%=ticket.referenceNumber%></title>
+    <title>Ticket No.
+        <%=ticket.referenceNumber%>
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/ticket.css" />
@@ -24,58 +26,72 @@
                 <li><a href="/ticket/LoggedInUserTickets"><i class="fas fa-arrow-left"> <span>Back</span></i></a></li>
                 <li><a href="/ticket/newTicket"><i class="fas fa-plus-square"> <span>New</span> </i></a></li>
                 <% if (mode==='view') {%>
-                    <li><a href='/ticket/edit/<%=ticket.id%>'><i class="fas fa-edit"> <span>Edit</span></i></a></li>
+                <li><a href='/ticket/edit/<%=ticket.id%>'><i class="fas fa-edit"> <span>Edit</span></i></a></li>
                 <% } else if (mode==='edit') {%>
-                    <li><a ><i class="fas fa-save"> <span>Save</span></i></a></li>
+                <li><a><i class="fas fa-save"> <span>Save</span></i></a></li>
                 <% } %>
             </ul>
         </div>
         <% var createdTime=ticket.createdAt.toString()%>
-        <h6>Created by <span style="color:#2980B9"><%=ticket.createdBy.userName%></span> at <%=createdTime%></h6>
+        <h6>Created by <span style="color:#2980B9">
+                <%=ticket.createdBy.userName%></span> at
+            <%=createdTime%>
+        </h6>
         <form id='ticket'>
             <div id="ticket-info">
                 <label for="subject">Subject</label>
-                <input type="text" name="subject" id='ticket-subject'  value="<%=ticket.subject%>">
+                <input type="text" name="subject" id='ticket-subject' value="<%=ticket.subject%>">
                 <label for="description">Description</label>
-                <textarea name="description" id="ticket-description" placeholder="Write something..." ><%=ticket.description%></textarea>
+                <textarea name="description" id="ticket-description" placeholder="Write something..."><%=ticket.description%></textarea>
             </div>
             <div id="ticket-options">
                 <label for="priority">Priority</label>
                 <select class="priority<%=ticket.priority%>" name="priority" id="ticket-priority" onchange="changeEventHandler(event)">
                     <% var options=[{class:'priorityHigh',value:'High'},{class:'priorityMedium',value:'Medium'},{class:'priorityLow',value:'Low'}]%>
                     <% for (var i=0;i < options.length;i++) { %>
-                        <% if(options[i].value===ticket.priority) {%>
-                            <option selected class="<%= options[i].class %>" value="<%= options[i].value %>"><%= options[i].value %></option>
-                            <% } else {%>
-                                <option class="<%= options[i].class %>" value="<%= options[i].value %>"><%= options[i].value %></option>
-                            <% } %>   
+                    <% if(options[i].value===ticket.priority) {%>
+                    <option selected class="<%= options[i].class %>" value="<%= options[i].value %>">
+                        <%= options[i].value %>
+                    </option>
+                    <% } else {%>
+                    <option class="<%= options[i].class %>" value="<%= options[i].value %>">
+                        <%= options[i].value %>
+                    </option>
+                    <% } %>
                     <% } %>
                 </select>
                 <label for="assignee">Assignee</label>
-                <select name="assignee" id="ticket-assignee" >
+                <select name="assignee" id="ticket-assignee">
                     <% for (var i=0;i < usersMap.length;i++) { %>
-                            <option value="<%= usersMap[i].value%>" > <%= usersMap[i].name %> </option>
-                    <% } %>         
+                    <option value="<%= usersMap[i].value%>">
+                        <%= usersMap[i].name %>
+                    </option>
+                    <% } %>
                 </select>
                 <label for="status">Status</label>
-                <select name="status" id="ticket-status" >
+                <select name="status" id="ticket-status">
                     <% var status=Object.keys(ticketStatus)%>
                     <% for (var i=0;i < status.length;i++) { %>
-                            <option value="<%=ticketStatus[status[i]] %>" > <%= ticketStatus[status[i]] %> </option>
-                    <% } %>         
+                    <option value="<%=ticketStatus[status[i]] %>">
+                        <%= ticketStatus[status[i]] %>
+                    </option>
+                    <% } %>
                 </select>
-                <label for="tags">tags</label>
+                <label for="tags">Tags  <i class="fa fa-edit" onclick="toggle_visibility('ticket-tags-edit')"></i></label>
                 <div id='ticket-tags'>
                     <div id='ticket-tags-display'>
-                        <span>tag1</span>
-                        <span>tag2</span>
-                        <i class="fas fas fa-edit" onclick="toggle_display('ticket-tags-edit')"></i>
+                        <ul id='ticket-tags-list'>
+                            <li><a class="tag">tag1</a></li>
+                            <li><a class="tag">tag2</a></li>
+                        </ul>
                     </div>
                     <div id='ticket-tags-edit'>
-                        <input type="text"><i class="fas fas fa-save"></i>
+                        <div id="ticket-tags-edit-btns">
+                            <span>Edit Tags</span>
+                            <i class="fas fa-times" onclick="closeAddTagsPopup(['tag1','tag2'])"></i>  <i class="fas fa-save"></i>  
+                        </div>
+                        <input type="text" id='ticket-tags-newTags' placeholder="please use comma to seperate tags" value="tag1,tag2">
                     </div>
-                    
-                    
                 </div>
                 <fieldset>
                     <p>Contact Details</p>
@@ -84,21 +100,21 @@
                         <span id='contactName_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-user"></i>
-                            <input type='text' id="contact-name" name=contactName placeholder="Your name" value="<%= ticket.contact.name %>"/>
+                            <input type='text' id="contact-name" name=contactName placeholder="Your name" value="<%= ticket.contact.name %>" />
                         </div>
                     </div>
                     <div>
                         <span id='contactPhone_msg'></span>
-                        <div class='inputWithIcon'>                            
+                        <div class='inputWithIcon'>
                             <i class="fas fa-phone"></i>
-                            <input type='text' id="contact-phone" name=contactPhone placeholder="Your phone" value="<%= ticket.contact.phone %>"/>
+                            <input type='text' id="contact-phone" name=contactPhone placeholder="Your phone" value="<%= ticket.contact.phone %>" />
                         </div>
                     </div>
                     <div>
                         <span id='contactEmail_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-envelope"></i>
-                            <input type='text' id="contact-email" name=contactEmail placeholder="Your Email" value="<%= ticket.contact.email %>"/>
+                            <input type='text' id="contact-email" name=contactEmail placeholder="Your Email" value="<%= ticket.contact.email %>" />
                         </div>
                     </div>
                 </fieldset>

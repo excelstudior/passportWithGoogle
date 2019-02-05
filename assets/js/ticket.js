@@ -99,7 +99,39 @@ function changeEventHandler(event) {
             
         })
         event.target.classList.add(newClassName);
-        // var v=hasClass(event.target,newClassName)
-        // alert (v)
     }; 
+}
+
+function renderTags(tags,tagDiv){
+    var tagsDiv=document.getElementById(tagDiv)
+    clearChildNode(tagsDiv);
+    for (var i=0;i<tags.length;i++){
+        var li =createNode('li');
+        var a =createNode('a')
+        a.classList.add('tag')
+        a.innerHTML=tags[i]
+        appendNode(li,a)
+        appendNode(tags,li)
+    }
+}
+
+function closeAddTagsPopup(originalTags){
+    var Tags=document.getElementById("ticket-tags-newTags")
+    var newTags=Tags.value.split(',')
+    var ifTagsUpdated=isArrayEqual(originalTags,newTags)
+
+    if (!ifTagsUpdated){
+        if(confirm('Do you want to save new tags!')){
+            //need to put save new tags method below
+            alert('Saving new tags')
+            renderTags(newTags,'ticket-tags-list')
+            hideElement('ticket-tags-edit');
+        } else {
+            Tags.value=originalTags;
+            hideElement('ticket-tags-edit');
+        }
+    } else {
+        hideElement('ticket-tags-edit');
+    }
+
 }

@@ -257,9 +257,72 @@
 /*rgb(212, 212, 253);*/
 
 /*ticket tag*/
-#ticket-tags #ticket-tags-edit{
-    display: none;
-    margin:5px 0px;
-   /* visibility: hidden; */
+#ticket-tags{
+    margin:10px 0px 5px 0px;
+}
+#ticket-tags div{
+    display: block;
+}
+/*ticket-tags-display*/
+#ticket-tags-list{
+    list-style:none;
+    margin:0;
+    padding-left:0;
+}
+#ticket-tags-list li{
+    display: inline-block;
     
+}
+/* a class override a id*/
+#ticket-tags-list li a.tag{
+    background: #eee ;
+    border-radius: 3px 0 0 3px;
+    color: #000 ;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 20px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;  
+}
+#ticket-tags-list li a.tag::after {
+    background: #fff;
+    border-bottom: 13px solid transparent;
+    border-left: 10px solid #eee;
+    border-top: 13px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+#ticket-tags #ticket-tags-edit{
+    /* display: none; */
+    width: 280px;
+    margin:5px 0px;
+    padding: 5px 10px;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    background-color:#8daaba;
+    color: white;
+    display: block;
+}
+#ticket-tags-edit input{
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+}
+
+#ticket-tags-edit-btns {
+    padding:5px;
+    font-size: 12px;
+}
+#ticket-tags-edit-btns i{
+    float: right;
+}
+#ticket-tags-edit-btns i::before{
+    float: right;
 }

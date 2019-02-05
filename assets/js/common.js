@@ -7,15 +7,6 @@ var toggle_display = function (element_id) {
     }
 }
 
-// var toggle_display = function (element_id) {
-//     var e = document.getElementById(element_id);
-//     if (e.style.display === 'block' || e.style.display === '') {
-//         e.style.display = 'none';
-//     } else {
-//         e.style.display = 'block';
-//     }
-// }
-
 var toggle_visibility = function (element_id) {
     var e = document.getElementById(element_id);
     if (e.style.visibility === 'hidden'||e.style.visibility==='') {
@@ -24,7 +15,10 @@ var toggle_visibility = function (element_id) {
         e.style.visibility = 'hidden';
     }
 }
-
+ var hideElement=function(element_id){
+    var e = document.getElementById(element_id);
+    e.style.visibility='hidden';
+ }
 // clear child element
 var clearChildNode = function (elememnt) {
     while (elememnt.firstChild) {
@@ -105,3 +99,15 @@ window.onclick = function (event) {
     }
 }
 //End
+
+function isArrayEqual(originalArr,newArr){
+    if(originalArr.length!==newArr.length){
+        return false;
+    }
+    for(var i=0;i<originalArr.length;i++){
+        if (newArr.indexOf(originalArr[i])<0){
+            return false;
+        }
+    }
+    return true;
+}
