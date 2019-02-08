@@ -366,3 +366,6 @@
 #ticket-tags-edit-btns i::before{
     float: right;
 }
+#ticket-original-tags{
+    display:none;
+}

@@ -101,9 +101,23 @@ function changeEventHandler(event) {
         event.target.classList.add(newClassName);
     }; 
 }
+function modifyTags(tagsDivId,tagToRemove){
+    var Tags=getTags(tagsDivId);
+    var TagsDiv=document.getElementById(tagsDivId);
+    if (Tags.indexOf(tagToRemove)>-1){
+        var newTags=[]
+        Tags.forEach(function(tag){
+                if (tag!==tagToRemove){
+                    newTags.push(tag);
+                }
+        })
+        TagsDiv.value=newTags.toString()
+    }
+}
+
 //need to add a check to remove duplicate tag value
-function getEditedTags(){
-    var tagsInput=document.getElementById("ticket-tags-newTags")
+function getTags(elementId){
+    var tagsInput=document.getElementById(elementId)
     var newTags=tagsInput.value.split(',');
     var tags=[]
     //trim string, remove empty strings
@@ -117,6 +131,15 @@ function getEditedTags(){
 }
 function removeTag(){
     alert('going to remove tag!')
+    var listItemId=event.target.name
+    var tagToRemove=listItemId!=undefined||listItemId!=""? listItemId.substring(4,listItemId.length):""
+    console.log(listItemId)
+    var itemToRemove=document.getElementById(listItemId)
+    var parentItem=document.getElementById('ticket-tags-list');
+    parentItem.removeChild(itemToRemove)
+    modifyTags('ticket-tags-newTags',tagToRemove)
+    modifyTags('ticket-original-tags',tagToRemove)
+
 }
 function renderTags(tags,tagDiv){
     var tagsDiv=document.getElementById(tagDiv)
@@ -125,10 +148,14 @@ function renderTags(tags,tagDiv){
         var li =createNode('li');
         var a =createNode('a')
         var span=createNode('span')
-        span.innerHTML='+';
-        span.onclick=removeTag;
+        span.innerHTML='x';
+        var listItemId='tag'+'-'+tags[i];
+        span.name=listItemId;
+        span.addEventListener('click',removeTag)
+        //span.onclick=removeTag();
         a.classList.add('tag')
-        a.innerHTML=tags[i]
+        a.innerHTML=tags[i];
+        li.id=listItemId
         a.insertBefore(span,a.childNodes[0])
         //appendNode(a,span)
         appendNode(li,a)
@@ -137,23 +164,28 @@ function renderTags(tags,tagDiv){
 }
 
 function saveEditedTags(){
-    var newTags=getEditedTags();
+    var newTags=getTags("ticket-tags-newTags");
     renderTags(newTags,'ticket-tags-list')
+    var originalTagsDiv=document.getElementById("ticket-original-tags")
+    originalTagsDiv.value=newTags.toString();
     hideElement('ticket-tags-edit')
 }
 
-function closeAddTagsPopup(originalTags){
-    var newTags=getEditedTags()
+function closeAddTagsPopup(){
+    var newTags=getTags("ticket-tags-newTags");
+    var originalTags=getTags("ticket-original-tags");
     var ifTagsUpdated=isArrayEqual(originalTags,newTags)
-
+    var originalTagsDiv=document.getElementById("ticket-original-tags")
     if (!ifTagsUpdated){
         if(confirm('Do you want to save new tags!')){
             //need to put save new tags method below
             alert('Saving new tags')
             renderTags(newTags,'ticket-tags-list')
+            originalTagsDiv.value=newTags.toString();
             hideElement('ticket-tags-edit');
         } else {
-            Tags.value=originalTags;
+            var editTagsDiv=document.getElementById("ticket-tags-newTags")
+            editTagsDiv.value=originalTagsDiv.value;
             hideElement('ticket-tags-edit');
         }
     } else {

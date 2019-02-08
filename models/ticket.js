@@ -34,7 +34,8 @@ const ticketSchema = new Schema({
         content:{type:String},
         date:{type:Date }
     }],
-    priority:{type:String}
+    priority:{type:String},
+    resolution:{type:String}
 
 }, options)
 

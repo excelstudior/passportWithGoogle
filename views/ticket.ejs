@@ -80,9 +80,19 @@
                 <label for="tags">Tags  <i class="fa fa-edit" onclick="toggle_visibility('ticket-tags-edit')"></i></label>
                 <div id='ticket-tags'>
                     <div id='ticket-tags-display'>
-                        <ul id='ticket-tags-list'>
+                        <!-- <ul id='ticket-tags-list'>
                             <li><a class="tag"><span>x</span>tag1</a></li>
                             <li><a class="tag"><span>x</span>tag2</a></li>
+                        </ul> -->
+                        <ul id='ticket-tags-list'>
+                        
+                        <% var tags=ticket.tags %>
+                        <% if (tags===null) {%>
+                            <% tags=[]%>
+                        <% } %>
+                        <% for (var i=0;i<tags.length;i++) { %>
+                            <li><a class="tag"><span>x</span>tsgs[i]</a></li>
+                        <%}%>
                         </ul>
                     </div>
                     <div id='ticket-tags-edit'>
@@ -90,12 +100,13 @@
                             <span>Edit Tags</span>
                             <ul>
                                 <li onclick="saveEditedTags()">SAVE</li>
-                                <li onclick="closeAddTagsPopup(['tag1','tag2'])">X</li>
+                                <li  onclick="closeAddTagsPopup()">X</li>
                             </ul>
                             <!-- <i class="fas fa-times" onclick="closeAddTagsPopup(['tag1','tag2'])"></i>  <i class="fas fa-save" onclick="saveEditedTags()"></i>   -->
                         </div>
                         <p>Please use <i>comma</i> to seperate tags</p>
-                        <input type="text" id='ticket-tags-newTags' placeholder="please use comma to seperate tags" value="tag1,tag2">
+                        <input type="text" id="ticket-original-tags" value="<%= tags.toString()%>">
+                        <input type="text" id='ticket-tags-newTags' placeholder="please use comma to seperate tags" value="<%= tags.toString()%>">
                     </div>
                 </div>
                 <fieldset>
