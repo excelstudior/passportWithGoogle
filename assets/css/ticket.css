@@ -274,10 +274,12 @@
     
 }
 /* a class override a id*/
+
 #ticket-tags-list li a.tag span{
     margin-right: 5px;
-    visibility: hidden;
+    visibility: hidden; 
 }
+
 #ticket-tags-list li a.tag:hover span{
     visibility: visible;
 }

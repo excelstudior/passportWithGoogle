@@ -125,7 +125,7 @@ function renderTags(tags,tagDiv){
         var li =createNode('li');
         var a =createNode('a')
         var span=createNode('span')
-        span.innerHTML='x';
+        span.innerHTML='+';
         span.onclick=removeTag;
         a.classList.add('tag')
         a.innerHTML=tags[i]
