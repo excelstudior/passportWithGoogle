@@ -131,14 +131,36 @@ function getTags(elementId){
 }
 function removeTag(){
     alert('going to remove tag!')
-    var listItemId=event.target.name
+    //get tag name
+    var listItemId=event.target.title;
     var tagToRemove=listItemId!=undefined||listItemId!=""? listItemId.substring(4,listItemId.length):""
     console.log(listItemId)
+    //get original tags
+    var originalTags=getTags('ticket-original-tags')
+    //modifiy original tags
+    var newTags=[];
+    originalTags.forEach(function(tag){
+        if(tag!==tagToRemove){
+            newTags.push(tag);
+        }
+    })
+
+    
     var itemToRemove=document.getElementById(listItemId)
     var parentItem=document.getElementById('ticket-tags-list');
     parentItem.removeChild(itemToRemove)
     modifyTags('ticket-tags-newTags',tagToRemove)
     modifyTags('ticket-original-tags',tagToRemove)
+    
+    
+    
+    //fetch post to update tags
+    //wait for response
+    //handle success
+        //update newTags tagsInput
+        //update original tagsInput
+        //remove the deleted item for li
+    //handle error
 
 }
 function renderTags(tags,tagDiv){
@@ -150,7 +172,7 @@ function renderTags(tags,tagDiv){
         var span=createNode('span')
         span.innerHTML='x';
         var listItemId='tag'+'-'+tags[i];
-        span.name=listItemId;
+        span.title=listItemId;
         span.addEventListener('click',removeTag)
         //span.onclick=removeTag();
         a.classList.add('tag')
@@ -165,10 +187,27 @@ function renderTags(tags,tagDiv){
 
 function saveEditedTags(){
     var newTags=getTags("ticket-tags-newTags");
-    renderTags(newTags,'ticket-tags-list')
-    var originalTagsDiv=document.getElementById("ticket-original-tags")
-    originalTagsDiv.value=newTags.toString();
-    hideElement('ticket-tags-edit')
+    var originalTagsDiv=document.getElementById("ticket-original-tags");
+    var ticketId=originalTagsDiv.name;
+    var data={tags:newTags};
+    var updateTagsURL='/ticket/edit/tags/'+ticketId;
+    fetch(updateTagsURL,{
+        method:'POST',
+        headers:{
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(data),
+    }).then(function(res){
+        if(res.status===200){
+            originalTagsDiv.value=newTags.toString();
+            renderTags(newTags,'ticket-tags-list');
+            hideElement('ticket-tags-edit');
+        } else {
+            showErrorModal(['There is an error'])
+        }
+    })
+    
 }
 
 function closeAddTagsPopup(){

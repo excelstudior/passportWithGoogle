@@ -159,4 +159,25 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
         ).catch(console.log(err))
     })
 });
+
+router.post('/edit/tags/:ticketId',userUtil.isAuthenticated,(req,res)=>{
+    console.log(req.body.tags,req.params);
+    var ticketId=req.params.ticketId;
+    var tags=req.body.tags;
+
+    Ticket.findById(ticketId).then(function(ticket){
+        ticket.tags=tags;
+        ticket.save()
+            .then(function(ticket){
+                res.status(200).send();
+            }).catch(function(err){
+                console.log(err)
+                res.status(400).send();
+            })
+    }).catch(function(err){
+        console.log(err)
+        res.status(400).send();
+    })
+    
+})
 module.exports = router;

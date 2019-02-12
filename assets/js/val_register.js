@@ -24,20 +24,23 @@ var validateInput=function(elementName,typeName){
                     if (elements[i].value.length<=3){
                         message='User name need to be longer than 3 characters'
                         updateInputColorAndCheckIconColorAndUpdateMessge(elements[i],elementName,'beige','white',message)
+                        return false;
                     } else {
                         updateInputColorAndCheckIconColorAndUpdateMessge(elements[i],elementName,'white','green')
+                        return true
                     }
-                    return null;
+                    
                 case 'password':
                     if (elements[i].value.length<=5){
                         message='Password needs to have at least 5 characters'
                         updateInputColorAndCheckIconColorAndUpdateMessge(elements[i],elementName,'beige','white',message)
+                        return false
                     } else {
                         updateInputColorAndCheckIconColorAndUpdateMessge(elements[i],elementName,'white','green')
+                        return true
                     }
-                return null;
                     
-                default:return null
+                default:return true
             }
         }
     }

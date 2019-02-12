@@ -3,6 +3,12 @@ var registerUserForm = document.getElementById('superAdmin-UserRegisterForm');
 
 var submitForm = function (e) {
     e.preventDefault();
+    var isUserNameValid=validateInput('username','text');
+    var isPassworkdValid=validateInput('password','password');
+    if(!isPassworkdValid||!isUserNameValid){
+        showErrorModal(['Please see errors'])
+        return;
+    }
     var data = createFormDataObject(registerUserForm)
     console.log(data);
     fetch(userRegisterURL, {
