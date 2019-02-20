@@ -28,7 +28,7 @@
                 <% if (mode==='view') {%>
                 <li><a href='/ticket/edit/<%=ticket.id%>'><i class="fas fa-edit"> <span>Edit</span></i></a></li>
                 <% } else if (mode==='edit') {%>
-                <li><a><i class="fas fa-save"> <span>Save</span></i></a></li>
+                <li><a onclick="saveTicket(event)" id="<%=ticket.id%>"><i class="fas fa-save" > <span>Save</span></i></a></li>
                 <% } %>
             </ul>
         </div>

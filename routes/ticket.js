@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 //import models
 const User = require('../models/user');
 const Ticket = require('../models/ticket')
-const Util=require('../Utilities/constants')
-const TicketStatus=Util.ticketStatus;
+const Util = require('../Utilities/constants')
+const TicketStatus = Util.ticketStatus;
 //get new ticket page
 router.get('/newTicket', userUtil.isAuthenticated, (req, res) => {
     User.find().then((users) => {
@@ -18,83 +18,83 @@ router.get('/newTicket', userUtil.isAuthenticated, (req, res) => {
             })
             console.log(usersMap)
             res.render('newTicket', { user: req.user, usersMap: usersMap })
-        } 
+        }
     })
 });
 
 //get tickets of logged in user, point to tickets.ejs
-router.get('/LoggedInUserTickets/',userUtil.isAuthenticated,(req,res)=>{
-    let userId=req.user.id
-    console.log('request user id :',userId)
-    Ticket.find({'assignee.id':userId})
-    .select('referenceNumber description subject priority contact status')
-    .then((tickets)=>{
-        console.log(tickets);
-        res.render('tickets',{user:req.user,tickets:tickets})
-    }).catch((err)=>{
-        console.log(err)
-    })
+router.get('/LoggedInUserTickets/', userUtil.isAuthenticated, (req, res) => {
+    let userId = req.user.id
+    console.log('request user id :', userId)
+    Ticket.find({ 'assignee.id': userId })
+        .select('referenceNumber description subject priority contact status')
+        .then((tickets) => {
+            console.log(tickets);
+            res.render('tickets', { user: req.user, tickets: tickets })
+        }).catch((err) => {
+            console.log(err)
+        })
 
 
 })
 //get a ticket with id,View
 router.get('/view/:ticketId', userUtil.isAuthenticated, (req, res) => {
-    var ticketId=req.params.ticketId;
+    var ticketId = req.params.ticketId;
     Ticket.findById(ticketId)
-    .then((ticket) => {
-        console.log(ticket)
-        if (ticket) {
-            User.find().then((users) => {
-                if (users) {
-                    let usersMap = users.map((user) => {
-                        let userObj = { id: user._id, userName: user.username }
-                        return { value: JSON.stringify(userObj), name: user.username }
-                    })
-                    console.log(usersMap)
-                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'view',ticketStatus:TicketStatus })
-                } 
-            })
-        } else {
-           res.json({message:'No ticket found'})
-        }
-    })
+        .then((ticket) => {
+            console.log(ticket)
+            if (ticket) {
+                User.find().then((users) => {
+                    if (users) {
+                        let usersMap = users.map((user) => {
+                            let userObj = { id: user._id, userName: user.username }
+                            return { value: JSON.stringify(userObj), name: user.username }
+                        })
+                        console.log(usersMap)
+                        res.render('ticket', { user: req.user, usersMap: usersMap, ticket: ticket, mode: 'view', ticketStatus: TicketStatus })
+                    }
+                })
+            } else {
+                res.json({ message: 'No ticket found' })
+            }
+        })
 });
 //get a ticket with id,Edit
 router.get('/edit/:ticketId', userUtil.isAuthenticated, (req, res) => {
-    var ticketId=req.params.ticketId;
+    var ticketId = req.params.ticketId;
     Ticket.findById(ticketId)
-    .then((ticket) => {
-        console.log(ticket)
-        if (ticket) {
-            User.find().then((users) => {
-                if (users) {
-                    let usersMap = users.map((user) => {
-                        let userObj = { id: user._id, userName: user.username }
-                        return { value: JSON.stringify(userObj), name: user.username }
-                    })
-                    console.log(usersMap)
-                    res.render('ticket', { user: req.user, usersMap: usersMap,ticket:ticket,mode:'edit',ticketStatus:TicketStatus })
-                } 
-            })
-        } else {
-           res.json({message:'No ticket found'})
-        }
-    })
+        .then((ticket) => {
+            console.log(ticket)
+            if (ticket) {
+                User.find().then((users) => {
+                    if (users) {
+                        let usersMap = users.map((user) => {
+                            let userObj = { id: user._id, userName: user.username }
+                            return { value: JSON.stringify(userObj), name: user.username }
+                        })
+                        console.log(usersMap)
+                        res.render('ticket', { user: req.user, usersMap: usersMap, ticket: ticket, mode: 'edit', ticketStatus: TicketStatus })
+                    }
+                })
+            } else {
+                res.json({ message: 'No ticket found' })
+            }
+        })
 });
 //test populate method
-router.get('/ticketTest/',userUtil.isAuthenticated,(req,res)=>{
-    let userId=req.user.id
-    console.log('request user id :',userId)
-    Ticket.find({'assignee.id':userId})
-    .select('referenceNumber subject priority contact status')
-    .then((tickets)=>{
-        for (var i=0;i<tickets.length;i++){
-            console.log(tickets[i]);
-        }
-        
-    }).catch((err)=>{
-        console.log(err)
-    })
+router.get('/ticketTest/', userUtil.isAuthenticated, (req, res) => {
+    let userId = req.user.id
+    console.log('request user id :', userId)
+    Ticket.find({ 'assignee.id': userId })
+        .select('referenceNumber subject priority contact status')
+        .then((tickets) => {
+            for (var i = 0; i < tickets.length; i++) {
+                console.log(tickets[i]);
+            }
+
+        }).catch((err) => {
+            console.log(err)
+        })
 
 
 })
@@ -110,23 +110,23 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
     // get assignee information
     let assignee = JSON.parse(req.body.assignee)
     // create contact object
-    let contact={} 
-    contact.name= req.body.contactName;
-    contact.email= req.body.contactEmail;
-    contact.phone= req.body.contactPhone;
-    if (req.body.contactId!==undefined){
-        contact.clientId=req.body.contactId;
+    let contact = {}
+    contact.name = req.body.contactName;
+    contact.email = req.body.contactEmail;
+    contact.phone = req.body.contactPhone;
+    if (req.body.contactId !== undefined) {
+        contact.clientId = req.body.contactId;
     } else {
-        contact.clientId=null;
+        contact.clientId = null;
     }
     // get priority
     let priority = req.body.priority;
     // create update log
-    let update={}
-    update.user=createdBy;
-    update.content='Tickte Created';
-    update.date=Date.now();
-    let updates=[]
+    let update = {}
+    update.user = createdBy;
+    update.content = 'Tickte Created';
+    update.date = Date.now();
+    let updates = []
     updates.push(update);
 
     let newTicket = new Ticket({
@@ -134,50 +134,99 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
         description: req.body.description,
         createdBy: createdBy,
         contact: contact,
-        assignee:assignee,
+        assignee: assignee,
         tags: null,
         priority: priority,
-        updates:updates,
+        updates: updates,
     })
 
     newTicket.referenceNumber = 0
     Ticket.findLastReferenceNumber().then(function (ticket, err) {
-        console.log('find ticket ', err,ticket)
+        console.log('find ticket ', err, ticket)
         if (ticket === null) {
             newTicket.referenceNumber = 1;
         } else {
             newTicket.referenceNumber = ticket.referenceNumber + 1;
         }
-       // console.log(newTicket)
-        var redirectUrl='/ticket/LoggedInUserTickets/';
-       // console.log(redirectUrl)
+        // console.log(newTicket)
+        var redirectUrl = '/ticket/LoggedInUserTickets/';
+        // console.log(redirectUrl)
         newTicket
-        .save()
-        .then(function(ticket){
-            res.redirect(redirectUrl)
-        }
-        ).catch(console.log(err))
+            .save()
+            .then(function (ticket) {
+                res.redirect(redirectUrl)
+            }
+            ).catch(console.log(err))
     })
 });
+//update a ticket
+router.post('/:ticketId', userUtil.isAuthenticated, (req, res) => {
+    var ticketId = req.params.ticketId;
+    Ticket.findById(ticketId).then(function (ticket) {
+        if (ticket===null) {
+            res.status(400).json({messages:['ticket not found']})
+        } else {
+            // // create update log, need to log the original log
+            // let update={}
+            //let userName = req.user.username;
+            // update.user=userName;
+            // update.content='Tickte Updated';
+            // update.date=Date.now();
+            // get assignee information
+            let assignee = JSON.parse(req.body.assignee)
+            // create contact object
+            let contact = {}
+            contact.name = req.body.contactName;
+            contact.email = req.body.contactEmail;
+            contact.phone = req.body.contactPhone;
+            if (req.body.contactId !== undefined) {
+                contact.clientId = req.body.contactId;
+            } else {
+                contact.clientId = null;
+            }
+            // get priority
+            let priority = req.body.priority;
 
-router.post('/edit/tags/:ticketId',userUtil.isAuthenticated,(req,res)=>{
-    console.log(req.body.tags,req.params);
-    var ticketId=req.params.ticketId;
-    var tags=req.body.tags;
+            ticket.assignee = assignee;
+            ticket.contact = contact;
+            ticket.subject = req.body.subject;
+            ticket.description = req.body.description;
+            ticket.priority = priority;
+            ticket.status=req.body.status;
+            ticket.save().then(res.status(200).send())
+                .catch(function (err) {
+                    console.log(err);
+                    res.status(400).json({ messages: ['something goes wrong'] })
+                })
+        }
 
-    Ticket.findById(ticketId).then(function(ticket){
-        ticket.tags=tags;
+
+
+    }).catch(function (err) {
+        console.log(err);
+    })
+
+
+})
+//edit tag
+router.post('/edit/tags/:ticketId', userUtil.isAuthenticated, (req, res) => {
+    console.log(req.body.tags, req.params);
+    var ticketId = req.params.ticketId;
+    var tags = req.body.tags;
+
+    Ticket.findById(ticketId).then(function (ticket) {
+        ticket.tags = tags;
         ticket.save()
-            .then(function(ticket){
+            .then(function (ticket) {
                 res.status(200).send();
-            }).catch(function(err){
+            }).catch(function (err) {
                 console.log(err)
                 res.status(400).send();
             })
-    }).catch(function(err){
+    }).catch(function (err) {
         console.log(err)
         res.status(400).send();
     })
-    
+
 })
 module.exports = router;
