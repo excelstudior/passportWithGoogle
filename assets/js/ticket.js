@@ -38,7 +38,7 @@ function validateTicketInfoInput() {
     console.log(messages)
     return messages;
 }
-
+//submit new ticket
 var submitTicket = function (e) {
     e.preventDefault();
     var messages = [];
@@ -83,6 +83,7 @@ function hasClass(el, className) {
 //     },false);
 // }
 
+//change priority dropdown color
 function changeEventHandler(event) {
     // You can use “this” to refer to the selected element.
     if (!event.target.value) alert('Please priority level');
@@ -122,7 +123,7 @@ function getTags(elementId) {
     //trim string, remove empty strings
     newTags.forEach(function (tag) {
         var tryTrim = tag.trim()
-        if (tryTrim !== ''&& tags.indexOf(tag)<0) {
+        if (tryTrim !== '' && tags.indexOf(tag) < 0) {
             tags.push(tryTrim);
         }
     })
@@ -169,7 +170,7 @@ function removeTag() {
         } else {
             showErrorModal(['There is an error'])
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         showErrorModal(['There is an error']);
         console.log(err);
     })
@@ -219,7 +220,7 @@ function saveEditedTags() {
         } else {
             showErrorModal(['There is an error'])
         }
-    }).catch(function(err){
+    }).catch(function (err) {
         showErrorModal(['There is an error']);
         console.log(err)
     })
@@ -249,12 +250,19 @@ function closeAddTagsPopup() {
 
 }
 //end
-function saveTicket(event){
-    var ticketId=event.target.parentNode.id;
-    alert('saving ticket '+ticketId);
+function saveTicket(event) {
+    event.preventDefault();
+    var messages = [];
+    messages = validateTicketInfoInput();
+    if (messages.length != 0) {
+        showErrorModal(messages);
+        return;
+    }
+    var ticketId = event.target.parentNode.id;
+    alert('saving ticket ' + ticketId);
     var data = createFormDataObject(ticketForm)
     //data.ticketId=ticketId;
-    var updateTicketURL=ticketURL+'/'+ticketId;
+    var updateTicketURL = ticketURL + '/' + ticketId;
     fetch(updateTicketURL, {
         method: 'POST',
         headers: {
@@ -264,7 +272,7 @@ function saveTicket(event){
         body: JSON.stringify(data),
     }).then(function (res) {
         if (res !== undefined) {
-            if (res.status===200) {
+            if (res.status === 200) {
                 window.location.replace('/ticket/LoggedInUserTickets')
                 return
             }
@@ -274,5 +282,39 @@ function saveTicket(event){
             })
         }
     })
-    //console.log(data)
+
+}
+function addTicketUpdateText() {
+    var update = document.getElementById('ticket-update').value;
+    if (update === "") {
+        alert('Update content is empty!');
+        return
+    }
+    var updateData = { update: update };
+    var ticketId = event.target.id;
+    alert('Adding ticket update, content ' + update + ', ticket id ' + ticketId);
+    var addTicketUpdateURL = ticketURL + '/update/' + ticketId;
+    fetch(addTicketUpdateURL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updateData),
+    }).then(function (res) {
+        if (res !== undefined) {
+            if (res.status === 200) {
+                window.location.replace('/ticket/LoggedInUserTickets')
+                return;
+            }
+            res.json().then(function (data) {
+                var messages = data.messages;
+                showErrorModal(messages);
+            })
+
+
+        }
+    }).catch(function (err) {
+        console.log(err)
+    })
 }

@@ -32,7 +32,7 @@ const ticketSchema = new Schema({
             userName:String,
         },
         content:{type:String},
-        date:{type:Date }
+        date:{type:Date}
     }],
     priority:{type:String},
     resolution:{type:String}

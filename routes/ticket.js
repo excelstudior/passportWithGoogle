@@ -27,9 +27,8 @@ router.get('/LoggedInUserTickets/', userUtil.isAuthenticated, (req, res) => {
     let userId = req.user.id
     console.log('request user id :', userId)
     Ticket.find({ 'assignee.id': userId })
-        .select('referenceNumber description subject priority contact status')
+        .select('referenceNumber description subject priority contact status updates')
         .then((tickets) => {
-            console.log(tickets);
             res.render('tickets', { user: req.user, tickets: tickets })
         }).catch((err) => {
             console.log(err)
@@ -124,7 +123,7 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
     // create update log
     let update = {}
     update.user = createdBy;
-    update.content = 'Tickte Created';
+    update.content = 'Ticket Created';
     update.date = Date.now();
     let updates = []
     updates.push(update);
@@ -162,16 +161,21 @@ router.post('/', userUtil.isAuthenticated, (req, res) => {
 //update a ticket
 router.post('/:ticketId', userUtil.isAuthenticated, (req, res) => {
     var ticketId = req.params.ticketId;
+    console.log('ticket id is ', ticketId);
     Ticket.findById(ticketId).then(function (ticket) {
-        if (ticket===null) {
-            res.status(400).json({messages:['ticket not found']})
+        console.log('ticekt is ', ticket)
+        if (ticket === null) {
+            res.status(400).json({ messages: ['ticket not found'] })
         } else {
             // // create update log, need to log the original log
-            // let update={}
-            //let userName = req.user.username;
-            // update.user=userName;
-            // update.content='Tickte Updated';
-            // update.date=Date.now();
+            let update = {}
+            let userId = req.user.id
+            let userName = req.user.username;
+            update.user = { id: userId, userName: userName }
+            // update.user.userName=userName;
+            // update.user.id=userId;
+            update.content = 'Ticket Updated';
+            update.date = Date.now();
             // get assignee information
             let assignee = JSON.parse(req.body.assignee)
             // create contact object
@@ -192,7 +196,8 @@ router.post('/:ticketId', userUtil.isAuthenticated, (req, res) => {
             ticket.subject = req.body.subject;
             ticket.description = req.body.description;
             ticket.priority = priority;
-            ticket.status=req.body.status;
+            ticket.status = req.body.status;
+            ticket.updates.push(update);
             ticket.save().then(res.status(200).send())
                 .catch(function (err) {
                     console.log(err);
@@ -206,6 +211,45 @@ router.post('/:ticketId', userUtil.isAuthenticated, (req, res) => {
         console.log(err);
     })
 
+
+})
+//add ticket update
+router.post('/update/:ticketId', userUtil.isAuthenticated, (req, res) => {
+    console.log('add update to ticket ', req.params.ticketId,req.body.update)
+    var ticketId = req.params.ticketId;
+    var updateContent=req.body.update;
+    var userId = req.user.id
+    var userName = req.user.username;
+    var update={}
+    update.user = { id: userId, userName: userName }
+    update.content=updateContent;
+    update.date=Date.now();
+    
+    Ticket.findById(ticketId)
+        .then(function (ticket) {
+            if (ticket === null) {
+                res.status(400).json({ messages: ['ticket not found'] })
+            } else {
+                var newUpdates=ticket.updates;
+                newUpdates.push(update);
+                console.log('update object',update);
+                console.log('after update added ',newUpdates);
+                ticket.updates=newUpdates;
+                ticket.save()
+                      .then(function(ticket){
+                          console.log(ticket)
+                        res.status(200).send();
+                      })
+                      .catch(function(err){
+                          console.log(err);
+                          res.status(400).json({ messages: ['Something went saving ticket'] })
+                      })
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.status(400).json({ messages: ['bad request'] })
+        })
 
 })
 //edit tag

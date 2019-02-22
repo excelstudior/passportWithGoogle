@@ -1,4 +1,7 @@
 
+/* .ticket-main{
+    background-color: #efecec;
+} */
 #ticket{
    width: 820px;
    margin: 10px auto;
@@ -17,7 +20,8 @@
 }
 #ticket-info{
     width:488px;
-    padding:5px
+    padding:5px;
+    
 }
 #ticket label,fieldset{
     margin: 10px 0px 5px 0px;
@@ -34,6 +38,61 @@
    -webkit-appearance: none;
   /* -webkit-border-radius: 0px; */
 }
+
+/*ticket updates*/
+#ticket-updates {
+    width: inherit;
+}
+#ticket-update-newItem{
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+    padding:5px;
+    
+}
+#ticket-update-newItem button{
+    float: right;
+    border:none;
+    padding:10px;
+    font-weight: 700;
+}
+#ticket-update{
+    width: inherit;
+}
+#ticket-updates ul{
+    padding: 0
+}
+#ticket-updates ul li{
+    list-style-type: none;
+}
+#ticket-update-item{
+    display: block !important;
+    margin:10px 5px;
+    background-color: rgb(248, 242, 234);
+}
+#ticket-update-item-header{
+    display: flex !important;
+    justify-content: flex-end; padding:5px 0px;
+    background-color: #c5c5c5;
+}
+#ticket-update-item-header span:nth-child(1){
+    margin-right:5px;
+    font-size: 12px;
+    
+}
+#ticket-update-item-header span:nth-child(2){
+    margin-left:5px;
+    margin-right:5px;
+    font-size: 10px;
+    color:grey;
+}
+#ticket-update-item-content{
+    padding:5px 5px;
+    font-size: 12px;
+    
+}
+/*End*/
 
 #ticket select{
     width: 100%;
@@ -188,9 +247,7 @@
     margin: 0px auto;
     width: 100%;
 }
-#ticket-updates{
-    width: 28%;
-}
+
 /*ticket table*/
 #tickets-table{
     margin-top:5px;

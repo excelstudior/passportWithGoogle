@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/ticket.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 
 <body>
@@ -28,7 +28,8 @@
                 <% if (mode==='view') {%>
                 <li><a href='/ticket/edit/<%=ticket.id%>'><i class="fas fa-edit"> <span>Edit</span></i></a></li>
                 <% } else if (mode==='edit') {%>
-                <li><a onclick="saveTicket(event)" id="<%=ticket.id%>"><i class="fas fa-save" > <span>Save</span></i></a></li>
+                <li><a><i class="fas fa-save" id="<%=ticket.id%>"> <span onclick="saveTicket(event)">Save</span></i></a>
+                </li>
                 <% } %>
             </ul>
         </div>
@@ -42,11 +43,37 @@
                 <label for="subject">Subject</label>
                 <input type="text" name="subject" id='ticket-subject' value="<%=ticket.subject%>">
                 <label for="description">Description</label>
-                <textarea name="description" id="ticket-description" placeholder="Write something..."><%=ticket.description%></textarea>
+                <textarea name="description" id="ticket-description"
+                    placeholder="Write something..."><%=ticket.description%></textarea>
+                <div name='updates' id="ticket-updates">
+                    <label>Updates</label>
+                    <div id="ticket-update-newItem">
+                        <textarea name="update" id="ticket-update" placeholder="Write some update here......"></textarea>
+                        <button onclick="addTicketUpdateText()" id="<%=ticket.id%>">Add</button>
+                    </div>
+                    
+                    <ul id="ticket-update-items">
+                        <% for (var i=ticket.updates.length-1;i>-1;i--) { %>
+                            <% var dateTime=ticket.updates[i].date.toLocaleString()%>
+                            <li>
+                                <div id="ticket-update-item">
+                                    <div id="ticket-update-item-header">
+                                        <span><strong><%=ticket.updates[i].user.userName%></strong> updated at:</strong></span>
+                                        <span><b><i><%=dateTime%></i></b></span>
+                                    </div>
+                                    <div id="ticket-update-item-content">
+                                        <cite><%=ticket.updates[i].content%></cite>
+                                    </div>    
+                                </div>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
             </div>
             <div id="ticket-options">
                 <label for="priority">Priority</label>
-                <select class="priority<%=ticket.priority%>" name="priority" id="ticket-priority" onchange="changeEventHandler(event)">
+                <select class="priority<%=ticket.priority%>" name="priority" id="ticket-priority"
+                    onchange="changeEventHandler(event)">
                     <% var options=[{class:'priorityHigh',value:'High'},{class:'priorityMedium',value:'Medium'},{class:'priorityLow',value:'Low'}]%>
                     <% for (var i=0;i < options.length;i++) { %>
                     <% if(options[i].value===ticket.priority) {%>
@@ -72,24 +99,32 @@
                 <select name="status" id="ticket-status">
                     <% var status=Object.keys(ticketStatus)%>
                     <% for (var i=0;i < status.length;i++) { %>
-                    <option value="<%=ticketStatus[status[i]] %>">
-                        <%= ticketStatus[status[i]] %>
-                    </option>
+                    <% if( ticketStatus[status[i]]===ticket.status ) {%>
+                        <option selected value="<%=ticketStatus[status[i]] %>">
+                            <%= ticketStatus[status[i]] %>
+                         </option>
+                    <% } else {%>
+                        <option value="<%=ticketStatus[status[i]] %>">
+                            <%= ticketStatus[status[i]] %>
+                        </option>
+                    <% } %>
                     <% } %>
                 </select>
-                <label for="tags">Tags  <i class="fa fa-edit" onclick="toggle_visibility('ticket-tags-edit')"></i></label>
+                <label for="tags">Tags <i class="fa fa-edit"
+                        onclick="toggle_visibility('ticket-tags-edit')"></i></label>
                 <div id='ticket-tags'>
                     <div id='ticket-tags-display'>
                         <ul id='ticket-tags-list'>
-                        
-                        <% var tags=ticket.tags %>
-                        <% if (tags===null) {%>
+
+                            <% var tags=ticket.tags %>
+                            <% if (tags===null) {%>
                             <% tags=[]%>
-                        <% } %>
-                        <% for (var i=0;i<tags.length;i++) { %>
+                            <% } %>
+                            <% for (var i=0;i<tags.length;i++) { %>
                             <% var listItemId='tag'+'-'+tags[i] %>
-                            <li id=<%=listItemId%>><a class="tag"><span onclick="removeTag()" title=<%=listItemId%> >x</span><%=tags[i]%></a></li>
-                        <%}%>
+                            <li id=<%=listItemId%>><a class="tag"><span onclick="removeTag()"
+                                        title=<%=listItemId%>>x</span><%=tags[i]%></a></li>
+                            <%}%>
                         </ul>
                     </div>
                     <div id='ticket-tags-edit'>
@@ -102,8 +137,10 @@
                             <!-- <i class="fas fa-times" onclick="closeAddTagsPopup(['tag1','tag2'])"></i>  <i class="fas fa-save" onclick="saveEditedTags()"></i>   -->
                         </div>
                         <p>Please use <i>comma</i> to seperate tags</p>
-                        <input type="text" id="ticket-original-tags" value="<%= tags.toString()%>" name="<%=ticket.id%>">
-                        <input type="text" id='ticket-tags-newTags' placeholder="please use comma to seperate tags" value="<%= tags.toString()%>">
+                        <input type="text" id="ticket-original-tags" value="<%= tags.toString()%>"
+                            name="<%=ticket.id%>">
+                            <input type="text" id='ticket-tags-newTags' placeholder="please use comma to seperate tags"
+                                value="<%= tags.toString()%>">
                     </div>
                 </div>
                 <fieldset>
@@ -113,21 +150,24 @@
                         <span id='contactName_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-user"></i>
-                            <input type='text' id="contact-name" name=contactName placeholder="Your name" value="<%= ticket.contact.name %>" />
+                            <input type='text' id="contact-name" name=contactName placeholder="Your name"
+                                value="<%= ticket.contact.name %>" />
                         </div>
                     </div>
                     <div>
                         <span id='contactPhone_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-phone"></i>
-                            <input type='text' id="contact-phone" name=contactPhone placeholder="Your phone" value="<%= ticket.contact.phone %>" />
+                            <input type='text' id="contact-phone" name=contactPhone placeholder="Your phone"
+                                value="<%= ticket.contact.phone %>" />
                         </div>
                     </div>
                     <div>
                         <span id='contactEmail_msg'></span>
                         <div class='inputWithIcon'>
                             <i class="fas fa-envelope"></i>
-                            <input type='text' id="contact-email" name=contactEmail placeholder="Your Email" value="<%= ticket.contact.email %>" />
+                            <input type='text' id="contact-email" name=contactEmail placeholder="Your Email"
+                                value="<%= ticket.contact.email %>" />
                         </div>
                     </div>
                 </fieldset>
