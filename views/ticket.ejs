@@ -54,11 +54,12 @@
                     
                     <ul id="ticket-update-items">
                         <% for (var i=ticket.updates.length-1;i>-1;i--) { %>
-                            <% var dateTime=ticket.updates[i].date.toLocaleString()%>
+                            <% var dateTime=new Date(ticket.updates[i].date).toLocaleString('en-AU')%>
+                            <!-- <% dateTime=dateTime.toLocaleString()%> -->
                             <li>
                                 <div id="ticket-update-item">
                                     <div id="ticket-update-item-header">
-                                        <span><strong><%=ticket.updates[i].user.userName%></strong> updated at:</strong></span>
+                                        <span><strong><%=ticket.updates[i].user.userName%></strong> updated at:</span>
                                         <span><b><i><%=dateTime%></i></b></span>
                                     </div>
                                     <div id="ticket-update-item-content">

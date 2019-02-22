@@ -76,6 +76,8 @@ router.get('/edit/:ticketId', userUtil.isAuthenticated, (req, res) => {
                     }
                 })
             } else {
+
+                //need to redirect to an error page
                 res.json({ message: 'No ticket found' })
             }
         })
@@ -223,7 +225,7 @@ router.post('/update/:ticketId', userUtil.isAuthenticated, (req, res) => {
     var update={}
     update.user = { id: userId, userName: userName }
     update.content=updateContent;
-    update.date=Date.now();
+    update.date=new Date();
     
     Ticket.findById(ticketId)
         .then(function (ticket) {
@@ -238,7 +240,7 @@ router.post('/update/:ticketId', userUtil.isAuthenticated, (req, res) => {
                 ticket.save()
                       .then(function(ticket){
                           console.log(ticket)
-                        res.status(200).send();
+                        res.status(200).json({update:update});
                       })
                       .catch(function(err){
                           console.log(err);

@@ -284,6 +284,25 @@ function saveTicket(event) {
     })
 
 }
+function renderUpdatesList(elementId,update){
+    console.log('update obj ',update)
+    var updatesDiv=document.getElementById(elementId);
+    // user name
+    var updateUserNameSpan=createNode('span');
+    var userName=createNode('strong');
+    userName.innerHTML=update.user.userName;
+    appendNode(updateUserNameSpan,userName);
+    updateUserNameSpan.innerHTML+=' updated at:'
+    // update date time
+    var updateDateTimeSpan=createNode('span');
+    var boldTextNode=createNode('b');
+    var dateTimeNode=createNode('i');
+    var dateTime=new Date(update.date).toLocaleString('en-AU');
+    // var dateTime=dateTime;
+    dateTimeNode.innerHTML=dateTime;
+    appendNode(updateDateTimeSpan,boldTextNode);
+    appendNode(boldTextNode,dateTimeNode);
+}
 function addTicketUpdateText() {
     var update = document.getElementById('ticket-update').value;
     if (update === "") {
@@ -304,13 +323,25 @@ function addTicketUpdateText() {
     }).then(function (res) {
         if (res !== undefined) {
             if (res.status === 200) {
-                window.location.replace('/ticket/LoggedInUserTickets')
+                //window.location.replace('/ticket/LoggedInUserTickets')
+                res.json().then(function(data){
+                    var update=data.update;
+                    renderUpdatesList('ticket-update-items',update);
+
+                }).catch(function(err){
+                    console.log(err);
+                    return;
+                })
+                
                 return;
+            } else {
+                res.json().then(function (data) {
+                    var messages = data.messages;
+                    showErrorModal(messages);
+                })
             }
-            res.json().then(function (data) {
-                var messages = data.messages;
-                showErrorModal(messages);
-            })
+
+            
 
 
         }
