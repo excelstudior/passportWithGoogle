@@ -26,4 +26,20 @@ module.exports = {
         })
         return letterString
     },
+    formateDateTime:function(value){
+        if (this.isDate(value)){
+            var year=value.getFullYear().toString();
+            var month=('0'+(value.getMonth()+1).toString()).substring(-1,2);
+            var date=('0'+(value.getDate()).toString()).substring(-1,2);
+            var hour=('0'+(value.getHours()).toString()).substring(-1,2);
+            var minute=('0'+(value.getMinutes()).toString()).substring(-1,2);
+            var second=('0'+(value.getSeconds()).toString()).substring(-1,2);
+            return year+'-'+month+'-'+date+' '+hour+':'+minute+':'+second;
+        }else{
+            return ""
+        }
+    },
+    isDate:function(value){
+        return !isNaN(Date.parse(value))
+    }
 }
