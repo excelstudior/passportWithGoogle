@@ -38,7 +38,20 @@
    -webkit-appearance: none;
   /* -webkit-border-radius: 0px; */
 }
-
+#ticket-description-readonly{
+    
+    word-wrap:break-word
+}
+#ticket-description-edit{
+    visibility: hidden;
+    width: 480px;
+    margin:5px 0px;
+    position: absolute;
+    z-index: 1;
+    background-color:#8daaba;
+    color: white;
+    display: block;
+}
 /*ticket updates*/
 #ticket-updates {
     width: inherit;
@@ -88,9 +101,15 @@
     color:grey;
 }
 #ticket-update-item-content{
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
     padding:5px 5px;
-    font-size: 12px;
-    
+    font-size: 12px;  
+}
+#ticket-update-item-content p{
+    word-wrap:break-word;
 }
 /*End*/
 

@@ -284,9 +284,17 @@ function saveTicket(event) {
     })
 
 }
-function renderUpdatesList(elementId,update){
+function renderUpdatesList(update){
     console.log('update obj ',update)
-    var updatesDiv=document.getElementById(elementId);
+    var updatesDiv=document.getElementById('ticket-update-items');
+    var newListItem=createNode('li');
+    var newUpdateItem=createNode('div');
+    newUpdateItem.id='ticket-update-item';
+
+    var updateDivHeader=createNode('div');
+    updateDivHeader.id='ticket-update-item-header';
+    var updateDivContent=createNode('div')
+    updateDivContent.id= 'ticket-update-item-content';
     // user name
     var updateUserNameSpan=createNode('span');
     var userName=createNode('strong');
@@ -297,21 +305,32 @@ function renderUpdatesList(elementId,update){
     var updateDateTimeSpan=createNode('span');
     var boldTextNode=createNode('b');
     var dateTimeNode=createNode('i');
-    var dateTime=new Date(update.date).toLocaleString('en-AU');
+    var dateTime=formateDateTime(new Date(update.date));
     // var dateTime=dateTime;
     dateTimeNode.innerHTML=dateTime;
     appendNode(updateDateTimeSpan,boldTextNode);
     appendNode(boldTextNode,dateTimeNode);
+    appendNode(updateDivHeader,updateUserNameSpan);
+    appendNode(updateDivHeader,updateDateTimeSpan);
+    // content of update
+    var updateItemContentNode=createNode('cite');
+    updateItemContentNode.innerHTML=update.content;
+    appendNode(updateDivContent,updateItemContentNode);
+    appendNode(newUpdateItem,updateDivHeader)
+    appendNode(newUpdateItem,updateDivContent);
+    appendNode(newListItem,newUpdateItem);
+    updatesDiv.insertBefore(newListItem,updatesDiv.childNodes[0]);
 }
-function addTicketUpdateText() {
-    var update = document.getElementById('ticket-update').value;
-    if (update === "") {
+function addTicketUpdateText(event) {
+    event.preventDefault();
+    var updateTextArea=document.getElementById('ticket-update')
+    var updateContent = updateTextArea.value;
+    if (updateContent === "") {
         alert('Update content is empty!');
         return
     }
-    var updateData = { update: update };
+    var updateData = { update: updateContent };
     var ticketId = event.target.id;
-    alert('Adding ticket update, content ' + update + ', ticket id ' + ticketId);
     var addTicketUpdateURL = ticketURL + '/update/' + ticketId;
     fetch(addTicketUpdateURL, {
         method: 'POST',
@@ -320,32 +339,22 @@ function addTicketUpdateText() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(updateData),
+        redirect:"manual",
     }).then(function (res) {
         if (res !== undefined) {
             if (res.status === 200) {
-                //window.location.replace('/ticket/LoggedInUserTickets')
                 res.json().then(function(data){
                     var update=data.update;
-                    renderUpdatesList('ticket-update-items',update);
-
-                }).catch(function(err){
-                    console.log(err);
-                    return;
+                    renderUpdatesList(update);
+                    updateTextArea.value='';
                 })
-                
-                return;
+
             } else {
-                res.json().then(function (data) {
-                    var messages = data.messages;
-                    showErrorModal(messages);
-                })
+                showErrorModal(['Error'])
             }
-
-            
-
-
         }
     }).catch(function (err) {
         console.log(err)
     })
 }
+

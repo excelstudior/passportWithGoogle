@@ -33,8 +33,8 @@
                 <% } %>
             </ul>
         </div>
-        <% var createdTime=ticket.createdAt.toString()%>
-        <h6>Created by <span style="color:#2980B9">
+        <% var createdTime=ticket.createdAt.toLocaleString()%>
+        <h6><span style="color:#2980B9">#<%=ticket.referenceNumber%> </span> created by <span style="color:#2980B9">
                 <%=ticket.createdBy.userName%></span> at
             <%=createdTime%>
         </h6>
@@ -42,19 +42,25 @@
             <div id="ticket-info">
                 <label for="subject">Subject</label>
                 <input type="text" name="subject" id='ticket-subject' value="<%=ticket.subject%>">
-                <label for="description">Description</label>
-                <textarea name="description" id="ticket-description"
-                    placeholder="Write something..."><%=ticket.description%></textarea>
+                <label for="description">Description <i class="fa fa-edit"
+                    onclick="toggle_visibility('ticket-description')"></i></label>
+                <div id='ticket-description-edit'>
+                        <textarea name="description" id="ticket-description"
+                        placeholder="Write something..."><%=ticket.description%></textarea>
+                        <button>Save</button>
+
+                </div>
+                <p id='ticket-description-readonly'><%=ticket.description%></p>
                 <div name='updates' id="ticket-updates">
                     <label>Updates</label>
                     <div id="ticket-update-newItem">
-                        <textarea name="update" id="ticket-update" placeholder="Write some update here......"></textarea>
-                        <button onclick="addTicketUpdateText()" id="<%=ticket.id%>">Add</button>
+                        <textarea onkeyup="textAreaAutoAdjust(this)"  name="update" id="ticket-update" placeholder="Write some update here......"></textarea>
+                        <button onclick="addTicketUpdateText(event)" id="<%=ticket.id%>" name="<%=user.username%>">Add</button>
                     </div>
                     
                     <ul id="ticket-update-items">
                         <% for (var i=ticket.updates.length-1;i>-1;i--) { %>
-                            <% var dateTime=new Date(ticket.updates[i].date).toLocaleString('en-AU')%>
+                            <% var dateTime=new Date(ticket.updates[i].date).toLocaleString()%>
                             <!-- <% dateTime=dateTime.toLocaleString()%> -->
                             <li>
                                 <div id="ticket-update-item">
@@ -63,7 +69,7 @@
                                         <span><b><i><%=dateTime%></i></b></span>
                                     </div>
                                     <div id="ticket-update-item-content">
-                                        <cite><%=ticket.updates[i].content%></cite>
+                                        <p><%=ticket.updates[i].content%></p>
                                     </div>    
                                 </div>
                             </li>
@@ -135,7 +141,6 @@
                                 <li onclick="saveEditedTags()">SAVE</li>
                                 <li  onclick="closeAddTagsPopup()">X</li>
                             </ul>
-                            <!-- <i class="fas fa-times" onclick="closeAddTagsPopup(['tag1','tag2'])"></i>  <i class="fas fa-save" onclick="saveEditedTags()"></i>   -->
                         </div>
                         <p>Please use <i>comma</i> to seperate tags</p>
                         <input type="text" id="ticket-original-tags" value="<%= tags.toString()%>"

@@ -111,3 +111,30 @@ function isArrayEqual(originalArr,newArr){
     }
     return true;
 }
+
+//date time formater
+function formateDateTime(value){
+    if (this.isDate(value)){
+        var year=value.getFullYear().toString();
+        var month=('0'+(value.getMonth()+1).toString()).substring(-1,2);
+        var date=('0'+(value.getDate()).toString()).substring(-1,2);
+        var hour=('0'+(value.getHours()).toString()).substring(-1,2);
+        var minute=('0'+(value.getMinutes()).toString()).substring(-1,2);
+        var second=('0'+(value.getSeconds()).toString()).substring(-1,2);
+        return year+'-'+month+'-'+date+' '+hour+':'+minute+':'+second;
+    }else{
+        return ""
+    }
+}
+function isDate(value){
+    return !isNaN(Date.parse(value))
+}
+
+//end
+
+//textarea
+function textAreaAutoAdjust(textArea){
+    textArea.style.height='auto';
+    textArea.style.height= (5+textArea.scrollHeight)+"px";
+
+}
