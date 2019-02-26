@@ -323,6 +323,7 @@ function renderUpdatesList(update){
 }
 function addTicketUpdateText(event) {
     event.preventDefault();
+    var ticketUpdateNewItemDiv=document.getElementById('ticket-update-newItem');
     var updateTextArea=document.getElementById('ticket-update')
     var updateContent = updateTextArea.value;
     if (updateContent === "") {
@@ -347,6 +348,7 @@ function addTicketUpdateText(event) {
                     var update=data.update;
                     renderUpdatesList(update);
                     updateTextArea.value='';
+                    ticketUpdateNewItemDiv.style.display='none';
                 })
 
             } else {

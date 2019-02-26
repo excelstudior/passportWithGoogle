@@ -1,7 +1,7 @@
-var toggle_display = function (element_id) {
+var toggle_display = function (element_id,style) {
     var e = document.getElementById(element_id);
     if (e.style.display === 'none' || e.style.display === '') {
-        e.style.display = 'block';
+        e.style.display = style;
     } else {
         e.style.display = 'none';
     }

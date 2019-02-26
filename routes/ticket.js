@@ -33,8 +33,6 @@ router.get('/LoggedInUserTickets/', userUtil.isAuthenticated, (req, res) => {
         }).catch((err) => {
             console.log(err)
         })
-
-
 })
 //get a ticket with id,View
 router.get('/view/:ticketId', userUtil.isAuthenticated, (req, res) => {

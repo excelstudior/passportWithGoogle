@@ -36,6 +36,7 @@
    border-radius: 0px;
    font-size: 14px;
    -webkit-appearance: none;
+   font-family: arial;
   /* -webkit-border-radius: 0px; */
 }
 #ticket-description-readonly{
@@ -48,15 +49,34 @@
     margin:5px 0px;
     position: absolute;
     z-index: 1;
-    background-color:#8daaba;
-    color: white;
-    display: block;
+    display: block;  
 }
+#ticket-update-newItem,#ticket-description-edit{
+    background-color:#2980B9;
+    color: white;
+    padding:5px;
+}
+#ticket-description,#ticket-update{
+    margin: 5px 0px;
+}
+/*in descrption edit pop up and update edit pop up*/
+.popUpEditModalButton{
+    float: right;
+    border:0.5px solid antiquewhite;
+    padding:4px 8px ;
+    font-weight: 500;
+    margin-left:10px;
+    color:antiquewhite;
+    background-color:inherit;
+}
+
 /*ticket updates*/
 #ticket-updates {
     width: inherit;
 }
-#ticket-update-newItem{
+/* #ticket div[id='ticket-update-newItem'] */
+div#ticket-update-newItem{
+    display: none ;
     width: 100%;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
@@ -64,12 +84,12 @@
     padding:5px;
     
 }
-#ticket-update-newItem button{
+/* #ticket-update-newItem button{
     float: right;
     border:none;
     padding:10px;
     font-weight: 700;
-}
+} */
 #ticket-update{
     width: inherit;
 }
@@ -105,11 +125,12 @@
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
     width: fill-available;
-    padding:5px 5px;
+    padding:15px 15px;
     font-size: 12px;  
 }
-#ticket-update-item-content p{
+#ticket-update-item-content cite{
     word-wrap:break-word;
+    padding:5px;
 }
 /*End*/
 
@@ -140,10 +161,6 @@
 #ticket-description,#ticket-subject{
     width: 460px;
     border-bottom: 0.5px solid #2980B9 !important;
-    
-}
-#ticket-description{
-    height: 300px;
     
 }
 .inputWithIcon{
@@ -384,13 +401,13 @@
 
 #ticket-tags #ticket-tags-edit{
     /* display: none; */
-    width: 280px;
+    width: 300px;
     margin:5px 0px;
     /* padding: 5px 0px; */
     visibility: hidden;
     position: absolute;
     z-index: 1;
-    background-color:#8daaba;
+    background-color:#2980B9;
     color: white;
     display: block;
 }
