@@ -46,7 +46,7 @@
                     onclick="toggle_visibility('ticket-description-edit')"></i></label>
                 <div id='ticket-description-edit'>
                         <a class="popUpEditModalButton" onclick="toggle_visibility('ticket-description-edit')">Cancel</a>
-                        <a class="popUpEditModalButton">Save</a>
+                        <a class="popUpEditModalButton" id="<%=ticket.id%>" onclick="saveEditedDescription(event)">Save</a>
                         <textarea name="description" id="ticket-description"
                         placeholder="Write something..."
                         onkeyup="textAreaAutoAdjust(this)"><%=ticket.description%></textarea>

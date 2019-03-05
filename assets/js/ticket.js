@@ -284,47 +284,46 @@ function saveTicket(event) {
     })
 
 }
-function renderUpdatesList(update){
-    console.log('update obj ',update)
-    var updatesDiv=document.getElementById('ticket-update-items');
-    var newListItem=createNode('li');
-    var newUpdateItem=createNode('div');
-    newUpdateItem.id='ticket-update-item';
+function renderUpdatesList(update) {
+    console.log('update obj ', update)
+    var updatesDiv = document.getElementById('ticket-update-items');
+    var newListItem = createNode('li');
+    var newUpdateItem = createNode('div');
+    newUpdateItem.id = 'ticket-update-item';
 
-    var updateDivHeader=createNode('div');
-    updateDivHeader.id='ticket-update-item-header';
-    var updateDivContent=createNode('div')
-    updateDivContent.id= 'ticket-update-item-content';
+    var updateDivHeader = createNode('div');
+    updateDivHeader.id = 'ticket-update-item-header';
+    var updateDivContent = createNode('div')
+    updateDivContent.id = 'ticket-update-item-content';
     // user name
-    var updateUserNameSpan=createNode('span');
-    var userName=createNode('strong');
-    userName.innerHTML=update.user.userName;
-    appendNode(updateUserNameSpan,userName);
-    updateUserNameSpan.innerHTML+=' updated at:'
+    var updateUserNameSpan = createNode('span');
+    var userName = createNode('strong');
+    userName.innerHTML = update.user.userName;
+    appendNode(updateUserNameSpan, userName);
+    updateUserNameSpan.innerHTML += ' updated at:'
     // update date time
-    var updateDateTimeSpan=createNode('span');
-    var boldTextNode=createNode('b');
-    var dateTimeNode=createNode('i');
-    var dateTime=formateDateTime(new Date(update.date));
+    var updateDateTimeSpan = createNode('span');
+    var boldTextNode = createNode('b');
+    var dateTimeNode = createNode('i');
+    var dateTime = formateDateTime(new Date(update.date));
     // var dateTime=dateTime;
-    dateTimeNode.innerHTML=dateTime;
-    appendNode(updateDateTimeSpan,boldTextNode);
-    appendNode(boldTextNode,dateTimeNode);
-    appendNode(updateDivHeader,updateUserNameSpan);
-    appendNode(updateDivHeader,updateDateTimeSpan);
+    dateTimeNode.innerHTML = dateTime;
+    appendNode(updateDateTimeSpan, boldTextNode);
+    appendNode(boldTextNode, dateTimeNode);
+    appendNode(updateDivHeader, updateUserNameSpan);
+    appendNode(updateDivHeader, updateDateTimeSpan);
     // content of update
-    var updateItemContentNode=createNode('cite');
-    updateItemContentNode.innerHTML=update.content;
-    appendNode(updateDivContent,updateItemContentNode);
-    appendNode(newUpdateItem,updateDivHeader)
-    appendNode(newUpdateItem,updateDivContent);
-    appendNode(newListItem,newUpdateItem);
-    updatesDiv.insertBefore(newListItem,updatesDiv.childNodes[0]);
+    var updateItemContentNode = createNode('cite');
+    updateItemContentNode.innerHTML = update.content;
+    appendNode(updateDivContent, updateItemContentNode);
+    appendNode(newUpdateItem, updateDivHeader)
+    appendNode(newUpdateItem, updateDivContent);
+    appendNode(newListItem, newUpdateItem);
+    updatesDiv.insertBefore(newListItem, updatesDiv.childNodes[0]);
 }
 function addTicketUpdateText(event) {
     event.preventDefault();
-    var ticketUpdateNewItemDiv=document.getElementById('ticket-update-newItem');
-    var updateTextArea=document.getElementById('ticket-update')
+    var updateTextArea = document.getElementById('ticket-update')
     var updateContent = updateTextArea.value;
     if (updateContent === "") {
         alert('Update content is empty!');
@@ -340,15 +339,15 @@ function addTicketUpdateText(event) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(updateData),
-        redirect:"manual",
+        redirect: "manual",
     }).then(function (res) {
         if (res !== undefined) {
             if (res.status === 200) {
-                res.json().then(function(data){
-                    var update=data.update;
+                res.json().then(function (data) {
+                    var update = data.update;
                     renderUpdatesList(update);
-                    updateTextArea.value='';
-                    ticketUpdateNewItemDiv.style.display='none';
+                    updateTextArea.value = '';
+                    toggle_display('ticket-update-newItem','inline-block')
                 })
 
             } else {
@@ -360,3 +359,30 @@ function addTicketUpdateText(event) {
     })
 }
 
+function saveEditedDescription(event) {
+    var ticketId = event.target.id;
+    var description = document.getElementById("ticket-description").innerHTML;
+    var updateTicketDescriptionURL = ticketURL + '/description/' + ticketId;
+    var data = { description: description };
+    alert("Saving your edited description " + description + ticketId);
+    //post update request
+    fetch(updateTicketDescriptionURL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+        redirect: "manual",
+    }).then(function (res) {
+        if (res.status === 200) {
+            alert('posted request')
+            toggle_visibility('ticket-description-edit')
+        } else {
+            showErrorModal(['Error'])
+        }
+    }).catch()
+
+
+
+}

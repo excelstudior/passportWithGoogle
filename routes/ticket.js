@@ -273,4 +273,9 @@ router.post('/edit/tags/:ticketId', userUtil.isAuthenticated, (req, res) => {
     })
 
 })
+//edit ticket description
+router.post('/description/:ticketId',userUtil.isAuthenticated,(req,res)=>{
+    console.log(req.params.ticketId);
+    res.status(200).send()
+})
 module.exports = router;
