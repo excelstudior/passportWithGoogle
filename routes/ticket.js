@@ -276,6 +276,27 @@ router.post('/edit/tags/:ticketId', userUtil.isAuthenticated, (req, res) => {
 //edit ticket description
 router.post('/description/:ticketId',userUtil.isAuthenticated,(req,res)=>{
     console.log(req.params.ticketId);
-    res.status(200).send()
+    var ticketId=req.params.ticketId;
+    var description=req.body.description;
+    Ticket.findById(ticketId).then(function(ticket){
+        ticket.description=description;
+        ticket.save()
+              .then(function(ticket){
+                if(ticket!==null){
+                    res.status(200).json({description:ticket.description})
+                } else {
+                    res.status(400).json({messages:['ticket not found']})
+                }
+              }).catch(function(err){
+                console.log(err);
+                res.status(400).json({messages:['Save failed']})
+              }) 
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json({messages:['Save failed']})
+    }) 
+
+
+    //res.status(200).send()
 })
 module.exports = router;

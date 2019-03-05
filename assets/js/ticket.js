@@ -361,7 +361,7 @@ function addTicketUpdateText(event) {
 
 function saveEditedDescription(event) {
     var ticketId = event.target.id;
-    var description = document.getElementById("ticket-description").innerHTML;
+    var description = document.getElementById("ticket-description").value;
     var updateTicketDescriptionURL = ticketURL + '/description/' + ticketId;
     var data = { description: description };
     alert("Saving your edited description " + description + ticketId);
@@ -378,6 +378,11 @@ function saveEditedDescription(event) {
         if (res.status === 200) {
             alert('posted request')
             toggle_visibility('ticket-description-edit')
+            res.json().then(function(data){
+                var description = data.description;
+                var ticketDescriptionReadOnlyP=document.getElementById('ticket-description-readonly');
+                ticketDescriptionReadOnlyP.innerHTML=description;
+            })
         } else {
             showErrorModal(['Error'])
         }
