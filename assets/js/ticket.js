@@ -386,8 +386,35 @@ function saveEditedDescription(event) {
         } else {
             showErrorModal(['Error'])
         }
-    }).catch()
+    }).catch(function(err){
+        showErrorModal(['Error']);
+        console.log(err);
+    })
 
 
 
 }
+//create a audit observer
+window.onload=(function(){
+    var originalValue={};
+    originalValue.contact={}
+    originalValue.subject=document.getElementById('ticket-subject').value;
+    originalValue.description=document.getElementById('ticket-description-readonly').innerHTML;
+    originalValue.tags=document.getElementById("ticket-original-tags").value;
+    originalValue.contact.name=document.getElementById("contact-name").value;
+    originalValue.contact.phone=document.getElementById("contact-phone").value;
+    originalValue.contact.email=document.getElementById("contact-email").value;
+
+    var ticketPriorityDpt=document.getElementById('ticket-priority');
+    originalValue.priority=ticketPriorityDpt.options[ticketPriorityDpt.selectedIndex].value;
+    var ticketAssigneeDpt=document.getElementById('ticket-assignee');
+    originalValue.assignee=ticketAssigneeDpt.options[ticketAssigneeDpt.selectedIndex].value;
+    var ticketStatusDpt=document.getElementById('ticket-status');
+    originalValue.status=ticketStatusDpt.options[ticketStatusDpt.selectedIndex].value;
+    console.log(originalValue)
+
+    var ticketChangesObserver=new Observer();
+    ticketChangesObserver.originalValue=originalValue;
+    console.log(ticketChangesObserver)
+
+})()

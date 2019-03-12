@@ -138,3 +138,41 @@ function textAreaAutoAdjust(textArea){
     textArea.style.height= (5+textArea.scrollHeight)+"px";
 
 }
+// Observer object for audit
+var Observer=function(){
+    var _messages={};
+    var regist=function(type,fn){
+        if (typeof _messages[type]==='undefined'){
+            _messages[type]=[fn];
+        } else {
+            _messages[type].push[fn];
+        }
+    }
+    var fire=function(type,args){
+        if(!_messages[type])
+        return;
+        var events={
+            type:type,
+            args:args||{}
+        };
+        var len=_messages[type].length;
+        for (var i=0;i<len;i++){
+            _messages[type][i].call(this,events);
+        }
+
+    }
+    var remove=function(type,fn){
+        if (_messages[type] instanceof Array){
+            var len=_messages[type].length-1;
+            for (var i=len;i>=0;i--){
+                _messages[type][i]===fn && _messages[type].splice(i,1);
+            }
+
+        }
+    }
+    return {
+        regist:regist,
+        fire:fire,
+        remove:remove,
+    }
+}
