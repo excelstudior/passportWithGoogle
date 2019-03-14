@@ -1,5 +1,6 @@
 var ticketURL = '/ticket';
 var ticketForm = document.getElementById('ticket');
+var ticketChangesObserver=new Observer();
 
 //validation , need to run with validate.js
 
@@ -214,9 +215,17 @@ function saveEditedTags() {
         body: JSON.stringify(data),
     }).then(function (res) {
         if (res.status === 200) {
+            var TagsUpdated = isArrayEqual(originalTagsDiv.value, newTags)
             originalTagsDiv.value = newTags.toString();
             renderTags(newTags, 'ticket-tags-list');
             hideElement('ticket-tags-edit');
+            if (!TagsUpdated){
+                var audit={}
+                audit.ticketId=ticketId;
+                audit.updateContent='Updated tag from '+originalTagsDiv.value +' to '+newTags;
+                ticketChangesObserver.fire('ticketAudit',audit)
+            }
+            
         } else {
             showErrorModal(['There is an error'])
         }
@@ -390,9 +399,32 @@ function saveEditedDescription(event) {
         showErrorModal(['Error']);
         console.log(err);
     })
-
-
-
+}
+function addTicketAudit(e){
+    var audit=e.args;
+    var ticketId=audit.ticketId;
+    var addTicketUpdateURL = ticketURL + '/update/' + ticketId;
+    var updateData = { update: audit.updateContent };
+    fetch(addTicketUpdateURL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updateData),
+        redirect: "manual",
+    }).then(function(res){
+        if(res.status === 200){
+            res.json().then(function (data) {
+                var update = data.update;
+                renderUpdatesList(update);
+            })
+        }else{
+            showErrorModal(['Error'])
+        }
+    }).catch(function(err){
+        console.log(err);
+    })
 }
 //create a audit observer
 window.onload=(function(){
@@ -413,8 +445,10 @@ window.onload=(function(){
     originalValue.status=ticketStatusDpt.options[ticketStatusDpt.selectedIndex].value;
     console.log(originalValue)
 
-    var ticketChangesObserver=new Observer();
+    
     ticketChangesObserver.originalValue=originalValue;
+    
+    ticketChangesObserver.regist('ticketAudit',addTicketAudit);
     console.log(ticketChangesObserver)
 
 })()
