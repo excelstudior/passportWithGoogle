@@ -400,6 +400,8 @@ function saveEditedDescription(event) {
         console.log(err);
     })
 }
+
+// observer methods
 function addTicketAudit(e){
     var audit=e.args;
     var ticketId=audit.ticketId;
@@ -445,9 +447,9 @@ window.onload=(function(){
     originalValue.status=ticketStatusDpt.options[ticketStatusDpt.selectedIndex].value;
     console.log(originalValue)
 
-    
+    //save original value when first load the page
     ticketChangesObserver.originalValue=originalValue;
-    
+    //regist observer method
     ticketChangesObserver.regist('ticketAudit',addTicketAudit);
     console.log(ticketChangesObserver)
 
